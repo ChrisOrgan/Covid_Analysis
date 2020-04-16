@@ -1,7 +1,5 @@
 <img src="https://media0.giphy.com/media/QNIL3zOyJplN6/giphy.gif">
 
-# Readme
-
 ## The Macroevolution of the Novel Coronavirus
 
 ### SARS-CoV-2 Is Evolving Gradually
