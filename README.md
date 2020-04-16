@@ -6,7 +6,8 @@
 
 - Here, we describe and compare the mode of SARS-CoV-2 genomic evolution to its 
   tempo, which so far has been much slower than that of SARS-CoV (Jia et al. 
-  2020)
+  2020) and the seasonal flu (see Andrew Rambaut's statement in Kupferschmidt 
+  2020).
     - To start, we focus on SARS-CoV-2 whole genomes.
         - Once they jumped into and spread among humans, has SARS-CoV-2 been 
           evolving in a punctuational manner, so that a large proportion of 
@@ -19,7 +20,8 @@
           of transmissions (nodes in a tree).
         - We expect the net number of transmissions along SARS-CoV-2 lineages 
           to correlate with (slope > 0) and explain the variation in 
-          accumulated mutations (*R^2^* > 0), controlling for shared ancestry.
+          accumulated mutations (*R<sup>2</sup>* > 0), controlling for shared 
+          ancestry.
         - First, we downloaded a molecular tree of SARS-CoV-2 (*n* = 3,958 
           genomes) from `Nextstrain` (Sagulenko et al. 2017; Hadfield et al. 
           2018; https://nextstrain.org/ncov).
@@ -71,7 +73,7 @@
             - We executed two ML runs and compared the results.
         - There is very little evidence to suggest that SARS-CoV-2 genomes 
           evolved in a punctuated manner (slope = -0.063 ± 0.0038; 
-          *R^2^* = 0.064).
+          *R<sup>2</sup>* = 0.064).
             - The two ML runs produced practically identical results.
         - SARS-CoV-2 genomes are most likely evolving gradually, with much of 
           the mutations occurring in between net transmission events, as 
@@ -79,8 +81,8 @@
         - We, therefore, find that the tempo and mode of SARS-CoV-2 evolution 
           are linked.
         - We will not be expecting jumps in the mutation rate and that drugs 
-          and vaccines (e.g., Sheahan et al. 2020) under development will still 
-          work in the future.
+          and vaccines (e.g., Le et al. 2020; Sheahan et al. 2020) under 
+          development will still work in the future.
         - We created and saved scatter plots of the regression using the `R` 
           packages `Cairo` 1.5.10 (Urbanek and Horner 2019), `ggplot2` 3.2.1 
           (Wickham 2009), `ggthemes` 4.2.0 (Arnold 2019), `htmlwidgets` 1.5.1 
@@ -101,16 +103,19 @@
             - The node-density effect is the underestimation of branch lengths 
               in tree regions with fewer taxa.
             - We executed the *δ* test, which tests for a curvilinear 
-              relationship between path length (*x*) and the number of nodes 
-              (*n*).
-                - Equation: *x* = *β*&middot;*n*^1/*δ*^
-                    - *β:* rate of change between path length and the number of 
-                           nodes
+              relationship between the number of nodes (*n*) and path length 
+              (*x*).
+                - Equation: *n* = *β*&middot;*x*<sup>*δ*</sup>
+                    - *β:* rate of change between the number of nodes and path 
+                           length
                 - We expect *δ* > 1 when the node-density effect is present.
             - We used `R` packages `ape` and `nlme` 3.1-143 (Pinheiro et al. 
               2019) to estimate *δ* by fitting a PGLS log-log regression.
         - The *δ* test suggests that the node-density effect is absent
-          (*δ* = -1.78).
+          (*δ* = -0.062).
+        - We creatted a scatterplot with the curvilinear fit line *n* = 6.46
+          *x*<sup>-0.062</sup> using `Cairo`, `ggplot2`, `ggthemes`, and 
+          `svglite`.
         - Non-random sampling regarding time and location can affect how we 
           interpret our results.
             - One way to roughly assess such sampling bias is to randomly drop 
@@ -172,6 +177,11 @@
     C., Wang W.-L. 2020. ***Analysis of the mutation dynamics of SARS-CoV-2 
     reveals the spread history and emergence of RBD mutant with lower ACE2 
     binding affinity***. bioRxiv.:2020.04.09.034942.
+- Kupferschmidt K. 2020. Mutations can reveal how the coronavirus moves—but 
+    they're easy to overinterpret. Available from https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret.
+- Le T.T., Andreadakis Z., Kumar A., Román R.G., Tollefsen S., Saville M., 
+    Mayhew S. 2020. The COVID-19 vaccine development landscape. Nat. Rev. Drug 
+    Discov.
 - Pagel M. 1999. Inferring the historical patterns of biological evolution. 
     Nature. 401:877–884.
 - Pagel M., Venditti C., Meade A. 2006. Large punctuational contribution of 
@@ -338,4 +348,3 @@
 [CovidActNow]: https://covidactnow.org
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
-
