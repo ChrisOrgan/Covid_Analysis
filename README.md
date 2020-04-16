@@ -1,11 +1,14 @@
 <img src="https://media0.giphy.com/media/QNIL3zOyJplN6/giphy.gif">
 
-# Coronavirus Macroevolution
+# Readme
 
-### SARS-CoV-2 Genomes Are Evolving Gradually
+## The Macroevolution of the Novel Coronavirus
 
-- We first aim to describe the mode of SARS-CoV-2 evolution and how it compares 
-  to its inferred slow tempo so far (Bedford et al. 2020; Jia et al. 2020)?
+### SARS-CoV-2 Is Evolving Gradually
+
+- Here, we describe and compare the mode of SARS-CoV-2 genomic evolution to its 
+  tempo, which so far has been much slower than that of SARS-CoV (Jia et al. 
+  2020)
     - To start, we focus on SARS-CoV-2 whole genomes.
         - Once they jumped into and spread among humans, has SARS-CoV-2 been 
           evolving in a punctuational manner, so that a large proportion of 
@@ -19,10 +22,10 @@
         - We expect the net number of transmissions along SARS-CoV-2 lineages 
           to correlate with (slope > 0) and explain the variation in 
           accumulated mutations (*R^2^* > 0), controlling for shared ancestry.
-        - First, we downloaded a molecular tree of SARS-CoV-2 (*n* = 3,944 
+        - First, we downloaded a molecular tree of SARS-CoV-2 (*n* = 3,958 
           genomes) from `Nextstrain` (Sagulenko et al. 2017; Hadfield et al. 
           2018; https://nextstrain.org/ncov).
-            - Downloaded on: 4/15/2020, 9:56:14 AM
+            - Downloaded on: 4/16/2020, 8:33:41 AM
             - The genomes come from various authors and labs, deposited at 
               `GISAID` (Shu and McCauley 2017; https://www.gisaid.org/).
             - Bioinformatic notes (see https://github.com/nextstrain/ncov):
@@ -45,9 +48,6 @@
             - This tip label edit is to prevent downstream errors.
         - Using the `R` 3.6.2 (R Core Team 2019) package `phytools` 0.6.99 
           (Revell 2012), we converted the Newick tree into a NEXUS format.
-        - Using the package `ape` 5.3 (Paradis and Schliep 2019), we extracted 
-          the total path lengths (diagonals of the variance-covariance matrix) 
-          and the number of nodes along the paths.
         - Using the regex functionality in `Notepad++` 7.5.8, we fixed the 
           codings of clades with 'anagenetic' taxa in the tree file.
             - Example:
@@ -59,6 +59,9 @@
                       a group.
                 - Regex (replace): `\1`
                     - The replacement is the group designated above.
+        - Using the package `ape` 5.3 (Paradis and Schliep 2019), we extracted 
+          the total path lengths (diagonals of the variance-covariance matrix) 
+          and the number of nodes along the paths.
         - Using the maximum likelihood (ML) algorithm in `BayesTraits` 3.0.1 
           (Pagel 1999; http://www.evolution.rdg.ac.uk/BayesTraitsV3.0.1/BayesTraitsV3.0.1.html), 
           we estimated the parameters of the regression model above.
@@ -69,14 +72,17 @@
             - We used default ML search settings.
             - We executed two ML runs and compared the results.
         - There is very little evidence to suggest that SARS-CoV-2 genomes 
-          evolved in a punctuated manner (slope = 0.0084 ± 0.0032; 
-          *R^2^* = 0.0018).
+          evolved in a punctuated manner (slope = -0.063 ± 0.0038; 
+          *R^2^* = 0.064).
             - The two ML runs produced practically identical results.
         - SARS-CoV-2 genomes are most likely evolving gradually, with much of 
           the mutations occurring in between net transmission events, as 
           depicted in the tree.
         - We, therefore, find that the tempo and mode of SARS-CoV-2 evolution 
           are linked.
+        - We will not be expecting jumps in the mutation rate and that drugs 
+          and vaccines (e.g., Sheahan et al. 2020) under development will still 
+          work in the future.
         - We created and saved scatter plots of the regression using the `R` 
           packages `Cairo` 1.5.10 (Urbanek and Horner 2019), `ggplot2` 3.2.1 
           (Wickham 2009), `ggthemes` 4.2.0 (Arnold 2019), `htmlwidgets` 1.5.1 
@@ -87,9 +93,10 @@
           fitted values, and a histogram of the residuals using the packages 
           `ggExtra` 0.9 (Attali and Baker 2019), `ggplot2`, `ggthemes`, and 
           `svglite`.
-            - The residuals vs. fitted values plot does not indicate a 
+            - The residuals vs. fitted values plot does not indicate a severe
               violation of residual homogeneity.
-            - The histogram shows that the residuals are normally distributed.
+            - The histogram shows that the residuals are normally distributed 
+              with a slight right skew.
         - We checked whether an artifact of phylogeny reconstruction, the 
           node-density effect (Webster et al. 2003; Venditti et al. 2006), 
           biases our punctuation test.
@@ -102,11 +109,10 @@
                     - *β:* rate of change between path length and the number of 
                            nodes
                 - We expect *δ* > 1 when the node-density effect is present.
-            - We used `R` to estimate *δ* by fitting a log-log regression.
-        - The *δ* test suggests that the node-density effect is present 
-          (*δ* = 8.17), but the *P* value of the exponent term is high 
-          (*P* = 0.51), and the *R^2^* of the regression is low 
-          (*R^2^* = 0.00011).
+            - We used `R` packages `ape` and `nlme` 3.1-143 (Pinheiro et al. 
+              2019) to estimate *δ* by fitting a PGLS log-log regression.
+        - The *δ* test suggests that the node-density effect is absent
+          (*δ* = -1.78).
         - Non-random sampling regarding time and location can affect how we 
           interpret our results.
             - One way to roughly assess such sampling bias is to randomly drop 
@@ -152,17 +158,6 @@
     more "ggplot2" enhancements. R package.
 - Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for "ggplot2." R 
     package.
-- Bedford T., Greninger A.L., Roychoudhury P., Starita L.M., Famulare M., Huang 
-    M.-L., Nalla A., Pepper G., Reinhardt A., Xie H., Shrestha L., Nguyen T.N., 
-    Adler A., Brandstetter E., Cho S., Giroux D., Han P.D., Fay K., Frazar 
-    C.D., Ilcisin M., Lacombe K., Lee J., Kiavand A., Richardson M., Sibley 
-    T.R., Truong M., Wolf C.R., Nickerson D.A., Rieder M.J., Englund J.A., 
-    The Seattle Flu Study Investigators, Hadfield J., Hodcroft E.B., Huddleston 
-    J., Moncla L.H., Müller N.F., Neher R.A., Deng X., Gu W., Federman S., Chiu 
-    C., Duchin J., Gautom R., Melly G., Hiatt B., Dykema P., Lindquist S., 
-    Queen K., Tao Y., Uehara A., Tong S., MacCannell D., Armstrong G.L., Baird 
-    G.S., Chu H.Y., Jerome K.R. 2020. ***Cryptic transmission of SARS-CoV-2 in 
-    Washington State***. medRxiv.:2020.04.02.20051417.
 - Gorbalenya A.E., Baker S.C., Baric R.S., de Groot R.J., Drosten C., Gulyaeva 
     A.A., Haagmans B.L., Lauber C., Leontovich A.M., Neuman B.W., Penzar D., 
     Perlman S., Poon L.L.M., Samborskiy D.V., Sidorov I.A., Sola I., Ziebuhr 
@@ -186,6 +181,8 @@
     314:119–121.
 - Paradis E., Schliep K. 2019. ape 5.0: An environment for modern phylogenetics 
     and evolutionary analyses in R. Bioinformatics. 35:526–528.
+- Pinheiro J., Bates D., DebRoy S., Sarkar D., R Core Team. 2019. nlme: Linear 
+    and nonlinear mixed effects models. R package.
 - R Core Team. 2019. R: A language and environment for statistical computing. 
     Vienna, Austria: R Foundation for Statistical Computing.
 - Rambaut A. 2017. FigTree-version 1.4.4, a graphical viewer of phylogenetic 
@@ -194,6 +191,14 @@
     (and other things). Methods Ecol. Evol. 3:217–223.
 - Sagulenko P., Puller V., Neher R.A. 2017. TreeTime: Maximum-likelihood 
     phylodynamic analysis. Virus Evol. 4.
+- Sheahan T.P., Sims A.C., Zhou S., Graham R.L., Pruijssers A.J., Agostini 
+    M.L., Leist S.R., Schäfer A., Dinnon K.H., Stevens L.J., Chappell J.D., Lu 
+    X., Hughes T.M., George A.S., Hill C.S., Montgomery S.A., Brown A.J., 
+    Bluemling G.R., Natchus M.G., Saindane M., Kolykhalov A.A., Painter G., 
+    Harcourt J., Tamin A., Thornburg N.J., Swanstrom R., Denison M.R., Baric 
+    R.S. 2020. An orally bioavailable broad-spectrum antiviral inhibits 
+    SARS-CoV-2 in human airway epithelial cell cultures and multiple 
+    coronaviruses in mice. Sci Transl. Med.
 - Sievert C. 2018. plotly for R.
 - Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza 
     data – from vision to reality. Euro Surveill. 22.
@@ -294,6 +299,7 @@
      Hopkins CSSE][]**
 - **[From Bats to Human Lungs, the Evolution of a Coronavirus][]**
 - **[Bad News Wrapped in Protein: Inside the Coronavirus Genome][]**
+- **[The Coronavirus Is Mutating. What Does That Mean for a Vaccine?][]**
 - [First 'Significant' Coronavirus Mutation Discovered In Preliminary Study][]
 - [TWiV Special: Coronavirus update with Mark Denison, MD][]
 - [Phylodynamic Analysis | 176 genomes | 6 Mar 2020][]
@@ -320,6 +326,8 @@
     https://www.newyorker.com/science/elements/from-bats-to-human-lungs-the-evolution-of-a-coronavirus#intcid=recommendations_the-new-yorker-right-rail-popular_bb51f0e8-6f2e-4099-b947-1bed209b9498_popular4-1
 [Bad News Wrapped in Protein: Inside the Coronavirus Genome]:
     https://www.nytimes.com/interactive/2020/04/03/science/coronavirus-genome-bad-news-wrapped-in-protein.html
+[The Coronavirus Is Mutating. What Does That Mean for a Vaccine?]:
+    https://www.nytimes.com/interactive/2020/04/16/opinion/coronavirus-mutations-vaccine-covid.html
 [First 'Significant' Coronavirus Mutation Discovered In Preliminary Study]:
     https://www.newsweek.com/coronavirus-mutation-study-covid-19-1497745
 [TWiV Special: Coronavirus update with Mark Denison, MD]:
@@ -332,3 +340,4 @@
 [CovidActNow]: https://covidactnow.org
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
+
