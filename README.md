@@ -1,6 +1,4 @@
-# Readme
-
-## Coronavirus Macroevolution
+# Coronavirus Macroevolution
 
 ### SARS-CoV-2 Genomes Are Evolving Gradually
 
