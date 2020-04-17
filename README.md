@@ -41,6 +41,13 @@
               clock model, and heterotachy)?
             - The branch lengths are in the unit of the expected number of 
               substitutions per site.
+            - Geographic distribution:
+                - Africa: 81 (2.04%)
+                - Asia: 559 (14.12%)
+                - Europe: 2,041 (51.57%)
+                - North America: 1,024 (25.87%)
+                - Oceania: 210 (5.31%)
+                - South America: 43 (1.09%)
             - Once our analytical pipeline is up and running, we can redo the 
               analyses using the most up-to-date tree.
         - Using `FigTree` 1.4.4 (Rambaut 2017), we saved the tree in a Newick 
@@ -71,10 +78,15 @@
               signal, to one.
             - We used default ML search settings.
             - We executed two ML runs and compared the results.
+        - We also evaluated the significance of the slope parameter using a 
+          likelihood-ratio (LR) test against an intercept-only model.
+            - LR = 2[lnLh(better fitting model) – lnLh(worse fitting model)]
+            - LR > 2 represents positive evidence (Raftery 1995).
+            - We also fitted the intercept-only models twice.
         - There is very little evidence to suggest that SARS-CoV-2 genomes 
           evolved in a punctuated manner (slope = -0.063 ± 0.0038; 
-          *R<sup>2</sup>* = 0.064).
-            - The two ML runs produced practically identical results.
+          *R<sup>2</sup>* = 0.064; LR [vs. an intercept-only model] = 263.79).
+            - The ML replicates produced practically identical results.
         - SARS-CoV-2 genomes are most likely evolving gradually, with much of 
           the mutations occurring in between net transmission events, as 
           depicted in the tree.
@@ -113,9 +125,9 @@
               2019) to estimate *δ* by fitting a PGLS log-log regression.
         - The *δ* test suggests that the node-density effect is absent
           (*δ* = -0.062).
-        - We creatted a scatterplot with the curvilinear fit line *n* = 6.46
-          *x*<sup>-0.062</sup> using `Cairo`, `ggplot2`, `ggthemes`, and 
-          `svglite`.
+        - We creatted a scatterplot with the curvilinear fit line 
+          *n* = 6.46*x*<sup>-0.062</sup> using `Cairo`, `ggplot2`, `ggthemes`, 
+          and `svglite`.
         - Non-random sampling regarding time and location can affect how we 
           interpret our results.
             - One way to roughly assess such sampling bias is to randomly drop 
@@ -125,6 +137,47 @@
       signatures of punctuated evolution.
     - Another potential follow-up is to test for punctuated evolution for each 
       gene in the genome.
+
+## The Mode of SARS-like Betacoronavirus Evolution
+
+- Has the evolution of the broader SARS-like betacoronaviruses also been 
+  gradual?
+    - We repeated the punctuation analyses as we did with the SARS-CoV-2 
+      genomes.
+    - We downloaded a molecular tree of 52 SARS-like betacoronavirus genomes 
+      from `Nextstrain` (https://nextstrain.org/groups/blab/sars-like-cov).
+        - Downloaded on: 4/16/2020, 7:19:55 PM
+        - See bioinformatic processing notes at 
+          https://github.com/blab/sars-like-cov.
+        - Virus type distribution:
+            - SARS-CoV: 12
+            - SARS-CoV-2: 12
+            - SARS-like CoV: 28
+        - Host distribution:
+            - Bat: 22 (natural reservoir; Xu et al. 2020)
+            - Civet: 3
+            - Human: 20
+            - Pangolin: 6
+        - We likely sample SARS-like betacoronavirus outbreaks more frequently 
+          when they occur in humans.
+    - There is very little evidence to suggest that SARS-like betacoronavirus 
+      genomes evolved in a punctuated manner (slope = 0.0000044 ± 0.000028; 
+      *R<sup>2</sup>* = 0.00049).
+        - The two ML runs produced practically identical results.
+    - We ran regressions with virus type as an additional categorical 
+      predictor ("dummy" variable).
+        - 3-group scenario
+            - 0: SARS-CoV (reference)
+            - 1: SARS-CoV-2
+            - 2: SARS-like CoV
+        - 2-group scenario
+            - 0: SARS-CoV (1 & 2; reference)
+            - 1: SARS-like CoV
+    - We used the Bayesian Information Criterion (BIC; Schwarz 1978)
+        - 1-group
+            - Regression model: path = β<sub>0</sub> + β<sub>1</sub>node
+            - Log likelihood = 261.20
+            - BIC = ln(52)&middot;2 - (2&middot;261.20) = -514.50
 
 ## Brief Literature Review
 
@@ -193,12 +246,15 @@
     and nonlinear mixed effects models. R package.
 - R Core Team. 2019. R: A language and environment for statistical computing. 
     Vienna, Austria: R Foundation for Statistical Computing.
+- Raftery A.E. 1995. Bayesian model selection in social research. Sociol. 
+    Methodol. 25:111–163.
 - Rambaut A. 2017. FigTree-version 1.4.4, a graphical viewer of phylogenetic 
     trees.
 - Revell L.J. 2012. phytools: An R package for phylogenetic comparative biology 
     (and other things). Methods Ecol. Evol. 3:217–223.
 - Sagulenko P., Puller V., Neher R.A. 2017. TreeTime: Maximum-likelihood 
     phylodynamic analysis. Virus Evol. 4.
+- Schwarz G. 1978. Estimating the dimension of a model. Ann. Stat. 6:461–464.
 - Sheahan T.P., Sims A.C., Zhou S., Graham R.L., Pruijssers A.J., Agostini 
     M.L., Leist S.R., Schäfer A., Dinnon K.H., Stevens L.J., Chappell J.D., Lu 
     X., Hughes T.M., George A.S., Hill C.S., Montgomery S.A., Brown A.J., 
