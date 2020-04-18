@@ -1,8 +1,8 @@
-<img src="https://media0.giphy.com/media/QNIL3zOyJplN6/giphy.gif">
+<img src="https://i.pinimg.com/originals/a0/c8/24/a0c82497f166b327446cb5825e0a1a25.gif">
 
 ## The Macroevolution of the Novel Coronavirus
 
-### SARS-CoV-2 Is Evolving Gradually
+### SARS-CoV-2 Is Mutating Gradually
 
 - Here, we describe and compare the mode of SARS-CoV-2 genomic evolution to its 
   tempo, which so far has been much slower than that of SARS-CoV (Jia et al. 
@@ -48,11 +48,8 @@
                 - North America: 1,024 (25.87%)
                 - Oceania: 210 (5.31%)
                 - South America: 43 (1.09%)
-            - Once our analytical pipeline is up and running, we can redo the 
-              analyses using the most up-to-date tree.
         - Using `FigTree` 1.4.4 (Rambaut 2017), we saved the tree in a Newick 
           format with the tip labels enclosed within single quotation marks.
-            - This tip label edit is to prevent downstream errors.
         - Using the `R` 3.6.2 (R Core Team 2019) package `phytools` 0.6.99 
           (Revell 2012), we converted the Newick tree into a NEXUS format.
         - Using the regex functionality in `Notepad++` 7.5.8, we fixed the 
@@ -68,7 +65,7 @@
                     - The replacement is the group designated above.
         - Using the package `ape` 5.3 (Paradis and Schliep 2019), we extracted 
           the total path lengths (diagonals of the variance-covariance matrix) 
-          and the number of nodes along the paths.
+          and the number of internal nodes along the paths.
         - Using the maximum likelihood (ML) algorithm in `BayesTraits` 3.0.1 
           (Pagel 1999; http://www.evolution.rdg.ac.uk/BayesTraitsV3.0.1/BayesTraitsV3.0.1.html), 
           we estimated the parameters of the regression model above.
@@ -78,13 +75,17 @@
               signal, to one.
             - We used default ML search settings.
             - We executed two ML runs and compared the results.
-        - We also evaluated the significance of the slope parameter using a 
+        - We evaluated the significance of the slope parameter using a 
           likelihood-ratio (LR) test against an intercept-only model.
             - LR = 2[lnLh(better fitting model) – lnLh(worse fitting model)]
             - LR > 2 represents positive evidence (Raftery 1995).
             - We also fitted the intercept-only models twice.
+        - We also assessed significance using *P* values.
+            - We calculated the *t* value (absolute slope / standard error), 
+              and the proportion of the null *t* distribution (df = 51) greater 
+              than the observed *t*.
         - There is very little evidence to suggest that SARS-CoV-2 genomes 
-          evolved in a punctuated manner (slope = -0.063 ± 0.0038; 
+          evolved in a punctuated manner (slope = -0.063 ± 0.0038, *P* = 0.049; 
           *R<sup>2</sup>* = 0.064; LR [vs. an intercept-only model] = 263.79).
             - The ML replicates produced practically identical results.
         - SARS-CoV-2 genomes are most likely evolving gradually, with much of 
@@ -117,16 +118,17 @@
             - We executed the *δ* test, which tests for a curvilinear 
               relationship between the number of nodes (*n*) and path length 
               (*x*).
-                - Equation: *n* = *β*&middot;*x*<sup>*δ*</sup>
+                - Equation: *n* = *β* *x<sup>δ</sup>*
                     - *β:* rate of change between the number of nodes and path 
                            length
                 - We expect *δ* > 1 when the node-density effect is present.
             - We used `R` packages `ape` and `nlme` 3.1-143 (Pinheiro et al. 
               2019) to estimate *δ* by fitting a PGLS log-log regression.
+                - We fixed Pagel's *λ* to one.
         - The *δ* test suggests that the node-density effect is absent
-          (*δ* = -0.062).
+          (*δ* = -0.046).
         - We creatted a scatterplot with the curvilinear fit line 
-          *n* = 6.46*x*<sup>-0.062</sup> using `Cairo`, `ggplot2`, `ggthemes`, 
+          *n* = 7.51*x*<sup>-0.046</sup> using `Cairo`, `ggplot2`, `ggthemes`, 
           and `svglite`.
         - Non-random sampling regarding time and location can affect how we 
           interpret our results.
@@ -142,13 +144,12 @@
 
 - Has the evolution of the broader SARS-like betacoronaviruses also been 
   gradual?
-    - We repeated the punctuation analyses as we did with the SARS-CoV-2 
-      genomes.
+    - We generally repeated the punctuation analyses as we did with the 
+      SARS-CoV-2 genomes.
     - We downloaded a molecular tree of 52 SARS-like betacoronavirus genomes 
       from `Nextstrain` (https://nextstrain.org/groups/blab/sars-like-cov).
         - Downloaded on: 4/16/2020, 7:19:55 PM
-        - See bioinformatic processing notes at 
-          https://github.com/blab/sars-like-cov.
+        - See bioinformatic notes at https://github.com/blab/sars-like-cov.
         - Virus type distribution:
             - SARS-CoV: 12
             - SARS-CoV-2: 12
@@ -158,26 +159,46 @@
             - Civet: 3
             - Human: 20
             - Pangolin: 6
-        - We likely sample SARS-like betacoronavirus outbreaks more frequently 
-          when they occur in humans.
+        - A potential bias is that researchers and labs sequence SARS-like 
+          betacoronavirus genomes more frequently at the onset and during a 
+          pandemic.
+    - We plotted the data to explore candidate regression models.
+    - We fitted two additional regressions with virus type (SARS-CoV, 
+      SARS-CoV-2, and SARS-like CoV) as a categorical predictor (i.e., "dummy" 
+      variable) on top of the standard punctuation test.
+    - We compared the three models using the Bayesian Information Criterion 
+      (BIC; Schwarz 1978), and selected the one with the lowest BIC value.
+        - Regression model 1: path = *β<sub>0</sub>* + *β<sub>1</sub>* node
+        - Regression model 2 (separate slopes; SARS-CoVs and SARS-like CoV):
+          path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
+                 *β<sub>2 (0/1)</sub>* + *β<sub>2 (0/1)</sub>* node
+        - Regression model 3 (separate slopes, but only between SARS-CoVs and 
+          SARS-like CoV): path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
+                                 *β<sub>2 (1)</sub>* + *β<sub>2 (2)</sub>* + 
+                                 *β<sub>3 (2)</sub>* node
+        - BIC = ln(*n*)*k* - 2ln(*Lh*)
+            - *n:* the number of taxa (sample size)
+            - *k:* the number of parameters estimated by the model
+            - *Lh:* the maximized value of the likelihood function
+        - ΔBIC = BIC of a model - BIC of the model with the lowest value
+            - A ΔBIC lower than two is barely worth mentioning; between two and 
+              five represents positive evidence for the model with the lowest 
+              value; between five and ten a strong one; and a convincing one 
+              for a ΔBIC greater than ten (Raftery 1995).
+    - The model with the lowest BIC value is the one with a single regression 
+      fit line (BIC = -510.55; lowest ΔBIC = 4.31).
     - There is very little evidence to suggest that SARS-like betacoronavirus 
       genomes evolved in a punctuated manner (slope = 0.0000044 ± 0.000028; 
-      *R<sup>2</sup>* = 0.00049).
-        - The two ML runs produced practically identical results.
-    - We ran regressions with virus type as an additional categorical 
-      predictor ("dummy" variable).
-        - 3-group scenario
-            - 0: SARS-CoV (reference)
-            - 1: SARS-CoV-2
-            - 2: SARS-like CoV
-        - 2-group scenario
-            - 0: SARS-CoV (1 & 2; reference)
-            - 1: SARS-like CoV
-    - We used the Bayesian Information Criterion (BIC; Schwarz 1978)
-        - 1-group
-            - Regression model: path = β<sub>0</sub> + β<sub>1</sub>node
-            - Log likelihood = 261.20
-            - BIC = ln(52)&middot;2 - (2&middot;261.20) = -514.50
+      *P* value = 0.438; *R<sup>2</sup>* = 0.00049).
+    - SARS-like betacoronaviruses have most likely been evolving gradually, 
+      before and during the two pandemics.
+    - We plotted the tree using the `R` packages `Cairo`, `ggimage` 0.2.8 (Yu 
+      2020), `ggtree` 1.14.6 (Yu et al. 2017), `phytools`, and `svglite`.
+    - However, regression diagnostics indicate violations of the residual 
+      homogeneity and normality assumptions.
+    - And the *δ* test suggests that the node-density effect is present 
+      (*δ* = 9.46).
+    - Altogether, our results here may not be reliable.
 
 ## Brief Literature Review
 
@@ -306,6 +327,9 @@
     bioRxiv.:2020.02.17.951335.
 - Xu Y. 2020. ***Unveiling the origin and transmission of 2019-nCoV***. Trends 
     Microbiol. 28:239–240.
+- Yu G., Smith D.K., Zhu H., Guan Y., Lam T.T.-Y. 2017. ggtree: An r package 
+    for visualization and annotation of phylogenetic trees with their 
+    covariates and other associated data. Methods Ecol. Evol. 8:28–36.
 - Zhang T., Wu Q., Zhang Z. 2020. ***Probable pangolin origin of SARS-CoV-2 
     associated with the COVID-19 outbreak***. Curr. Biol. 30:1346-1351.e2.
 - Zhou P., Yang X.-L., Wang X.-G., Hu B., Zhang L., Zhang W., Si H.-R., Zhu Y., 
