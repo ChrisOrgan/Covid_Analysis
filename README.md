@@ -140,7 +140,7 @@
     - Another potential follow-up is to test for punctuated evolution for each 
       gene in the genome.
 
-## The Mode of SARS-like Betacoronavirus Evolution
+### The Mode of SARS-like Betacoronavirus Evolution
 
 - Has the evolution of the broader SARS-like betacoronaviruses also been 
   gradual?
