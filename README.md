@@ -1,6 +1,4 @@
-<!-- <img src="https://media.giphy.com/media/xT8qBbC1zOLusglVOE/giphy.gif"> --!>
-
-<iframe src="https://giphy.com/embed/xT8qBbC1zOLusglVOE" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/labyrinth-xT8qBbC1zOLusglVOE">via GIPHY</a></p>
+<img src="https://media.giphy.com/media/xT8qBbC1zOLusglVOE/200w_d.gif">
 
 ## The Macroevolution of the Novel Coronavirus
 
