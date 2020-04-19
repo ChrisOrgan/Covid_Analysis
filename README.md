@@ -1,6 +1,82 @@
-<img src="https://i.pinimg.com/originals/a0/c8/24/a0c82497f166b327446cb5825e0a1a25.gif">
+<img src="https://media.giphy.com/media/xT8qBbC1zOLusglVOE/giphy.gif">
 
 ## The Macroevolution of the Novel Coronavirus
+
+### SARS-CoV-2 Transmissions Through Space and Time
+
+- Here, we analyze, under a unified, phylogenetic framework, how SARS-CoV-2 
+  transmissions vary across continents and through time.
+    - We acknowledge that nonrandom sampling regarding locations, especially, 
+      can significantly bias this analysis.
+    - We will not be able to test with confidence for a slowdown or an 
+      acceleration in transmission (*sensu* Sakamoto et al. 2016) because of an 
+      interplay between increasing mitigation measures and sequencing efforts 
+      through time.
+    - [...]
+
+### How Does The Speed of SARS-CoV-2 Mutations Change Through Time?
+
+- [...]
+
+### SARS-like Betacoronaviruses Have Been Evolving Gradually
+
+- Has the evolution of the broader SARS-like betacoronaviruses also been 
+  gradual?
+    - We generally repeated the punctuation analyses as we did with the 
+      SARS-CoV-2 genomes.
+    - We downloaded a molecular tree of 52 SARS-like betacoronavirus genomes 
+      from `Nextstrain` (https://nextstrain.org/groups/blab/sars-like-cov).
+        - Downloaded on: 4/16/2020, 7:19:55 PM
+        - See bioinformatic notes at https://github.com/blab/sars-like-cov.
+        - Virus type distribution:
+            - SARS-CoV: 12
+            - SARS-CoV-2: 12
+            - SARS-like CoV: 28
+        - Host distribution:
+            - Bat: 22 (natural reservoir; Xu et al. 2020)
+            - Civet: 3
+            - Human: 20
+            - Pangolin: 6
+        - A potential bias is that researchers and labs sequence SARS-like 
+          betacoronavirus genomes more frequently at the onset and during a 
+          pandemic.
+    - We plotted the data to explore candidate regression models.
+    - We fitted two additional regressions with virus type (SARS-CoV, 
+      SARS-CoV-2, and SARS-like CoV) as a categorical predictor (i.e., "dummy" 
+      variable) on top of the standard punctuation test.
+    - We compared the three models using the Bayesian Information Criterion 
+      (BIC; Schwarz 1978), and selected the one with the lowest BIC value.
+        - Regression model 1: path = *β<sub>0</sub>* + *β<sub>1</sub>* node
+        - Regression model 2 (separate slopes; SARS-CoVs and SARS-like CoV):
+          path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
+                 *β<sub>2 (0/1)</sub>* + *β<sub>2 (0/1)</sub>* node
+        - Regression model 3 (separate slopes, but only between SARS-CoVs and 
+          SARS-like CoV): path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
+                                 *β<sub>2 (1)</sub>* + *β<sub>2 (2)</sub>* + 
+                                 *β<sub>3 (2)</sub>* node
+        - BIC = ln(*n*)*k* - 2ln(*Lh*)
+            - *n:* the number of taxa (sample size)
+            - *k:* the number of parameters estimated by the model
+            - *Lh:* the maximized value of the likelihood function
+        - ΔBIC = BIC of a model - BIC of the model with the lowest value
+            - A ΔBIC lower than two is barely worth mentioning; between two and 
+              five represents positive evidence for the model with the lowest 
+              value; between five and ten a strong one; and a convincing one 
+              for a ΔBIC greater than ten (Raftery 1995).
+    - The model with the lowest BIC value is the one with a single regression 
+      fit line (BIC = -510.55; lowest ΔBIC = 4.31).
+    - There is very little evidence to suggest that SARS-like betacoronavirus 
+      genomes evolved in a punctuated manner (slope = 0.0000044 ± 0.000028; 
+      *P* value = 0.438; *R<sup>2</sup>* = 0.00049).
+    - We plotted the tree using the `R` packages `Cairo`, `ggimage` 0.2.8 (Yu 
+      2020), `ggtree` 1.14.6 (Yu et al. 2017), `phytools`, and `svglite`.
+    - However, regression diagnostics indicate violations of the residual 
+      homogeneity and normality assumptions.
+    - The *δ* test suggests that the node-density effect is present 
+      (*δ* = 9.46), but because we did not find punctuation, this artifact does 
+      not bias our analysis.
+    - Altogether, SARS-like betacoronaviruses have most likely been evolving 
+      gradually, before and during the two pandemics.
 
 ### SARS-CoV-2 Is Mutating Gradually
 
@@ -93,9 +169,9 @@
           depicted in the tree.
         - We, therefore, find that the tempo and mode of SARS-CoV-2 evolution 
           are linked.
-        - We will not be expecting jumps in the mutation rate and that drugs 
-          and vaccines (e.g., Le et al. 2020; Sheahan et al. 2020) under 
-          development will still work in the future.
+        - We will not be expecting jumps in the accumulation of mutations and 
+          that drugs and vaccines (e.g., Le et al. 2020; Sheahan et al. 2020) 
+          under development will still work in the future.
         - We created and saved scatter plots of the regression using the `R` 
           packages `Cairo` 1.5.10 (Urbanek and Horner 2019), `ggplot2` 3.2.1 
           (Wickham 2009), `ggthemes` 4.2.0 (Arnold 2019), `htmlwidgets` 1.5.1 
@@ -140,70 +216,13 @@
     - Another potential follow-up is to test for punctuated evolution for each 
       gene in the genome.
 
-### The Mode of SARS-like Betacoronavirus Evolution
-
-- Has the evolution of the broader SARS-like betacoronaviruses also been 
-  gradual?
-    - We generally repeated the punctuation analyses as we did with the 
-      SARS-CoV-2 genomes.
-    - We downloaded a molecular tree of 52 SARS-like betacoronavirus genomes 
-      from `Nextstrain` (https://nextstrain.org/groups/blab/sars-like-cov).
-        - Downloaded on: 4/16/2020, 7:19:55 PM
-        - See bioinformatic notes at https://github.com/blab/sars-like-cov.
-        - Virus type distribution:
-            - SARS-CoV: 12
-            - SARS-CoV-2: 12
-            - SARS-like CoV: 28
-        - Host distribution:
-            - Bat: 22 (natural reservoir; Xu et al. 2020)
-            - Civet: 3
-            - Human: 20
-            - Pangolin: 6
-        - A potential bias is that researchers and labs sequence SARS-like 
-          betacoronavirus genomes more frequently at the onset and during a 
-          pandemic.
-    - We plotted the data to explore candidate regression models.
-    - We fitted two additional regressions with virus type (SARS-CoV, 
-      SARS-CoV-2, and SARS-like CoV) as a categorical predictor (i.e., "dummy" 
-      variable) on top of the standard punctuation test.
-    - We compared the three models using the Bayesian Information Criterion 
-      (BIC; Schwarz 1978), and selected the one with the lowest BIC value.
-        - Regression model 1: path = *β<sub>0</sub>* + *β<sub>1</sub>* node
-        - Regression model 2 (separate slopes; SARS-CoVs and SARS-like CoV):
-          path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
-                 *β<sub>2 (0/1)</sub>* + *β<sub>2 (0/1)</sub>* node
-        - Regression model 3 (separate slopes, but only between SARS-CoVs and 
-          SARS-like CoV): path = *β<sub>0</sub>* + *β<sub>1</sub>* node + 
-                                 *β<sub>2 (1)</sub>* + *β<sub>2 (2)</sub>* + 
-                                 *β<sub>3 (2)</sub>* node
-        - BIC = ln(*n*)*k* - 2ln(*Lh*)
-            - *n:* the number of taxa (sample size)
-            - *k:* the number of parameters estimated by the model
-            - *Lh:* the maximized value of the likelihood function
-        - ΔBIC = BIC of a model - BIC of the model with the lowest value
-            - A ΔBIC lower than two is barely worth mentioning; between two and 
-              five represents positive evidence for the model with the lowest 
-              value; between five and ten a strong one; and a convincing one 
-              for a ΔBIC greater than ten (Raftery 1995).
-    - The model with the lowest BIC value is the one with a single regression 
-      fit line (BIC = -510.55; lowest ΔBIC = 4.31).
-    - There is very little evidence to suggest that SARS-like betacoronavirus 
-      genomes evolved in a punctuated manner (slope = 0.0000044 ± 0.000028; 
-      *P* value = 0.438; *R<sup>2</sup>* = 0.00049).
-    - SARS-like betacoronaviruses have most likely been evolving gradually, 
-      before and during the two pandemics.
-    - We plotted the tree using the `R` packages `Cairo`, `ggimage` 0.2.8 (Yu 
-      2020), `ggtree` 1.14.6 (Yu et al. 2017), `phytools`, and `svglite`.
-    - However, regression diagnostics indicate violations of the residual 
-      homogeneity and normality assumptions.
-    - And the *δ* test suggests that the node-density effect is present 
-      (*δ* = 9.46).
-    - Altogether, our results here may not be reliable.
-
 ## Brief Literature Review
 
 - **Holmes (2003)**  
     summarized the general structure of SARS-associated coronavirus virion
+- **Andersen et al. (2020)**  
+    used comparative genomics to assess the origin of SARS-CoV-2, arguing that 
+    it is not a lab-made virus
 - **Gorbalenya et al. (2020)**  
     named SARS-CoV-2
 - **van Doremalen et al. (2020)**
@@ -231,6 +250,8 @@
 
 ## References
 
+- Andersen K.G., Rambaut A., Lipkin W.I., Holmes E.C., Garry R.F. 2020. The 
+    proximal origin of SARS-CoV-2. Nat. Med. 26:450–452.
 - Attali D., Baker C. 2019. ggExtra: Add marginal histograms to "ggplot2", and 
     more "ggplot2" enhancements. R package.
 - Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for "ggplot2." R 
@@ -275,6 +296,9 @@
     (and other things). Methods Ecol. Evol. 3:217–223.
 - Sagulenko P., Puller V., Neher R.A. 2017. TreeTime: Maximum-likelihood 
     phylodynamic analysis. Virus Evol. 4.
+- Sakamoto M., Benton M.J., Venditti C. 2016. Dinosaurs in decline tens of 
+    millions of years before their final extinction. Proc. Natl. Acad. Sci. 
+    U.S.A. 113:5036–5040.
 - Schwarz G. 1978. Estimating the dimension of a model. Ann. Stat. 6:461–464.
 - Sheahan T.P., Sims A.C., Zhou S., Graham R.L., Pruijssers A.J., Agostini 
     M.L., Leist S.R., Schäfer A., Dinnon K.H., Stevens L.J., Chappell J.D., Lu 
