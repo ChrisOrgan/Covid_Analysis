@@ -250,8 +250,8 @@
 
 ## References
 
-- Andersen K.G., Rambaut A., Lipkin W.I., Holmes E.C., Garry R.F. 2020. The 
-    proximal origin of SARS-CoV-2. Nat. Med. 26:450–452.
+- Andersen K.G., Rambaut A., Lipkin W.I., Holmes E.C., Garry R.F. 2020. ***The 
+    proximal origin of SARS-CoV-2***. Nat. Med. 26:450–452.
 - Attali D., Baker C. 2019. ggExtra: Add marginal histograms to "ggplot2", and 
     more "ggplot2" enhancements. R package.
 - Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for "ggplot2." R 
