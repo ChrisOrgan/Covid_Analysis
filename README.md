@@ -1,4 +1,4 @@
-<img src="https://media.giphy.com/media/xT8qBbC1zOLusglVOE/giphy.gif">
+<img src="https://gph.is/28UY8Tf">
 
 ## The Macroevolution of the Novel Coronavirus
 
