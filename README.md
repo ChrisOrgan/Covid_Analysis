@@ -40,7 +40,7 @@
             - Transmission prevention efforts (e.g., social distancing, 
               lockdown, enforcement, healthcare, etc.)
     - The lists of factors above are not exhaustive.
-    - We can compare our results with R<sub>0</sub> estimates.
+    - We can compare our results with *R<sub>0</sub>* estimates.
     - To test for variations in net transmission across continents and days, we 
       regress the log-transformed number of nodes along phylogenetic paths 
       against time, accounting for continents, and shared branch lengths.
