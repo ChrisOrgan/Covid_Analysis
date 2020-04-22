@@ -1,18 +1,72 @@
-<img src="https://media.giphy.com/media/xT8qBbC1zOLusglVOE/giphy-downsized-large.gif">
+<img src="https://66.media.tumblr.com/9bff83312a6a877533f6a6ed661aee9b/tumblr_naewkrksTS1t01o2yo2_500.gif">
 
-## The Macroevolution of the Novel Coronavirus
+## Coronavirus Macroevolution
 
-### SARS-CoV-2 Transmissions Through Space and Time
+### SARS-CoV-2 Transmissions through Space and Time
 
-- Here, we analyze, under a unified, phylogenetic framework, how SARS-CoV-2 
-  transmissions vary across continents and through time.
-    - We acknowledge that nonrandom sampling regarding locations, especially, 
-      can significantly bias this analysis.
-    - We will not be able to test with confidence for a slowdown or an 
-      acceleration in transmission (*sensu* Sakamoto et al. 2016) because of an 
-      interplay between increasing mitigation measures and sequencing efforts 
-      through time.
-    - [...]
+- Here, we analyze, under a phylogenetic framework, how SARS-CoV-2 net 
+  transmissions vary across geographic regions and through time.
+    - We acknowledge multiple factors that could cause the net transmission 
+      rate to differ between continents.
+        - Variables that can cause heterogeneity
+            - Population density
+            - Transmission prevention efforts (e.g., social distancing, 
+              lockdown, enforcement, healthcare, etc.)
+            - Sampling effort and or capability
+            - Sequencing effort and or capability
+            - Reporting of cases
+        - Because coding continents as dummy variables is a crude approach, we 
+          do not expect heterogeneity between continents to exceed that of 
+          within.
+        - On the other hand, using countries as proxies to geographic variation 
+          would result in an overly complicated model (i.e., too many country 
+          variables).
+        - Another bias is that some SARS-CoV-2 genomes came from patients with 
+          different exposure and sampling locations.
+    - To assess geographic sampling bias, we can regress the number of sampled 
+      genomes in a country against the number of reported cases, accounting for 
+      continents, and shared branch lengths.
+    - While we can test for a slowdown or an acceleration in transmission 
+      (*sensu* Sakamoto et al. 2016), we have to recognize multiple factors:
+        - Variables that promote transmission
+            - Introduction to new environments
+            - The rise of key mutations
+            - Relaxed selection
+            - Sampling frequency
+            - Sequencing frequency
+        - Variable that impede transmission
+            - Filling of ecological niches
+            - The rise of deleterious mutations
+            - Transmission prevention efforts (e.g., social distancing, 
+              lockdown, enforcement, healthcare, etc.)
+    - The lists of factors above are not exhaustive.
+    - We can compare our results with R<sub>0</sub> estimates.
+    - To test for variations in net transmission across continents and days, we 
+      regress the log-transformed number of nodes along phylogenetic paths 
+      against time, accounting for continents, and shared branch lengths.
+        - We acquired a SARS-CoV-2 time tree (*n* = 3,958 genomes) from 
+          `Nextstrain`.
+            - Temporal resolution assumes a nucleotide substitution rate of 
+              8 × 10^-4^ substitutions per site per year 
+              (https://github.com/nextstrain/ncov; 
+              http://virological.org/t/phylodynamic-analysis-176-genomes-6-mar-2020/356).
+            - Geographic distribution:
+                - Africa: 81 (2.04%)
+                - Asia: 559 (14.12%)
+                - Europe: 2,041 (51.57%)
+                - North America: 1,024 (25.87%)
+                - Oceania: 210 (5.31%)
+                - South America: 43 (1.09%)
+        - Candidate regression models:
+            - Null: SARS-CoV-2 net transmission rate (log node count) is 
+                    constant across continents and time.
+                - Slope > 0: The transmission rate is higher than the 
+                             extinction rate, but the two have always been 
+                             constant.
+            - Alternative 1: SARS-CoV-2 transmission rate is contant across 
+                             continents, but not time (quadratic).
+            - Alternative 2: SARS-CoV-2 transmission rate is constant across 
+                             time, but not continents (separate slopes).
 
 ### How Does The Speed of SARS-CoV-2 Mutations Change Through Time?
 
@@ -22,6 +76,9 @@
 
 - Has the evolution of the broader SARS-like betacoronaviruses also been 
   gradual?
+    - While the spike gene likely has undergone selection either before or 
+      after zoonotic transfers into humans (e.g., Andersen et al. 2020), we do 
+      expect selection to be necessarily genome-wide.
     - We generally repeated the punctuation analyses as we did with the 
       SARS-CoV-2 genomes.
     - We downloaded a molecular tree of 52 SARS-like betacoronavirus genomes 
@@ -112,18 +169,14 @@
                 - There were single nucleotide polymorphisms (SNPs) present in 
                   the nCoV samples in the first and last few bases of the 
                   alignment that were masked as likely sequencing artifacts.
+                    - Insertions, deletions, and differences at the ends of the 
+                      genome are more likely to be errors 
+                      (https://nextstrain.org/narratives/ncov/sit-rep/2020-03-05?n=5).
             - How does the `Nextstrain` team model the rate of molecular 
               evolution (e.g., substitution model, across-site rate variation, 
               clock model, and heterotachy)?
             - The branch lengths are in the unit of the expected number of 
               substitutions per site.
-            - Geographic distribution:
-                - Africa: 81 (2.04%)
-                - Asia: 559 (14.12%)
-                - Europe: 2,041 (51.57%)
-                - North America: 1,024 (25.87%)
-                - Oceania: 210 (5.31%)
-                - South America: 43 (1.09%)
         - Using `FigTree` 1.4.4 (Rambaut 2017), we saved the tree in a Newick 
           format with the tip labels enclosed within single quotation marks.
         - Using the `R` 3.6.2 (R Core Team 2019) package `phytools` 0.6.99 
@@ -172,6 +225,7 @@
         - We will not be expecting jumps in the accumulation of mutations and 
           that drugs and vaccines (e.g., Le et al. 2020; Sheahan et al. 2020) 
           under development will still work in the future.
+            - Mutations in viruses can be deleterious (e.g., Muth et al. 2018).
         - We created and saved scatter plots of the regression using the `R` 
           packages `Cairo` 1.5.10 (Urbanek and Horner 2019), `ggplot2` 3.2.1 
           (Wickham 2009), `ggthemes` 4.2.0 (Arnold 2019), `htmlwidgets` 1.5.1 
@@ -221,8 +275,12 @@
 - **Holmes (2003)**  
     summarized the general structure of SARS-associated coronavirus virion
 - **Andersen et al. (2020)**  
-    used comparative genomics to assess the origin of SARS-CoV-2, arguing that 
-    it is not a lab-made virus
+    reviewed hypotheses on the origin of SARS-CoV-2, particularly on whether 
+    selection occurred before or after the zoonotic transfer into humans
+- **Damas et al. (2020)**  
+    analyzed vertebrate ACE2, covering sequence and structure conservation, 
+    susceptibility to SARS-CoV-2, possible SARS-CoV-2 intermediates, and site- 
+    and lineage-specific selective pressures.
 - **Gorbalenya et al. (2020)**  
     named SARS-CoV-2
 - **van Doremalen et al. (2020)**
@@ -243,7 +301,7 @@
     and bat CoV-like viruses
 - **Xu et al. (2020)**  
     briefly reviewed the origin and transmission of SARS-CoV-2
-- **Zhang et al. (in press):**  
+- **Zhang et al. (2020):**  
     proposed pangolin as a possible natural reservoir of SARS-CoV-2
 - **Zhou et al. (2020):**  
     analyzed the SARS-CoV-2 genomes from five of the likely patient zeroes
@@ -256,6 +314,12 @@
     more "ggplot2" enhancements. R package.
 - Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for "ggplot2." R 
     package.
+- Damas J., Hughes G.M., Keough K.C., Painter C.A., Persky N.S., Corbo M., 
+    Hiller M., Koepfli K.-P., Pfenning A.R., Zhao H., Genereux D.P., Swofford 
+    R., Pollard K.S., Ryder O.A., Nweeia M.T., Lindblad-Toh K., Teeling E.C., 
+    Karlsson E.K., Lewin H.A. 2020. Broad host range of SARS-CoV-2 predicted by 
+    comparative and structural analysis of ACE2 in vertebrates. 
+    bioRxiv.:2020.04.16.045302.
 - Gorbalenya A.E., Baker S.C., Baric R.S., de Groot R.J., Drosten C., Gulyaeva 
     A.A., Haagmans B.L., Lauber C., Leontovich A.M., Neuman B.W., Penzar D., 
     Perlman S., Poon L.L.M., Samborskiy D.V., Sidorov I.A., Sola I., Ziebuhr 
@@ -277,6 +341,12 @@
 - Le T.T., Andreadakis Z., Kumar A., Román R.G., Tollefsen S., Saville M., 
     Mayhew S. 2020. The COVID-19 vaccine development landscape. Nat. Rev. Drug 
     Discov.
+- Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
+    Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
+    Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
+    2018. Attenuation of replication by a 29 nucleotide deletion in 
+    SARS-coronavirus acquired during the early stages of human-to-human 
+    transmission. Sci. Rep. 8:1–11.
 - Pagel M. 1999. Inferring the historical patterns of biological evolution. 
     Nature. 401:877–884.
 - Pagel M., Venditti C., Meade A. 2006. Large punctuational contribution of 
@@ -308,9 +378,9 @@
     R.S. 2020. An orally bioavailable broad-spectrum antiviral inhibits 
     SARS-CoV-2 in human airway epithelial cell cultures and multiple 
     coronaviruses in mice. Sci Transl. Med.
-- Sievert C. 2018. plotly for R.
 - Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza 
     data – from vision to reality. Euro Surveill. 22.
+- Sievert C. 2018. plotly for R.
 - Urbanek S., Horner J. 2019. Cairo: R graphics device using cairo graphics 
     library for creating high-quality bitmap (PNG, JPEG, TIFF), vector (PDF, 
     SVG, PostScript) and display (X11 and Win32) output. R package.
@@ -322,8 +392,8 @@
     htmlwidgets: HTML widgets for R. R package.
 - Venditti C., Meade A., Pagel M. 2006. Detecting the node-density artifact in 
     phylogeny reconstruction. Syst. Biol. 55:637–643.
-- Wang C., Horby P.W., Hayden F.G., Gao G.F. 2020. ***A novel coronavirus 
-    outbreak of global health concern***. Lancet. 395:470–473.
+- Wang C., Horby P.W., Hayden F.G., Gao G.F. 2020. A novel coronavirus outbreak 
+    of global health concern. Lancet. 395:470–473.
 - Webster A.J., Payne R.J.H., Pagel M. 2003. Molecular phylogenies link rates 
     of evolution and speciation. Science. 301:478–478.
 - Wickham H. 2009. ggplot2: Elegant graphics for data analysis. New York: 
@@ -354,6 +424,7 @@
 - Yu G., Smith D.K., Zhu H., Guan Y., Lam T.T.-Y. 2017. ggtree: An r package 
     for visualization and annotation of phylogenetic trees with their 
     covariates and other associated data. Methods Ecol. Evol. 8:28–36.
+- Yu G. 2020. ggimage: Use Image in "ggplot2." R package.
 - Zhang T., Wu Q., Zhang Z. 2020. ***Probable pangolin origin of SARS-CoV-2 
     associated with the COVID-19 outbreak***. Curr. Biol. 30:1346-1351.e2.
 - Zhou P., Yang X.-L., Wang X.-G., Hu B., Zhang L., Zhang W., Si H.-R., Zhu Y., 
@@ -398,7 +469,6 @@
 
 ## Other Resources
 
-- **[COVID-19 Portofolio][]**
 - **[LitCOVID][]**
 - **[Nextstrain][]**
 - **[Nextstrain: Genomic epidemiology of novel coronavirus][]**
@@ -409,19 +479,18 @@
 - **[Johns Hopkins University & Medicine Coronavirus Resource Center][]**
 - **[2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns 
      Hopkins CSSE][]**
-- **[From Bats to Human Lungs, the Evolution of a Coronavirus][]**
-- **[Bad News Wrapped in Protein: Inside the Coronavirus Genome][]**
-- **[The Coronavirus Is Mutating. What Does That Mean for a Vaccine?][]**
+- **[NCBI Virus][]**
+- [From Bats to Human Lungs, the Evolution of a Coronavirus][]
+- [Bad News Wrapped in Protein: Inside the Coronavirus Genome][]
+- [The Coronavirus Is Mutating. What Does That Mean for a Vaccine?][]
 - [First 'Significant' Coronavirus Mutation Discovered In Preliminary Study][]
 - [TWiV Special: Coronavirus update with Mark Denison, MD][]
 - [Phylodynamic Analysis | 176 genomes | 6 Mar 2020][]
 - [nCoV-2019 codon usage and reservoir (not snakes v2)][]
 - [COVID-19 Projections][]
-- [CovidActNow][]
 - [Molecular dating using heterochronous data and substitution model 
    averaging][]
 
-[COVID-19 Portofolio]: https://icite.od.nih.gov/covid19/search
 [LitCOVID]: https://www.ncbi.nlm.nih.gov/research/coronavirus
 [Nextstrain]: https://nextstrain.org
 [Nextstrain: Genomic epidemiology of novel coronavirus]:
@@ -434,6 +503,7 @@
     https://coronavirus.jhu.edu
 [2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns Hopkins 
  CSSE]: https://github.com/CSSEGISandData/COVID-19
+[NCBI Virus]: https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#
 [From Bats to Human Lungs, the Evolution of a Coronavirus]:
     https://www.newyorker.com/science/elements/from-bats-to-human-lungs-the-evolution-of-a-coronavirus#intcid=recommendations_the-new-yorker-right-rail-popular_bb51f0e8-6f2e-4099-b947-1bed209b9498_popular4-1
 [Bad News Wrapped in Protein: Inside the Coronavirus Genome]:
@@ -449,6 +519,5 @@
 [nCoV-2019 codon usage and reservoir (not snakes v2)]:
     http://virological.org/t/ncov-2019-codon-usage-and-reservoir-not-snakes-v2/339
 [COVID-19 Projections]: https://covid19.healthdata.org/united-states-of-america
-[CovidActNow]: https://covidactnow.org
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
