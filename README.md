@@ -521,5 +521,3 @@
 [COVID-19 Projections]: https://covid19.healthdata.org/united-states-of-america
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
-
-<img src="https://media.giphy.com/media/W6itv78YBylif0laJ7/giphy.gif">
