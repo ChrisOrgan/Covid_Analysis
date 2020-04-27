@@ -1,4 +1,4 @@
-<img src="https://66.media.tumblr.com/9bff83312a6a877533f6a6ed661aee9b/tumblr_naewkrksTS1t01o2yo2_500.gif">
+<img src="https://media.giphy.com/media/Q9aBxHn9fTqKs/giphy.gif">
 
 ## Coronavirus Macroevolution
 
