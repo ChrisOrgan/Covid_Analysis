@@ -522,4 +522,4 @@
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
 
-<img src="https://i.ya-webdesign.com/images/confused-travolta-png-gif-1.gif">
+<img src="https://media.giphy.com/media/W6itv78YBylif0laJ7/giphy.gif">
