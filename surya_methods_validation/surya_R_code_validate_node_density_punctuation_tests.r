@@ -125,7 +125,6 @@ vcv_pos <- corBrownian(phy = tree_pos)
 vcv_neg <- corBrownian(phy = tree_neg)
 
 # Detect node-density artifact ----
-# See https://stackoverflow.com/questions/18305852/power-regression-in-r-similar-to-excel
 pgls <- gls(log(node) ~ log(path), data = dat, correlation = vcv)
 beta <- exp(as.numeric(pgls$coefficients[1]))
 delta <- as.numeric(pgls$coefficients[2])
