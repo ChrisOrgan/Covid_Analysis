@@ -1,0 +1,46 @@
+==========
+Regression
+==========
+
+Generalized least squares fit by REML
+  Model: y ~ x * group 
+  Data: dat_edit2 
+       AIC      BIC    logLik
+  230.9105 238.2221 -108.4552
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+
+Coefficients:
+                      Value Std.Error   t-value p-value
+(Intercept)      -13.024234  27.42423 -0.474917  0.6397
+x                  0.802878   0.19752  4.064885  0.0006
+groupmammal       11.312561  38.66694  0.292564  0.7727
+grouparchosaur    19.962644  30.35554  0.657628  0.5179
+x:groupmammal     -0.203641   0.28871 -0.705357  0.4883
+x:grouparchosaur  -0.380161   0.29060 -1.308188  0.2049
+
+ Correlation: 
+                 (Intr) x      grpmmm grprch x:grpm
+x                -0.395                            
+groupmammal      -0.709  0.280                     
+grouparchosaur   -0.567  0.369  0.402              
+x:groupmammal     0.270 -0.684 -0.462 -0.253       
+x:grouparchosaur  0.297 -0.679 -0.210 -0.522  0.464
+
+Standardized residuals:
+         Min           Q1          Med           Q3          Max 
+-1.006734476 -0.294793956 -0.008672226  0.208847236  0.984032726 
+
+Residual standard error: 33.68135 
+Degrees of freedom: 27 total; 21 residual
+
+Intercept = -13.024
+Slope (ref: lepidosaur) = 0.803
+P-value (slope) = 0.000556388277071209
+R-squared = 0.592
+Variance = 1134.433
+BIC = 238.222
