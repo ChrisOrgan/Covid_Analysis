@@ -121,7 +121,7 @@ write.table(
 
 # Define correlation matrices ----
 vcv <- corPagel(value = 1, phy = tree)
-vcv_pos <- corPagel(value = 0, phy = tree_pos)
+vcv_pos <- corPagel(value = 0, phy = tree_pos)  # false convergence (8)
 vcv_neg <- corPagel(value = 1, phy = tree_neg)
 
 # Detect node-density artifact ----
