@@ -7,9 +7,9 @@
 - [x] SARS-CoV-2: Punctuation (4/16)
 - [x] SARS-CoV-2: Punctuation (4/16; mutation rate)
 - [x] SARS-CoV-2: Punctuation (4/16; path ~ node x continent)
-- [ ] SARS-CoV-2: Punctuation (5/04; equitable global subsampling)
-- [ ] SARS-CoV-2: Punctuation (5/04; mutation rate)
-- [ ] SARS-CoV-2: Punctuation (5/04; path ~ node x continent)
+- [ ] SARS-CoV-2: Punctuation (5/05; equitable global subsampling)
+- [ ] SARS-CoV-2: Punctuation (5/05; mutation rate)
+- [ ] SARS-CoV-2: Punctuation (5/05; path ~ node x continent)
 - [ ] SARS-CoV-2: Punctuation (4/30; non-subsampled)
 - [ ] SARS-CoV-2: Punctuation (4/30; mutation rate)
 - [ ] SARS-CoV-2: Punctuation (4/30; path ~ node x continent)
@@ -286,7 +286,32 @@
       between continents, which is either punctuated or Red Queen-like.
         - The reasons behind this difference may be attributable to sampling 
           bias, transmission prevention efforts, and epidemiological parameters 
-          such as population density.
+          such as population size and density.
+        - In a large population, selection acting on both humans and viruses 
+          tend to be stronger than drift.
+        - When selection is high, we expect the rate of evolution to increase 
+          as viruses jump into new hosts, hence the evidence for punctuated 
+          evolution.
+            - We use Kendall's rank correlation (Kendall 1938) to test whether 
+              the slope estimates from the separate-slopes model positively 
+              correlate with continent population sizes.
+                - This nonparametric test only requires the independence 
+                  assumption.
+                - We collect 2020 population size estimates from the 
+                  United Nations World Population Prospects
+                  (https://population.un.org/wpp/Download/Standard/Population/).
+                    - Following `Nextstrain` designation, we treat Central 
+                      America and the Caribbean as part of North America.
+                    - So, we subtract 43,532,374 Caribbean people and 
+                      179,670,186 central Americans from South America and add 
+                      them to North America.
+                - We use an additional `R` package, `ggrepel` 0.8.2 (Slowinski 
+                  2020), when creating the scatter plot.
+            - There is little evidence for a positive relationship, but this 
+              result may be because of the small sample size (*τ* = 0.47; 
+              *P* = 0.1361).
+            - The plot shows somewhat of a positive relationship, with South 
+              America likely being an outlier.
     - Non-random sampling regarding time and, specifically, location affects 
       how we interpret our results.
         - [...]
@@ -394,12 +419,15 @@
     - To test for variations in net transmission across continents and days, we 
       regress the log-transformed number of nodes along phylogenetic paths 
       against time, accounting for continents, and shared branch lengths.
-        - Because node count is a Poisson data, we use Poisson regression 
+        - Because node count likely follows a Poisson distribution rather than 
+          a normal one, we use phylogenetic Poisson regression 
           (see https://bookdown.org/roback/bookdown-bysh/ch-poissonreg.html).
             - The `R` package `phylolm` 2.6 (Ho and Ané 2014) unfortunately 
               cannot handle zero branch lengths.
             - `ape`'s generalized estimating equations (GEE) method may be the 
               ideal option (Paradis and Claude 2002).
+                - GEE accounts for phylogeny in the form of a correlation 
+                  matrix.
 
 ## Brief Literature Review
 
@@ -495,6 +523,7 @@
     C., Wang W.-L. 2020. ***Analysis of the mutation dynamics of SARS-CoV-2 
     reveals the spread history and emergence of RBD mutant with lower ACE2 
     binding affinity***. bioRxiv.:2020.04.09.034942.
+- Kendall M.G. 1938. A new measure of rank correlation. Biometrika. 30:81–93.
 - Kupferschmidt K. 2020. Mutations can reveal how the coronavirus moves—but 
     they're easy to overinterpret. Available from https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret.
 - Lauer S.A., Grantz K.H., Bi Q., Jones F.K., Zheng Q., Meredith H.R., Azman 
@@ -561,6 +590,8 @@
 - Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza 
     data – from vision to reality. Euro Surveill. 22.
 - Sievert C. 2018. plotly for R.
+- Slowinski K. 2020. ggrepel: Automatically position non-overlapping text 
+    labels with "ggplot2." R package.
 - Stenseth N.C., Smith J.M. 1984. Coevolution in ecosystems: Red Queen 
     evolution or stasis? Evolution. 38:870–880.
 - Urbanek S., Horner J. 2019. Cairo: R graphics device using cairo graphics 

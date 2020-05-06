@@ -30,9 +30,9 @@ a {
 <li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16)</li>
 <li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16; mutation rate)</li>
 <li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16; path ~ node x continent)</li>
-<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; equitable global subsampling)</li>
-<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; mutation rate)</li>
-<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; path ~ node x continent)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/05; equitable global subsampling)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/05; mutation rate)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/05; path ~ node x continent)</li>
 <li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; non-subsampled)</li>
 <li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; mutation rate)</li>
 <li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; path ~ node x continent)</li>
@@ -464,7 +464,41 @@ between continents, which is either punctuated or Red Queen-like.
 <ul>
 <li>The reasons behind this difference may be attributable to sampling
 bias, transmission prevention efforts, and epidemiological parameters
-such as population density.</li>
+such as population size and density.</li>
+<li>In a large population, selection acting on both humans and viruses
+tend to be stronger than drift.</li>
+<li>When selection is high, we expect the rate of evolution to increase
+as viruses jump into new hosts, hence the evidence for punctuated
+evolution.
+<ul>
+<li>We use Kendall's rank correlation (Kendall 1938) to test whether
+the slope estimates from the separate-slopes model positively
+correlate with continent population sizes.
+<ul>
+<li>This nonparametric test only requires the independence
+assumption.</li>
+<li>We collect 2020 population size estimates from the
+United Nations World Population Prospects
+(<a href="https://population.un.org/wpp/Download/Standard/Population/">https://population.un.org/wpp/Download/Standard/Population/</a>).
+<ul>
+<li>Following <code>Nextstrain</code> designation, we treat Central
+America and the Caribbean as part of North America.</li>
+<li>So, we subtract 43,532,374 Caribbean people and
+179,670,186 central Americans from South America and add
+them to North America.</li>
+</ul>
+</li>
+<li>We use an additional <code>R</code> package, <code>ggrepel</code> 0.8.2 (Slowinski
+2020), when creating the scatter plot.</li>
+</ul>
+</li>
+<li>There is little evidence for a positive relationship, but this
+result may be because of the small sample size (<em>τ</em> = 0.47;
+<em>P</em> = 0.1361).</li>
+<li>The plot shows somewhat of a positive relationship, with South
+America likely being an outlier.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Non-random sampling regarding time and, specifically, location affects
@@ -620,13 +654,19 @@ which people recover or die (Cobey 2020).</li>
 regress the log-transformed number of nodes along phylogenetic paths
 against time, accounting for continents, and shared branch lengths.
 <ul>
-<li>Because node count is a Poisson data, we use Poisson regression
+<li>Because node count likely follows a Poisson distribution rather than
+a normal one, we use phylogenetic Poisson regression
 (see <a href="https://bookdown.org/roback/bookdown-bysh/ch-poissonreg.html">https://bookdown.org/roback/bookdown-bysh/ch-poissonreg.html</a>).
 <ul>
 <li>The <code>R</code> package <code>phylolm</code> 2.6 (Ho and Ané 2014) unfortunately
 cannot handle zero branch lengths.</li>
 <li><code>ape</code>'s generalized estimating equations (GEE) method may be the
-ideal option (Paradis and Claude 2002).</li>
+ideal option (Paradis and Claude 2002).
+<ul>
+<li>GEE accounts for phylogeny in the form of a correlation
+matrix.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -728,6 +768,7 @@ trait evolution models. Syst. Biol. 63:397–408.</li>
 C., Wang W.-L. 2020. <em><strong>Analysis of the mutation dynamics of SARS-CoV-2
 reveals the spread history and emergence of RBD mutant with lower ACE2
 binding affinity</strong></em>. bioRxiv.:2020.04.09.034942.</li>
+<li>Kendall M.G. 1938. A new measure of rank correlation. Biometrika. 30:81–93.</li>
 <li>Kupferschmidt K. 2020. Mutations can reveal how the coronavirus moves—but
 they're easy to overinterpret. Available from <a href="https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret">https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret</a>.</li>
 <li>Lauer S.A., Grantz K.H., Bi Q., Jones F.K., Zheng Q., Meredith H.R., Azman
@@ -794,6 +835,8 @@ coronaviruses in mice. Sci Transl. Med.</li>
 <li>Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza
 data – from vision to reality. Euro Surveill. 22.</li>
 <li>Sievert C. 2018. plotly for R.</li>
+<li>Slowinski K. 2020. ggrepel: Automatically position non-overlapping text
+labels with &quot;ggplot2.&quot; R package.</li>
 <li>Stenseth N.C., Smith J.M. 1984. Coevolution in ecosystems: Red Queen
 evolution or stasis? Evolution. 38:870–880.</li>
 <li>Urbanek S., Horner J. 2019. Cairo: R graphics device using cairo graphics
