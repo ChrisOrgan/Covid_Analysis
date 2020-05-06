@@ -1,4 +1,6 @@
-<img src="https://media.giphy.com/media/xULW8l2gXuRPmsQe8U/giphy.gif">
+<img src="https://raw.githubusercontent.com/suryakevin/suryakevin.github.io/master/izanami.svg" width=20% height=20%>
+
+# Readme
 
 ## Coronavirus Macroevolution
 
@@ -735,3 +737,55 @@
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
 [Cassia Wagner]: https://bedford.io/team/cassia-wagner
+
+## Notes
+
+### Punctuated SARS-CoV-2 Gene Evolution?
+
+### SARS-CoV-2 in Cruise Ships
+
+- SARS-CoV-2 genomic diversity might have declined following transmissions into 
+  cruise ships (i.e., founder effect), which may be equivalent to islands in 
+  the theory of island biogeography (MacArthur and Wilson 1967).
+
+### The Coevolution of Coronavirus Spike Gene and Vertebrate ACE2
+
+- Do non-conservative mutations in the coronavirus *S* gene explain those in 
+  the vertebrate ACE2?
+- Possibly, not all mammal coronaviruses prefer ACE2 (Damas et al. 2020).
+
+### Did Mutation Rates Increase Before or After the Zoonotic Transfer to Humans?
+
+- The high binding affinity of the SARS-CoV-2 receptor-binding domain (RBD) to 
+  human ACE2 indicate selection (Andersen et al. 2020).
+- The question is whether selection occurred before the zoonotic transfer 
+  (pre-adaptation in pangolins or other intermediates) or after (cryptic 
+  human-to-human transmissions).
+    - Potential biases are the undersampling of non-human SARS-like CoVs 
+      (Andersen et al. 2020) and SARS-CoV-2 from the early cryptic transmission 
+      stages (e.g., Bedford et al. 2020).
+- Likely, SARS-like CoVs from bats and pangolins recombined before jumping into 
+  humans (Lam et al. 2020; Nielsen et al. 2020; Xiao et al. 2020).
+
+### References
+
+- Bedford T., Greninger A.L., Roychoudhury P., Starita L.M., Famulare M., Huang 
+    M.-L., Nalla A., Pepper G., Reinhardt A., Xie H., Shrestha L., Nguyen T.N., 
+    Adler A., Brandstetter E., Cho S., Giroux D., Han P.D., Fay K., Frazar 
+    C.D., Ilcisin M., Lacombe K., Lee J., Kiavand A., Richardson M., Sibley 
+    T.R., Truong M., Wolf C.R., Nickerson D.A., Rieder M.J., Englund J.A., 
+    The Seattle Flu Study Investigators, Hadfield J., Hodcroft E.B., 
+    Huddleston J., Moncla L.H., Müller N.F., Neher R.A., Deng X., Gu W., 
+    Federman S., Chiu C., Duchin J., Gautom R., Melly G., Hiatt B., Dykema P., 
+    Lindquist S., Queen K., Tao Y., Uehara A., Tong S., MacCannell D., 
+    Armstrong G.L., Baird G.S., Chu H.Y., Jerome K.R. 2020. Cryptic 
+    transmission of SARS-CoV-2 in Washington State. medRxiv. 
+    2020.04.02.20051417.
+- Lam T.T.-Y., Shum M.H.-H., Zhu H.-C., Tong Y.-G., Ni X.-B., Liao Y.-S., Wei 
+    W., Cheung W.Y.-M., Li W.-J., Li L.-F., Leung G.M., Holmes E.C., Hu Y.-L., 
+    Guan Y. 2020. Identifying SARS-CoV-2 related coronaviruses in Malayan 
+    pangolins. Nature. 1–6.
+- MacArthur R.H., Wilson E.O. 1967. The Theory of Island Biogeography. 
+    Princeton, NJ: Princeton University Press.
+- Nielsen R., Wang H., Pipes L. 2020. Synonymous mutations and the molecular 
+    evolution of SARS-Cov-2 origins. bioRxiv.:2020.04.20.052019.

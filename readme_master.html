@@ -1,0 +1,970 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="author" content="MarkdownViewer++" />
+        <title>readme_master.txt</title>
+        <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+html {
+  padding: 1in;
+  font-family: arial;
+  max-width: 80ch;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+        </style>
+      </head>
+    <body>
+        <img src="https://raw.githubusercontent.com/suryakevin/suryakevin.github.io/master/izanami.svg" width=20% height=20%>
+<h1 id="readme">Readme</h1>
+<h2 id="coronavirus-macroevolution">Coronavirus Macroevolution</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16; mutation rate)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-CoV-2: Punctuation (4/16; path ~ node x continent)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; equitable global subsampling)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; mutation rate)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (5/04; path ~ node x continent)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; non-subsampled)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; mutation rate)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Punctuation (4/30; path ~ node x continent)</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-Cov-2: Speciation ~ time + continent</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Geographic radiation</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> SARS-CoV-2: Dispersal ~ mutation rate</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked="checked" /> SARS-like CoV: Punctuation</li>
+</ul>
+<h3 id="the-mode-of-sars-cov-2-evolution">The Mode of SARS-CoV-2 Evolution</h3>
+<ul>
+<li>Here, we investigate the mode of SARS-CoV-2 genomic evolution and compare it
+to its tempo.
+<ul>
+<li>The mutation rate of SARS-CoV-2 has so far been slower than that of
+SARS-CoV (Jia et al. 2020), the seasonal flu (see Rambaut's statement in
+Kupferschmidt 2020), and RNA viruses generally (Corum and Zimmer 2020).
+<ul>
+<li>SARS-CoV-2 has proofreader proteins.</li>
+</ul>
+</li>
+<li>Once they jumped into and spread among humans, has SARS-CoV-2 been
+evolving in a punctuational manner, so that a large proportion of their
+genomic divergences occurred during transmission events?
+<ul>
+<li>Mutation rates may elevate at net transmission events as the viruses
+infect new hosts.</li>
+</ul>
+</li>
+<li>The null hypothesis is that they have been evolving gradually.</li>
+<li>To test for punctuated evolution (see Webster et al. 2003; Pagel et al.
+2006), we use phylogenetic generalized least squares (PGLS) to regress
+the total phylogenetic path lengths of the genomes (distances from the
+root of a phylogenetic tree to the tips) on the net number of
+transmissions (nodes in a tree).</li>
+<li>We expect the net number of transmissions along SARS-CoV-2 lineages to
+correlate with (slope &gt; 0) and explain the variation in accumulated
+mutations (<em>R<sup>2</sup></em> &gt; 0), controlling for shared ancestry.</li>
+<li>First, we download a molecular tree of SARS-CoV-2 (<em>n</em> = 3,958 genomes)
+from <code>Nextstrain</code> (Sagulenko et al. 2017; Hadfield et al. 2018;
+<a href="https://nextstrain.org/ncov">https://nextstrain.org/ncov</a>).
+<ul>
+<li>Downloaded on: 4/16/2020, 8:33:41 AM</li>
+<li>The genomes come from various authors and labs, deposited at <code>GISAID</code>
+(Shu and McCauley 2017; <a href="https://www.gisaid.org/">https://www.gisaid.org/</a>).</li>
+<li>Bioinformatic notes (see <a href="https://github.com/nextstrain/ncov">https://github.com/nextstrain/ncov</a>):
+<ul>
+<li>Site numbering and genome structure use Wuhan-Hu-1/2019 (GenBank
+Accession number: MN908947; Wu et al. 2020) as the reference.</li>
+<li>The phylogeny is rooted relative to early samples from Wuhan.</li>
+<li>There were single nucleotide polymorphisms (SNPs) present in the
+nCoV samples in the first and last few bases of the alignment
+that were masked as likely sequencing artifacts.
+<ul>
+<li>Insertions, deletions, and differences at the ends of the
+genome are more likely to be errors (<a href="https://nextstrain.org/narratives/ncov/sit-rep/2020-03-05?n=5">https://nextstrain.org/narratives/ncov/sit-rep/2020-03-05?n=5</a>).</li>
+</ul>
+</li>
+<li>How does the <code>Nextstrain</code> team model the rate of molecular
+evolution (e.g., substitution model, across-site rate variation,
+clock model, and heterotachy)?
+<ul>
+<li>Start reading <a href="https://github.com/nextstrain/ncov/blob/master/docs/running.md">https://github.com/nextstrain/ncov/blob/master/docs/running.md</a>
+and <a href="https://github.com/nextstrain/ncov/blob/master/docs/workflow_structure.md">https://github.com/nextstrain/ncov/blob/master/docs/workflow_structure.md</a></li>
+</ul>
+</li>
+<li>The branch lengths are in the unit of the expected number of
+substitutions per site.</li>
+</ul>
+</li>
+<li>Read about the metadata at <a href="https://github.com/nextstrain/ncov/blob/master/docs/metadata.md">https://github.com/nextstrain/ncov/blob/master/docs/metadata.md</a></li>
+</ul>
+</li>
+<li>The way the <code>Nextstrain</code> tree encodes nodes comprising tips with zero
+terminal branch lengths inflates the number of nodes in the tree.
+<ul>
+<li>The tree has an additional node for each of the 161 genomes sampled
+from patients exposed in a location different from the sampling one.</li>
+<li>First, using <code>FigTree</code> 1.4.4 (Rambaut 2017), we save the tree in a
+Newick format with the tip labels enclosed within single quotes, and
+without the problematic node labels.</li>
+<li>Second, we use the <code>R</code> 3.6.2 (R Core Team 2019) package <code>phytools</code>
+0.7-20 (Revell 2012) to convert the Newick tree into a NEXUS format.
+<ul>
+<li>The problem is most practically solved in the NEXUS format.</li>
+</ul>
+</li>
+<li>Third, using regex in <code>Notepad++</code> 7.5.8, we fix the encodings.
+<ul>
+<li>Example:
+<ul>
+<li>Problematic: <code>(1000:0,(1001:0):5);</code></li>
+<li>Correct: <code>(1000:0,1001:5);</code></li>
+<li>Regex (search): <code>\(([0-9][0-9][0-9][0-9]):0\)</code>
+<ul>
+<li>The backslashes escape the parentheses in front of them.</li>
+<li>The unescaped parentheses set the digits they enclose as
+a single group.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Regex (replace): <code>\1</code>
+<ul>
+<li>The replacement is the group designated above.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We check the tree using <code>ape</code> 5.3 (Paradis and Schliep 2019).
+<ul>
+<li>The tree is rooted despite the <code>R</code> output.</li>
+</ul>
+</li>
+<li>Using <code>ape</code>, we extract the total path lengths (diagonals of the
+variance-covariance matrix) and the number of internal nodes along the
+paths.</li>
+<li>Using the maximum likelihood (ML) algorithm in <code>BayesTraits</code> 3.0.1 (Pagel
+1999; <a href="http://www.evolution.rdg.ac.uk/BayesTraitsV3.0.1/BayesTraitsV3.0.1.html">http://www.evolution.rdg.ac.uk/BayesTraitsV3.0.1/BayesTraitsV3.0.1.html</a>),
+we estimate the parameters of the regression model above.
+<ul>
+<li>PGLS accounts for the shared inheritance of branch lengths.</li>
+<li>Our PGLS model assumes that the tree is correct.</li>
+<li>To check phylogenetic signal, we run two analyses, one with Pagel's
+<em>λ</em> (Pagel 1999) set to one, and another to near-zero (1 x 10<sup>-6</sup>).
+<ul>
+<li>We expect <em>λ</em> = 1 because the data come from the tree itself.</li>
+</ul>
+</li>
+<li>We use default ML search settings.</li>
+<li>We execute two ML runs for each model and compare the results
+(total: four runs).</li>
+</ul>
+</li>
+<li>We evaluate the significance of the slope parameter using a
+likelihood-ratio (LR) test against an intercept-only model.
+<ul>
+<li>LR = 2 x [lnLh(better fitting model) – lnLh(worse fitting model)]</li>
+<li>LR &gt; 2 represents positive evidence (Raftery 1995).</li>
+</ul>
+</li>
+<li>We further assess significance using <em>P</em> values.
+<ul>
+<li>We calculate the <em>t</em> value (absolute slope / standard error), and the
+proportion of the null <em>t</em> distribution (df = 3,957 [<em>n</em> - 1])
+greater than the observed <em>t</em>.</li>
+</ul>
+</li>
+<li>We repeat the analyses above using the <code>R</code> packages <code>ape</code> and <code>nlme</code>
+3.1-147 (Pinheiro et al. 2019), which employ a restricted maximum
+likelihood (REML) algorithm.</li>
+<li>We also run a sensitivity analysis using a tree scaled to the unit of
+mutations/year (i.e., rate tree).
+<ul>
+<li>The question shifts to: How does the speed of SARS-CoV-2 mutations
+change through time?</li>
+<li>We acquire and edit the <code>Nextstrain</code> timetree the same way as with
+the molecular tree.
+<ul>
+<li>Genomes with unknown sampling dates were filtered out.</li>
+<li>Temporal resolution assumes a nucleotide substitution rate of
+8 × 10<sup>-4</sup> substitutions per site per year
+(<a href="https://github.com/nextstrain/ncov;">https://github.com/nextstrain/ncov;</a> <a href="http://virological.org/t/phylodynamic-analysis-176-genomes-6-mar-2020/356">http://virological.org/t/phylodynamic-analysis-176-genomes-6-mar-2020/356</a>).</li>
+<li>The branch lengths are in years.</li>
+<li>We set negative branch lengths to zero.</li>
+</ul>
+</li>
+<li>Using <code>ape</code> and <code>phytools</code>, we then create a rate tree with branch
+lengths in mutations/year (molecular branch length / time branch
+length).
+<ul>
+<li>To avoid division by zero, we set zero time branch lengths to an
+arbitrarily small value (1 x 10<sup>-6</sup>).
+<ul>
+<li>Regardless of the value we choose, the rate on the branches
+above will be underestimated.</li>
+</ul>
+</li>
+<li>We then assess the distribution of rates in <code>R</code> and <code>FigTree</code>.
+<ul>
+<li>Two internal branches are outliers.
+<ul>
+<li>One leads to a clade comprising two genomes from Iceland
+and England.</li>
+<li>Another leads to a clade containing one Wales and four
+Scotland genomes.</li>
+</ul>
+</li>
+<li>Such extremely high rates likely resulted from undersampling.</li>
+</ul>
+</li>
+<li>With <code>ape</code>, we remove the two branches and their descendants from
+the rate tree (final <em>n</em> = 3,951 genomes).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There is very little evidence to suggest that SARS-CoV-2 genomes evolved
+in a punctuated manner (slope = -0.063 ± 0.0038, <em>P</em> &lt; 0.0001;
+<em>R<sup>2</sup></em> = 0.064; LR [vs. an intercept-only model] = 263.79).
+<ul>
+<li>The ML replicates produce practically identical results.</li>
+<li><code>R</code> results: slope = -0.20 ± 0.0060, <em>P</em> &lt; 0.0001;
+<em>R<sup>2</sup></em> = -0.186; LR [vs. an intercept-only model] = 974.76.
+<ul>
+<li>The conclusion is the same.</li>
+<li>The <em>R<sup>2</sup></em> of a model is negative if the fit is worse
+than that of an intercept-only model.</li>
+</ul>
+</li>
+<li>Rate tree results: slope = 4.55 ± 0.70, <em>P</em> &lt; 0.0001;
+<em>R<sup>2</sup></em> = 0.011; LR [vs. an intercept-only model] = 42.18).
+<ul>
+<li>Note that the <em>R<sup>2</sup></em> is low.</li>
+<li>For every additional net transmission event, the cumulative
+mutation rate increases by only four units; the slope is
+relatively shallow.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We check whether an artifact of phylogeny reconstruction, the
+node-density effect (Webster et al. 2003; Venditti et al. 2006), biases
+our punctuation tests.
+<ul>
+<li>The node-density effect is the underestimation of branch lengths in
+tree regions with fewer taxa.</li>
+<li>We executed the <em>δ</em> test, which tests for a curvilinear relationship
+between the number of nodes (<em>n</em>) and path length (<em>x</em>).
+<ul>
+<li>Equation: <em>n</em> = <em>β</em> <em>x<sup>δ</sup></em>
+<ul>
+<li><em>β:</em> rate of change between the number of nodes and path
+length</li>
+</ul>
+</li>
+<li>We expect <em>δ</em> &gt; 1 when the node-density effect is present.</li>
+</ul>
+</li>
+<li>We use <code>R</code> packages <code>ape</code> and <code>nlme</code> to estimate <em>δ</em> by fitting a
+PGLS log-log regression.
+<ul>
+<li>We fix Pagel's <em>λ</em> to one.</li>
+</ul>
+</li>
+<li>Since the number of nodes is a count data, it should have been more
+appropriate to use a generalized linear mixed model (GLMM) like a
+phylogenetic Poisson regression.
+<ul>
+<li>Log-transforming Poisson data introduces bias (O'Hara and Kotze
+2010).</li>
+</ul>
+</li>
+<li>But, Venditti et al. (2006) state that the regression equation with
+node count as the response tends to be more accurate than the one
+with path length.</li>
+</ul>
+</li>
+<li>The <em>δ</em> test suggests that the node-density effect is absent
+(<em>δ</em> = -0.046).
+<ul>
+<li>The rate tree is also free of this artifact (<em>δ</em> = -0.017).</li>
+</ul>
+</li>
+<li>We create scatterplots with the curvilinear fit lines using <code>Cairo</code>
+1.5-12 (Urbanek and Horner 2019), <code>ggplot2</code> 3.3.0 (Wickham 2009),
+<code>ggthemes</code> 4.2.0 (Arnold 2019), and <code>svglite</code> 1.2.3 (Wickham et al. 2019).</li>
+<li>We create and save scatter plots of the punctuation regressions using the
+<code>R</code> packages <code>Cairo</code>, <code>ggplot2</code>, <code>ggthemes</code>, <code>htmlwidgets</code> 1.5.1
+(Vaidyanathan et al. 2019), <code>plotly</code> 4.9.2.1 (Sievert 2018), and
+<code>svglite</code>.
+<ul>
+<li>We do not observe any influential outliers.</li>
+</ul>
+</li>
+<li>We run regression diagnostics by plotting the residuals against fitted
+values, and histograms of the residuals using the packages <code>ggExtra</code> 0.9
+(Attali and Baker 2019), <code>ggplot2</code>, <code>ggthemes</code>, and <code>svglite</code>.
+<ul>
+<li>The residuals vs. fitted values plot indicates a violation of the
+residual homogeneity of variance.
+<ul>
+<li>The plot shows funneling, but we expect this pattern given that
+SARS-CoV-2 spreads around the Earth from only one origin (Wuhan).</li>
+<li>The violation is more severe for the rate tree analysis.</li>
+</ul>
+</li>
+<li>The histogram shows that the residual distribution is somewhat
+right-skewed.
+<ul>
+<li>The skew seems more severe for the rate tree analysis.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We bolster our assessment of normality with the Shapiro-Wilk test
+(Shapiro and Wilk 1965).
+<ul>
+<li>The test suggests that two residual distributions above are
+non-normal (<em>P</em> &lt; 0.0001).</li>
+</ul>
+</li>
+<li>We plot trees using <code>Cairo</code>, <code>ggimage</code> 0.2.8 (Yu 2020), <code>ggtree</code> 1.14.6
+(Yu et al. 2017; 2020), <code>phytools</code>, and <code>svglite</code>.</li>
+<li>At this stage, we find that SARS-CoV-2 genomes are most likely evolving
+gradually (slope ≈ 0), with much of the mutations occurring in between
+net transmission events, as depicted in the tree.
+<ul>
+<li>The tempo and mode of SARS-CoV-2 evolution may be linked.</li>
+<li>We will not be expecting jumps in the accumulation of mutations and
+that drugs and vaccines (e.g., Amanat and Kramer 2020; Gao et al.
+2020; Le et al. 2020; Sheahan et al. 2020) under development will
+still work in the future.
+<ul>
+<li>Mutations in viruses can be deleterious (e.g., Muth et al. 2018).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>We check for Simpson's paradox (Blyth 1972), whether only parts of the
+tree exhibit evidence of punctuation.
+<ul>
+<li>We fit a regression model where we allow different fit lines for
+different continents (Africa, Asia, Europe, North America, Oceania,
+and South America).
+<ul>
+<li>Geographic distribution:
+<ul>
+<li>Africa: 81 (2.04%)</li>
+<li>Asia: 559 (14.12%)</li>
+<li>Europe: 2,041 (51.57%)</li>
+<li>North America: 1,024 (25.87%)</li>
+<li>Oceania: 210 (5.31%)</li>
+<li>South America: 43 (1.09%)</li>
+</ul>
+</li>
+<li>To obtain the standard errors for the intercept and slope of all
+lines, we fit the model five more times, each with a different
+reference.</li>
+</ul>
+</li>
+<li>We compare the separate-slopes model above with the single-slope one
+using the Bayesian Information Criterion (BIC; Schwarz 1978) and
+select the one with the lowest BIC value.
+<ul>
+<li>BIC = ln(<em>n</em>)<em>k</em> - 2ln(<em>Lh</em>)
+<ul>
+<li><em>n:</em> the number of taxa (sample size)</li>
+<li><em>k:</em> the number of parameters estimated by the model</li>
+<li><em>Lh:</em> the maximized value of the likelihood function</li>
+</ul>
+</li>
+<li>ΔBIC = BIC of a model - BIC of the model with the lowest value
+<ul>
+<li>A ΔBIC lower than two is barely worth mentioning; between two
+and five represents positive evidence for the model with the
+lowest value; between five and ten a strong one; and a
+convincing one for a ΔBIC greater than ten (Raftery 1995).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The separate-slopes model is more likely than the single-slope one
+(ΔBIC = 6,161.6; <em>R<sup>2</sup></em> = 0.81).</li>
+<li>There is indeed evidence for Simpson's paradox, with three lines
+having positive slopes (Africa, Asia, and North America), and the
+other three negative (Europe, Oceania, and South America).
+<ul>
+<li>All <em>P</em> values are less than 0.01.</li>
+<li>The lines seem off because they are phylogenetically-corrected.</li>
+<li>But, note that all continents have multiple introductions.
+<ul>
+<li>Using dummy coding may not be the most appropriate approach.</li>
+</ul>
+</li>
+<li>The sample size for three continents (Africa, Oceania, and South
+America) is relatively small.</li>
+<li>In all cases, the residuals are relatively large.</li>
+<li>While the residuals vs. fitted values plot does not indicate
+heteroscedasticity, it does show a positive relationship.
+<ul>
+<li>Within each continent, data points with low and high number
+of nodes have high residuals.</li>
+<li>In other words, each line is predicting the tails of the
+distribution poorly.</li>
+<li>The fitted values for almost all South American genomes are
+highly negative, and thereby nonsensical.</li>
+</ul>
+</li>
+<li>As before, the residual distribution is non-normal (Shapiro-Wilk
+<em>P</em> &lt; 0.0001).</li>
+</ul>
+</li>
+<li>We interpret the separate-slope regression results with care.</li>
+</ul>
+</li>
+<li>No published studies have interpreted negative slopes in a punctuation
+regression test.
+<ul>
+<li>Here are some thoughts to help interpret negative slopes:
+<ul>
+<li>Viral transmission is allopatric.</li>
+<li>Sampled viruses could either be in the middle of a coevolutionary
+arms race with the host's immune system (Red Queen-like; Van
+Valen 1973; Stenseth and Smith 1984) or at the end (i.e.,
+winning, and so ended up killing the host).</li>
+<li>But, COVID-19 symptoms do not develop immediately.
+<ul>
+<li>The median incubation period is 5.1 days; 97.5% will develop
+symptoms within 11.5 days (Lauer et al. 2020).</li>
+</ul>
+</li>
+<li>The viruses may be able to linger and replicate easily before
+being barraged by immune reactions.</li>
+<li>We may not need to invoke acceleration along longer branches.</li>
+<li>There may simply be a threshold separating a stage of low and
+high, constant evolution.</li>
+<li>Viruses that reside within a host have to experience the Red
+Queen game.</li>
+<li>Whereas lineages that frequently jump may have a lower chance of
+being engaged in the game, and so have evolved less.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The results above hint that the mode of SARS-CoV-2 evolution differs
+between continents, which is either punctuated or Red Queen-like.
+<ul>
+<li>The reasons behind this difference may be attributable to sampling
+bias, transmission prevention efforts, and epidemiological parameters
+such as population density.</li>
+</ul>
+</li>
+<li>Non-random sampling regarding time and, specifically, location affects
+how we interpret our results.
+<ul>
+<li>[...]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>A follow-up question is whether only parts of the tree, where cross-continent
+dispersal is rampant, exhibit signatures of punctuated evolution.</li>
+</ul>
+<h3 id="sars-like-betacoronaviruses-have-been-evolving-gradually">SARS-like Betacoronaviruses Have Been Evolving Gradually</h3>
+<ul>
+<li>Has the evolution of the broader SARS-like betacoronaviruses also been
+gradual?
+<ul>
+<li>While the spike gene likely has undergone selection either before or
+after zoonotic transfers into humans (e.g., Andersen et al. 2020), we do
+expect selection to be necessarily genome-wide.</li>
+<li>We generally repeat the punctuation analyses as we do with the SARS-CoV-2
+genomes.</li>
+<li>We download a molecular tree of 52 SARS-like betacoronavirus genomes from
+<code>Nextstrain</code> (<a href="https://nextstrain.org/groups/blab/sars-like-cov">https://nextstrain.org/groups/blab/sars-like-cov</a>).
+<ul>
+<li>Downloaded on: 4/16/2020, 7:19:55 PM</li>
+<li>See bioinformatic notes at <a href="https://github.com/blab/sars-like-cov">https://github.com/blab/sars-like-cov</a>.</li>
+<li>Virus type distribution:
+<ul>
+<li>SARS-CoV: 12</li>
+<li>SARS-CoV-2: 12</li>
+<li>SARS-like CoV: 28</li>
+</ul>
+</li>
+<li>Host distribution:
+<ul>
+<li>Bat: 22 (natural reservoir; Xu et al. 2020)</li>
+<li>Civet: 3</li>
+<li>Human: 20</li>
+<li>Pangolin: 6</li>
+</ul>
+</li>
+<li>A potential bias is that researchers and labs sequence SARS-like
+betacoronavirus genomes more frequently at the onset and during a
+pandemic.</li>
+<li>There is no corresponding timetree.</li>
+</ul>
+</li>
+<li>We plot the data to explore candidate regression models.</li>
+<li>We fit two additional regressions with virus types (SARS-CoV, SARS-CoV-2,
+and SARS-like CoV) as dummy variables.</li>
+<li>We compare the three models using the BIC, and select the one with the
+lowest BIC value.</li>
+<li>The model with the lowest BIC value is the one with a single regression
+fit line (BIC = -510.55; lowest ΔBIC = 4.31).</li>
+<li>There is very little evidence to suggest that SARS-like betacoronavirus
+genomes evolved in a punctuated manner (slope = 0.0000044 ± 0.000028;
+<em>P</em> value = 0.438; <em>R<sup>2</sup></em> = 0.00049).</li>
+<li>However, regression diagnostics indicate violations of the residual
+homogeneity of variance and normality assumptions.</li>
+<li>The <em>δ</em> test suggests that the node-density effect is present
+(<em>δ</em> = 9.46), but because we do not find punctuation, this artifact does
+not bias our analysis.</li>
+<li>Taken together, SARS-like betacoronaviruses have most likely been
+evolving gradually, before and during the two pandemics.</li>
+</ul>
+</li>
+</ul>
+<h3 id="sars-cov-2-transmissions-through-space-and-time">SARS-CoV-2 Transmissions through Space and Time</h3>
+<ul>
+<li>Here, we analyze, under a phylogenetic framework, how SARS-CoV-2 net
+transmissions vary across geographic regions and through time.
+<ul>
+<li>We acknowledge multiple factors that could cause the net transmission
+rate to differ between continents.
+<ul>
+<li>Variables that can cause heterogeneity
+<ul>
+<li>Population size and density (Cobey 2020)</li>
+<li>Public health (see Richardson et al. 2020 and Zhou et al. 2020b
+regarding underlying health conditions)</li>
+<li>Transmission prevention efforts (e.g., handwashing, face covering
+[Anfinrud et al. 2020; Leung et al. 2020], social distancing,
+lockdown, enforcement, travel restrictions [Chinazzi et al.
+2020], healthcare [Cobey 2020], etc.)</li>
+<li>Sampling effort and or capability</li>
+<li>Sequencing effort and or capability</li>
+<li>Reporting of cases
+<ul>
+<li>Note that the number of undiagnosed cases is likely higher
+than reported (Vogel 2020).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Because coding continents as dummy variables is a crude approach, we
+do not expect heterogeneity between continents to exceed that of
+within.</li>
+<li>On the other hand, using countries as proxies to geographic variation
+would result in an overly complicated model (i.e., too many country
+variables).</li>
+<li>Latitude/Longitude data may be an ideal alternative
+(<a href="https://github.com/nextstrain/ncov/blob/master/config/lat_longs.tsv">https://github.com/nextstrain/ncov/blob/master/config/lat_longs.tsv</a>).</li>
+<li>Another bias is that some SARS-CoV-2 genomes came from patients with
+different exposure and sampling locations.</li>
+</ul>
+</li>
+<li>To assess geographic sampling bias, we can regress the number of sampled
+genomes in a country against the number of reported cases, accounting for
+continents, and shared branch lengths.</li>
+<li>While we can test for a slowdown or an acceleration in transmission
+(<em>sensu</em> Sakamoto et al. 2016), we have to recognize multiple factors:
+<ul>
+<li>Variables that promote transmission
+<ul>
+<li>Introduction to new environments</li>
+<li>The rise of key mutations</li>
+<li>Relaxed selection</li>
+<li>Sampling frequency</li>
+<li>Sequencing frequency</li>
+</ul>
+</li>
+<li>Variables that impede transmission
+<ul>
+<li>Filling of ecological niches</li>
+<li>The rise of deleterious mutations</li>
+<li>Transmission prevention efforts (e.g., handwashing, face
+covering, social distancing, lockdown, enforcement, healthcare,
+etc.)</li>
+</ul>
+</li>
+<li>Variables that may either promote or impede transmission
+<ul>
+<li>Seasonal change (Cobey 2020; Cohen 2020)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The lists of factors above are not exhaustive.</li>
+<li>We can compare our results with <em>R<sub>0</sub></em> estimates.
+<ul>
+<li>The average <em>R<sub>0</sub></em> value is 2.2-6.47 (briefly reviewed in
+Wang et al. 2020b).
+<ul>
+<li><em>R<sub>0</sub></em> is the transmission rate divided by the rate at
+which people recover or die (Cobey 2020).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>To test for variations in net transmission across continents and days, we
+regress the log-transformed number of nodes along phylogenetic paths
+against time, accounting for continents, and shared branch lengths.
+<ul>
+<li>Because node count is a Poisson data, we use Poisson regression
+(see <a href="https://bookdown.org/roback/bookdown-bysh/ch-poissonreg.html">https://bookdown.org/roback/bookdown-bysh/ch-poissonreg.html</a>).
+<ul>
+<li>The <code>R</code> package <code>phylolm</code> 2.6 (Ho and Ané 2014) unfortunately
+cannot handle zero branch lengths.</li>
+<li><code>ape</code>'s generalized estimating equations (GEE) method may be the
+ideal option (Paradis and Claude 2002).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="brief-literature-review">Brief Literature Review</h2>
+<ul>
+<li><strong>Holmes (2003)</strong><br />
+summarized the general structure of SARS-associated coronavirus virion</li>
+<li><strong>Andersen et al. (2020)</strong><br />
+reviewed hypotheses on the origin of SARS-CoV-2, particularly on whether
+selection occurred before or after the zoonotic transfer into humans</li>
+<li><strong>Anfinrud et al. (2020)</strong><br />
+demonstrated how mouth covering could reduce the emission of droplets</li>
+<li><strong>Damas et al. (2020)</strong><br />
+analyzed vertebrate ACE2, covering sequence and structure conservation,
+susceptibility to SARS-CoV-2, possible SARS-CoV-2 intermediates, and site-
+and lineage-specific selective pressures</li>
+<li><strong>Gorbalenya et al. (2020)</strong><br />
+named SARS-CoV-2</li>
+<li><strong>Richardson et al. (2020)</strong><br />
+reported that many COVID-19 patients hospitalized in the New York City area
+have underlying health conditions like hypertension, obesity, and diabetes</li>
+<li><strong>van Doremalen et al. (2020)</strong>
+evaluated the stability of SARS-CoV-2 and SARS-CoV-1 in aerosols and on
+various surfaces, and estimated their decay rates</li>
+<li><strong>Wang et al. (2020a)</strong><br />
+summarized all three major coronaviruses outbreaks</li>
+<li><strong>Wu et al. (2020a)</strong><br />
+analyzed the SARS-CoV-2 genome from one of the likely patient zeroes</li>
+<li><strong>Wu et al. (2020b)</strong><br />
+showed that SARS-CoV-2 viral RNA could persists in fecal samples longer
+than in respiratory ones</li>
+<li><strong>Wu et al. (2020c)</strong><br />
+championed wastewater surveillance to help estimate the prevalence of
+SARS-CoV-2 in a population</li>
+<li><strong>Xiao et al. (2020)</strong><br />
+hypothesized that SARS-CoV-2 originated from the recombination of pangolin
+and bat CoV-like viruses</li>
+<li><strong>Xu et al. (2020)</strong><br />
+briefly reviewed the origin and transmission of SARS-CoV-2</li>
+<li><strong>Zhang et al. (2020):</strong><br />
+proposed pangolin as a possible natural reservoir of SARS-CoV-2</li>
+<li><strong>Zhou et al. (2020a):</strong><br />
+analyzed the SARS-CoV-2 genomes from five of the likely patient zeroes</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>Amanat F., Krammer F. 2020. SARS-CoV-2 vaccines: Status report. Immunity.</li>
+<li>Andersen K.G., Rambaut A., Lipkin W.I., Holmes E.C., Garry R.F. 2020. <em><strong>The
+proximal origin of SARS-CoV-2</strong></em>. Nat. Med. 26:450–452.</li>
+<li>Anfinrud P., Stadnytskyi V., Bax C.E., Bax A. 2020. Visualizing
+speech-generated oral fluid droplets with laser light scattering. N.
+Engl. J. Med.</li>
+<li>Attali D., Baker C. 2019. ggExtra: Add marginal histograms to &quot;ggplot2&quot;, and
+more &quot;ggplot2&quot; enhancements. R package.</li>
+<li>Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for &quot;ggplot2.&quot; R
+package.</li>
+<li>Blyth C.R. 1972. On Simpson’s paradox and the sure-thing principle. J. Am.
+Stat. Assoc. 67:364–366.</li>
+<li>Chinazzi M., Davis J.T., Ajelli M., Gioannini C., Litvinova M., Merler S.,
+Piontti A.P. y, Mu K., Rossi L., Sun K., Viboud C., Xiong X., Yu H.,
+Halloran M.E., Longini I.M., Vespignani A. 2020. The effect of travel
+restrictions on the spread of the 2019 novel coronavirus (COVID-19)
+outbreak. Science. 368:395–400.</li>
+<li>Cobey S. 2020. <em><strong>Modeling infectious disease dynamics</strong></em>. Science.</li>
+<li>Cohen J. 2020. Why do dozens of diseases wax and wane with the seasons—and
+will COVID-19? Available from <a href="https://www.sciencemag.org/news/2020/03/why-do-dozens-diseases-wax-and-wane-seasons-and-will-covid-19">https://www.sciencemag.org/news/2020/03/why-do-dozens-diseases-wax-and-wane-seasons-and-will-covid-19</a>.</li>
+<li>Corum J., Zimmer C. 2020. How Coronavirus Mutates and Spreads. The New York
+Times.</li>
+<li>Damas J., Hughes G.M., Keough K.C., Painter C.A., Persky N.S., Corbo M.,
+Hiller M., Koepfli K.-P., Pfenning A.R., Zhao H., Genereux D.P., Swofford
+R., Pollard K.S., Ryder O.A., Nweeia M.T., Lindblad-Toh K., Teeling E.C.,
+Karlsson E.K., Lewin H.A. 2020. Broad host range of SARS-CoV-2 predicted by
+comparative and structural analysis of ACE2 in vertebrates.
+bioRxiv.:2020.04.16.045302.</li>
+<li>Gao Q., Bao L., Mao H., Wang L., Xu K., Yang M., Li Y., Zhu L., Wang N., Lv
+Z., Gao H., Ge X., Kan B., Hu Y., Liu J., Cai F., Jiang D., Yin Y., Qin C.,
+Li J., Gong X., Lou X., Shi W., Wu D., Zhang H., Zhu L., Deng W., Li Y., Lu
+J., Li C., Wang X., Yin W., Zhang Y., Qin C. 2020. Rapid development of an
+inactivated vaccine for SARS-CoV-2. bioRxiv. 2020.04.17.046375.</li>
+<li>Gorbalenya A.E., Baker S.C., Baric R.S., de Groot R.J., Drosten C., Gulyaeva
+A.A., Haagmans B.L., Lauber C., Leontovich A.M., Neuman B.W., Penzar D.,
+Perlman S., Poon L.L.M., Samborskiy D.V., Sidorov I.A., Sola I., Ziebuhr
+J., Coronaviridae Study Group of the International Committee on Taxonomy of
+Viruses. 2020. <em><strong>The species <em>Severe acute respiratory syndrome-related
+coronavirus</em>: Classifying 2019-nCoV and naming it SARS-CoV-2</strong></em>. Nat.
+Microbiol. 1–9.</li>
+<li>Hadfield J., Megill C., Bell S.M., Huddleston J., Potter B., Callender C.,
+Sagulenko P., Bedford T., Neher R.A. 2018. Nextstrain: Real-time tracking
+of pathogen evolution. Bioinformatics. 34:4121–4123.</li>
+<li>Ho L.S.T., Ané C. 2014. A linear-time algorithm for Gaussian and non-Gaussian
+trait evolution models. Syst. Biol. 63:397–408.</li>
+<li>Holmes K.V. 2003. <em><strong>SARS-associated coronavirus</strong></em>. N. Engl. J. Med.
+348:1948–1951.</li>
+<li>Jia Y., Shen G., Zhang Y., Huang K.-S., Ho H.-Y., Hor W.-S., Yang C.-H., Li
+C., Wang W.-L. 2020. <em><strong>Analysis of the mutation dynamics of SARS-CoV-2
+reveals the spread history and emergence of RBD mutant with lower ACE2
+binding affinity</strong></em>. bioRxiv.:2020.04.09.034942.</li>
+<li>Kupferschmidt K. 2020. Mutations can reveal how the coronavirus moves—but
+they're easy to overinterpret. Available from <a href="https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret">https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret</a>.</li>
+<li>Lauer S.A., Grantz K.H., Bi Q., Jones F.K., Zheng Q., Meredith H.R., Azman
+A.S., Reich N.G., Lessler J. 2020. The incubation period of coronavirus
+disease 2019 (COVID-19) from publicly reported confirmed cases: Estimation
+and application. Ann. Intern. Med. 172:577–582.</li>
+<li>Le T.T., Andreadakis Z., Kumar A., Román R.G., Tollefsen S., Saville M.,
+Mayhew S. 2020. The COVID-19 vaccine development landscape. Nat. Rev. Drug
+Discov.</li>
+<li>Leung N.H.L., Chu D.K.W., Shiu E.Y.C., Chan K.-H., McDevitt J.J., Hau B.J.P.,
+Yen H.-L., Li Y., Ip D.K.M., Peiris J.S.M., Seto W.-H., Leung G.M., Milton
+D.K., Cowling B.J. 2020. Respiratory virus shedding in exhaled breath and
+efficacy of face masks. Nat. Med. 1–5.</li>
+<li>Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T.,
+Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I.,
+Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C.
+2018. Attenuation of replication by a 29 nucleotide deletion in
+SARS-coronavirus acquired during the early stages of human-to-human
+transmission. Sci. Rep. 8:1–11.</li>
+<li>O'Hara R.B., Kotze D.J. 2010. Do not log-transform count data. Methods Ecol.
+Evol. 1:118–122.</li>
+<li>Pagel M. 1999. Inferring the historical patterns of biological evolution.
+Nature. 401:877–884.</li>
+<li>Pagel M., Venditti C., Meade A. 2006. Large punctuational contribution of
+speciation to evolutionary divergence at the molecular level. Science.
+314:119–121.</li>
+<li>Paradis E., Claude J. 2002. Analysis of comparative data using generalized
+estimating equations. J. Theor. Biol. 218:175–185.</li>
+<li>Paradis E., Schliep K. 2019. ape 5.0: An environment for modern phylogenetics
+and evolutionary analyses in R. Bioinformatics. 35:526–528.</li>
+<li>Pinheiro J., Bates D., DebRoy S., Sarkar D., R Core Team. 2019. nlme: Linear
+and nonlinear mixed effects models. R package.</li>
+<li>R Core Team. 2019. R: A language and environment for statistical computing.
+Vienna, Austria: R Foundation for Statistical Computing.</li>
+<li>Rambaut A. 2017. FigTree-version 1.4.4, a graphical viewer of phylogenetic
+trees.</li>
+<li>Raftery A.E. 1995. Bayesian model selection in social research. Sociol.
+Methodol. 25:111–163.</li>
+<li>Revell L.J. 2012. phytools: An R package for phylogenetic comparative biology
+(and other things). Methods Ecol. Evol. 3:217–223.</li>
+<li>Richardson S., Hirsch J.S., Narasimhan M., Crawford J.M., McGinn T., Davidson
+K.W., Barnaby D.P., Becker L.B., Chelico J.D., Cohen S.L., Cookingham J.,
+Coppa K., Diefenbach M.A., Dominello A.J., Duer-Hefele J., Falzon L.,
+Gitlin J., Hajizadeh N., Harvin T.G., Hirschwerk D.A., Kim E.J., Kozel
+Z.M., Marrast L.M., Mogavero J.N., Osorio G.A., Qiu M., Zanos T.P. 2020.
+Presenting characteristics, comorbidities, and outcomes among 5700 patients
+hospitalized with COVID-19 in the New York City area. JAMA.</li>
+<li>Sagulenko P., Puller V., Neher R.A. 2017. TreeTime: Maximum-likelihood
+phylodynamic analysis. Virus Evol. 4.</li>
+<li>Sakamoto M., Benton M.J., Venditti C. 2016. Dinosaurs in decline tens of
+millions of years before their final extinction. Proc. Natl. Acad. Sci.
+U.S.A. 113:5036–5040.</li>
+<li>Schwarz G. 1978. Estimating the dimension of a model. Ann. Stat. 6:461–464.</li>
+<li>Shapiro S.S., Wilk M.B. 1965. An analysis of variance test for normality
+(complete samples). Biometrika. 52:591–611.</li>
+<li>Sheahan T.P., Sims A.C., Zhou S., Graham R.L., Pruijssers A.J., Agostini
+M.L., Leist S.R., Schäfer A., Dinnon K.H., Stevens L.J., Chappell J.D., Lu
+X., Hughes T.M., George A.S., Hill C.S., Montgomery S.A., Brown A.J.,
+Bluemling G.R., Natchus M.G., Saindane M., Kolykhalov A.A., Painter G.,
+Harcourt J., Tamin A., Thornburg N.J., Swanstrom R., Denison M.R., Baric
+R.S. 2020. An orally bioavailable broad-spectrum antiviral inhibits
+SARS-CoV-2 in human airway epithelial cell cultures and multiple
+coronaviruses in mice. Sci Transl. Med.</li>
+<li>Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza
+data – from vision to reality. Euro Surveill. 22.</li>
+<li>Sievert C. 2018. plotly for R.</li>
+<li>Stenseth N.C., Smith J.M. 1984. Coevolution in ecosystems: Red Queen
+evolution or stasis? Evolution. 38:870–880.</li>
+<li>Urbanek S., Horner J. 2019. Cairo: R graphics device using cairo graphics
+library for creating high-quality bitmap (PNG, JPEG, TIFF), vector (PDF,
+SVG, PostScript) and display (X11 and Win32) output. R package.</li>
+<li>Vaidyanathan R., Xie Y., Allaire J.J., Chang J., Russell K. 2019.
+htmlwidgets: HTML widgets for R. R package.</li>
+<li>van Doremalen N., Bushmaker T., Morris D.H., Holbrook M.G., Gamble A.,
+Williamson B.N., Tamin A., Harcourt J.L., Thornburg N.J., Gerber S.I.,
+Lloyd-Smith J.O., de Wit E., Munster V.J. 2020. Aerosol and surface
+stability of SARS-CoV-2 as compared with SARS-CoV-1. N. Engl. J. Med.</li>
+<li>Van Valen L. 1973. A new evolutionary law. Evol. Theory. 1:1–30.</li>
+<li>Venditti C., Meade A., Pagel M. 2006. Detecting the node-density artifact in
+phylogeny reconstruction. Syst. Biol. 55:637–643.</li>
+<li>Vogel G. 2020. Antibody surveys suggesting vast undercount of coronavirus
+infections may be unreliable. Available from <a href="https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable">https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable</a>.</li>
+<li>Wang C., Horby P.W., Hayden F.G., Gao G.F. 2020a. A novel coronavirus
+outbreak of global health concern. Lancet. 395:470–473.</li>
+<li>Wang H., Wang Z., Dong Y., Chang R., Xu C., Yu X., Zhang S., Tsamlag L.,
+Shang M., Huang J., Wang Y., Xu G., Shen T., Zhang X., Cai Y. 2020b.
+<em><strong>Phase-adjusted estimation of the number of Coronavirus Disease 2019
+cases in Wuhan, China</strong></em>. Cell Discov. 6:1–8.</li>
+<li>Webster A.J., Payne R.J.H., Pagel M. 2003. Molecular phylogenies link rates
+of evolution and speciation. Science. 301:478–478.</li>
+<li>Wickham H. 2009. ggplot2: Elegant graphics for data analysis. New York:
+Springer-Verlag.</li>
+<li>Wickham H., Henry L., Luciani T.J., Decorde M., Lise V. 2019. svglite: An
+&quot;SVG&quot; graphics device. R package.</li>
+<li>Wu F., Zhao S., Yu B., Chen Y.-M., Wang W., Song Z.-G., Hu Y., Tao Z.-W.,
+Tian J.-H., Pei Y.-Y., Yuan M.-L., Zhang Y.-L., Dai F.-H., Liu Y., Wang
+Q.-M., Zheng J.-J., Xu L., Holmes E.C., Zhang Y.-Z. 2020a. <em><strong>A new
+coronavirus associated with human respiratory disease in China</strong></em>. Nature.
+579:265–269.</li>
+<li>Wu Y., Guo C., Tang L., Hong Z., Zhou J., Dong X., Yin H., Xiao Q., Tang Y.,
+Qu X., Kuang L., Fang X., Mishra N., Lu J., Shan H., Jiang G., Huang X.
+2020b. Prolonged presence of SARS-CoV-2 viral RNA in faecal samples.
+Lancet Gastroenterol. Hepatol. 5:434–435.</li>
+<li>Wu F., Xiao A., Zhang J., Gu X., Lee W.L., Kauffman K., Hanage W., Matus M.,
+Ghaeli N., Endo N., Duvallet C., Moniz K., Erickson T., Chai P., Thompson
+J., Alm E. 2020c. SARS-CoV-2 titers in wastewater are higher than expected
+from clinically confirmed cases. medRxiv.:2020.04.05.20051540.</li>
+<li>Xiao K., Zhai J., Feng Y., Zhou N., Zhang X., Zou J.-J., Li N., Guo Y., Li
+X., Shen X., Zhang Z., Shu F., Huang W., Li Y., Zhang Z., Chen R.-A., Wu
+Y.-J., Peng S.-M., Huang M., Xie W.-J., Cai Q.-H., Hou F.-H., Liu Y., Chen
+W., Xiao L., Shen Y. 2020. <em><strong>Isolation and characterization of
+2019-nCoV-like coronavirus from Malayan pangolins</strong></em>.
+bioRxiv.:2020.02.17.951335.</li>
+<li>Xu Y. 2020. <em><strong>Unveiling the origin and transmission of 2019-nCoV</strong></em>. Trends
+Microbiol. 28:239–240.</li>
+<li>Yu G., Smith D.K., Zhu H., Guan Y., Lam T.T.-Y. 2017. ggtree: An r package
+for visualization and annotation of phylogenetic trees with their
+covariates and other associated data. Methods Ecol. Evol. 8:28–36.</li>
+<li>Yu G., Lam T.T.-Y., Zhu H., Guan Y. 2018. Two methods for mapping and
+visualizing associated data on phylogeny using ggtree. Mol. Biol. Evol.
+35:3041–3043.</li>
+<li>Yu G. 2020. ggimage: Use Image in &quot;ggplot2.&quot; R package.</li>
+<li>Zhang T., Wu Q., Zhang Z. 2020. <em><strong>Probable pangolin origin of SARS-CoV-2
+associated with the COVID-19 outbreak</strong></em>. Curr. Biol. 30:1346-1351.e2.</li>
+<li>Zhou P., Yang X.-L., Wang X.-G., Hu B., Zhang L., Zhang W., Si H.-R., Zhu Y.,
+Li B., Huang C.-L., Chen H.-D., Chen J., Luo Y., Guo H., Jiang R.-D., Liu
+M.-Q., Chen Y., Shen X.-R., Wang X., Zheng X.-S., Zhao K., Chen Q.-J.,
+Deng F., Liu L.-L., Yan B., Zhan F.-X., Wang Y.-Y., Xiao G.-F., Shi Z.-L.
+2020a. <em><strong>A pneumonia outbreak associated with a new coronavirus of
+probable bat origin</strong></em>. Nature. 579:270–273.</li>
+<li>Zhou F., Yu T., Du R., Fan G., Liu Y., Liu Z., Xiang J., Wang Y., Song B., Gu
+X., Guan L., Wei Y., Li H., Wu X., Xu J., Tu S., Zhang Y., Chen H., Cao B.
+2020b. Clinical course and risk factors for mortality of adult inpatients
+with COVID-19 in Wuhan, China: A retrospective cohort study. Lancet.
+395:1054–1062.</li>
+</ul>
+<h2 id="nature-coronavirus-collection"><em>Nature</em> Coronavirus Collection</h2>
+<ul>
+<li><strong><a href="https://www.nature.com/collections/hajgidghjb">Coronavirus</a></strong></li>
+<li><strong><a href="https://doi.org/10.1038/d41586-020-00154-w">Coronavirus updates: autopsy results drastically change US coronavirus
+timeline</a></strong></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00166-6">China coronavirus: Six questions scientists are asking</a></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00973-x">How sewage could reveal true scale of coronavirus outbreak</a></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00364-2">Did pangolins spread the China coronavirus to people?</a></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00180-8">Why snakes probably aren't spreading the new China virus</a></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00760-8">How much is coronavirus spreading under the radar?</a></li>
+<li><a href="https://doi.org/10.1038/d41586-020-00758-2">The coronavirus pandemic in five powerful charts</a></li>
+</ul>
+<h2 id="science-coronavirus-collection"><em>Science</em> Coronavirus Collection</h2>
+<ul>
+<li><strong><a href="https://www.sciencemag.org/coronavirus-research-commentary-and-news?utm_source=newsletters&amp;utm_medium=newsletter&amp;utm_campaign=coronavirus600x190-24027&amp;et_rid=681382821&amp;et_cid=3261778#">Coronavirus: Research, Commentary, and News</a></strong></li>
+</ul>
+<h2 id="other-resources">Other Resources</h2>
+<ul>
+<li><strong><a href="https://www.ncbi.nlm.nih.gov/research/coronavirus">LitCOVID</a></strong></li>
+<li><strong><a href="https://nextstrain.org">Nextstrain</a></strong></li>
+<li><strong><a href="https://nextstrain.org/ncov">Nextstrain: Genomic epidemiology of novel coronavirus</a></strong></li>
+<li><strong><a href="https://nextstrain.org/groups/blab/beta-cov">Nextstrain: Genetic diversity of betacoronaviruses including novel
+coronavirus (nCoV)</a></strong></li>
+<li><strong><a href="https://nextstrain.org/groups/blab/sars-like-cov">Nextstrain: Phylogeny of SARS-like betacoronaviruses including novel
+coronavirus SARS-CoV-2</a></strong></li>
+<li><strong><a href="https://coronavirus.jhu.edu">Johns Hopkins University &amp; Medicine Coronavirus Resource Center</a></strong></li>
+<li><strong><a href="https://github.com/CSSEGISandData/COVID-19">2019 Novel Coronavirus COVID-19 (2019-nCoV) Data Repository by Johns
+Hopkins CSSE</a></strong></li>
+<li><strong><a href="https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#">NCBI Virus</a></strong></li>
+<li><a href="https://www.newyorker.com/science/elements/from-bats-to-human-lungs-the-evolution-of-a-coronavirus#intcid=recommendations_the-new-yorker-right-rail-popular_bb51f0e8-6f2e-4099-b947-1bed209b9498_popular4-1">From Bats to Human Lungs, the Evolution of a Coronavirus</a></li>
+<li><a href="https://www.nytimes.com/interactive/2020/04/03/science/coronavirus-genome-bad-news-wrapped-in-protein.html">Bad News Wrapped in Protein: Inside the Coronavirus Genome</a></li>
+<li><a href="https://www.nytimes.com/interactive/2020/04/30/science/coronavirus-mutations.html">How Coronavirus Mutates and Spreads</a></li>
+<li><a href="https://blogs.sciencemag.org/pipeline/archives/2020/04/21/watching-for-mutations-in-the-coronavirus">Watching For Mutations in the Coronavirus</a></li>
+<li><a href="https://www.nytimes.com/interactive/2020/04/16/opinion/coronavirus-mutations-vaccine-covid.html">The Coronavirus Is Mutating. What Does That Mean for a Vaccine?</a></li>
+<li><a href="https://www.newsweek.com/coronavirus-mutation-study-covid-19-1497745">First 'Significant' Coronavirus Mutation Discovered In Preliminary Study</a></li>
+<li><a href="https://www.theguardian.com/world/datablog/ng-interactive/2020/apr/22/see-how-coronavirus-can-spread-through-a-population-and-how-countries-flatten-the-curve">How coronavirus spreads through a population and how we can beat it</a></li>
+<li><a href="https://www.vox.com/future-perfect/2020/4/24/21233226/coronavirus-runners-cyclists-airborne-infectious-dose">Why you're unlikely to get the coronavirus from runners or cyclists</a></li>
+<li><a href="https://www.nytimes.com/2020/04/22/us/coronavirus-sequencing.html?referringSource=articleShare&amp;fbclid=IwAR0UvG4vtcdIH6BhltsMI08W75RGTgdCaqaKZV_4jNePBnvyiD-dZXBLaCE">Covid-19 Arrived in Seattle. Where It Went From There Stunned the
+Scientists</a></li>
+<li><a href="https://podcasts.apple.com/us/podcast/this-week-in-virology/id300973784?i=1000469609855">TWiV Special: Coronavirus update with Mark Denison, MD</a></li>
+<li><a href="http://virological.org/t/phylodynamic-analysis-176-genomes-6-mar-2020/356">Phylodynamic Analysis | 176 genomes | 6 Mar 2020</a></li>
+<li><a href="http://virological.org/t/ncov-2019-codon-usage-and-reservoir-not-snakes-v2/339">nCoV-2019 codon usage and reservoir (not snakes v2)</a></li>
+<li><a href="https://covid19.healthdata.org/united-states-of-america">COVID-19 Projections</a></li>
+<li><a href="https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial">Molecular dating using heterochronous data and substitution model
+averaging</a></li>
+<li><a href="https://bedford.io/team/cassia-wagner">Cassia Wagner</a></li>
+</ul>
+<h2 id="notes">Notes</h2>
+<h3 id="punctuated-sars-cov-2-gene-evolution">Punctuated SARS-CoV-2 Gene Evolution?</h3>
+<h3 id="sars-cov-2-in-cruise-ships">SARS-CoV-2 in Cruise Ships</h3>
+<ul>
+<li>SARS-CoV-2 genomic diversity might have declined following transmissions into
+cruise ships (i.e., founder effect), which may be equivalent to islands in
+the theory of island biogeography (MacArthur and Wilson 1967).</li>
+</ul>
+<h3 id="the-coevolution-of-coronavirus-spike-gene-and-vertebrate-ace2">The Coevolution of Coronavirus Spike Gene and Vertebrate ACE2</h3>
+<ul>
+<li>Do non-conservative mutations in the coronavirus <em>S</em> gene explain those in
+the vertebrate ACE2?</li>
+<li>Possibly, not all mammal coronaviruses prefer ACE2 (Damas et al. 2020).</li>
+</ul>
+<h3 id="did-mutation-rates-increase-before-or-after-the-zoonotic-transfer-to-humans">Did Mutation Rates Increase Before or After the Zoonotic Transfer to Humans?</h3>
+<ul>
+<li>The high binding affinity of the SARS-CoV-2 receptor-binding domain (RBD) to
+human ACE2 indicate selection (Andersen et al. 2020).</li>
+<li>The question is whether selection occurred before the zoonotic transfer
+(pre-adaptation in pangolins or other intermediates) or after (cryptic
+human-to-human transmissions).
+<ul>
+<li>Potential biases are the undersampling of non-human SARS-like CoVs
+(Andersen et al. 2020) and SARS-CoV-2 from the early cryptic transmission
+stages (e.g., Bedford et al. 2020).</li>
+</ul>
+</li>
+<li>Likely, SARS-like CoVs from bats and pangolins recombined before jumping into
+humans (Lam et al. 2020; Nielsen et al. 2020; Xiao et al. 2020).</li>
+</ul>
+<h3 id="references-1">References</h3>
+<ul>
+<li>Bedford T., Greninger A.L., Roychoudhury P., Starita L.M., Famulare M., Huang
+M.-L., Nalla A., Pepper G., Reinhardt A., Xie H., Shrestha L., Nguyen T.N.,
+Adler A., Brandstetter E., Cho S., Giroux D., Han P.D., Fay K., Frazar
+C.D., Ilcisin M., Lacombe K., Lee J., Kiavand A., Richardson M., Sibley
+T.R., Truong M., Wolf C.R., Nickerson D.A., Rieder M.J., Englund J.A.,
+The Seattle Flu Study Investigators, Hadfield J., Hodcroft E.B.,
+Huddleston J., Moncla L.H., Müller N.F., Neher R.A., Deng X., Gu W.,
+Federman S., Chiu C., Duchin J., Gautom R., Melly G., Hiatt B., Dykema P.,
+Lindquist S., Queen K., Tao Y., Uehara A., Tong S., MacCannell D.,
+Armstrong G.L., Baird G.S., Chu H.Y., Jerome K.R. 2020. Cryptic
+transmission of SARS-CoV-2 in Washington State. medRxiv.
+2020.04.02.20051417.</li>
+<li>Lam T.T.-Y., Shum M.H.-H., Zhu H.-C., Tong Y.-G., Ni X.-B., Liao Y.-S., Wei
+W., Cheung W.Y.-M., Li W.-J., Li L.-F., Leung G.M., Holmes E.C., Hu Y.-L.,
+Guan Y. 2020. Identifying SARS-CoV-2 related coronaviruses in Malayan
+pangolins. Nature. 1–6.</li>
+<li>MacArthur R.H., Wilson E.O. 1967. The Theory of Island Biogeography.
+Princeton, NJ: Princeton University Press.</li>
+<li>Nielsen R., Wang H., Pipes L. 2020. Synonymous mutations and the molecular
+evolution of SARS-Cov-2 origins. bioRxiv.:2020.04.20.052019.</li>
+</ul>
+
+    </body>
+</html>
+            
