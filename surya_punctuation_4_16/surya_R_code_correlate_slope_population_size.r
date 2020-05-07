@@ -53,9 +53,8 @@ plot_corr <-
     ) +
     theme_tufte(base_size = 10, base_family = "Arial", ticks = FALSE) +
     labs(
-      subtitle = "Slope (total path lengths ~ node count)\n",
       x = "\nPopulation Size",
-      y = NULL
+      y = "Slope (total path lengths ~ node count)\n"
     )
 
 # Save scatter plot ----
