@@ -31,7 +31,7 @@ for (strain in 1:length(tree$tip.label)) {
 # Create data frame ----
 dat <- data.frame(path, node)
 
-# Define correlation matrix ----
+# Define correlation matrices ----
 vcv_lambda0 <- corPagel(value = 0, phy = tree, fixed = TRUE)
 vcv_lambda1 <- corPagel(value = 1, phy = tree, fixed = TRUE)
 
