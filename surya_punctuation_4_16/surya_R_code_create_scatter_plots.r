@@ -61,11 +61,7 @@ plot_reg <-
       size = 1
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(
-      subtitle = "Total Path Lengths (mutations)\n",
-      x = "\nNumber of Nodes",
-      y = NULL
-    )
+    labs(x = "\nNumber of Nodes", y = "Total Path Lengths (mutations)\n")
 plot_region <-
   ggplot(dat, aes(node, path, color = continent)) +
     geom_jitter(size = 0.75, height = 0.2, width = 0.2, alpha = 0.3) +
@@ -75,9 +71,8 @@ plot_region <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region <-
@@ -137,9 +132,8 @@ plot_reg_region <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_africa <-
@@ -171,9 +165,8 @@ plot_reg_region_africa <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_asia <-
@@ -204,9 +197,8 @@ plot_reg_region_asia <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_europe <-
@@ -237,9 +229,8 @@ plot_reg_region_europe <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_namerica <-
@@ -270,9 +261,8 @@ plot_reg_region_namerica <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_oceania <-
@@ -303,9 +293,8 @@ plot_reg_region_oceania <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_region_samerica <-
@@ -336,9 +325,8 @@ plot_reg_region_samerica <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 plot_reg_rate <-
@@ -353,11 +341,7 @@ plot_reg_rate <-
       size = 1
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(
-      subtitle = "Total Path Lengths (mutations/year)\n",
-      x = "\nNumber of Nodes",
-      y = NULL
-    )
+    labs(x = "\nNumber of Nodes", y = "Total Path Lengths (mutations/year)\n")
 plot_region_rate <-
   ggplot(dat_rate, aes(node, path, color = continent)) +
     geom_jitter(size = 0.75, height = 0.2, width = 0.2, alpha = 0.3) +
@@ -367,9 +351,309 @@ plot_region_rate <-
       legend.position = "right"
     ) +
     labs(
-      subtitle = "Total Path Lengths (mutations/year)\n",
       x = "\nNumber of Nodes",
-      y = NULL,
+      y = "Total Path Lengths (mutations/year)\n",
+      color = NULL
+    )
+plot_reg_pop <-
+  ggplot(dat, aes(node, path, color = continent)) +
+    geom_point(size = 0.75, alpha = 0.1) +
+    geom_segment(
+      x = min(dat_africa$node),
+      xend = max(dat_africa$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_africa$node) +
+          -0.00000000401*1340598113 +
+          0.000000000273*min(dat_africa$node)*1340598113,
+      yend = 13.201109271227 + -0.367840886867*max(dat_africa$node) +
+             -0.00000000401*1340598113 +
+             0.000000000273*max(dat_africa$node)*1340598113,
+      color = "#F8766D",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_asia$node),
+      xend = max(dat_asia$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_asia$node) +
+          -0.00000000401*4641054786 +
+          0.000000000273*min(dat_asia$node)*4641054786,
+      yend = 13.201109271227 + -0.367840886867*max(dat_asia$node) +
+             -0.00000000401*4641054786 +
+             0.000000000273*max(dat_asia$node)*4641054786,
+      color = "#B79F00",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_europe$node),
+      xend = max(dat_europe$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_europe$node) +
+          -0.00000000401*747636045 +
+          0.000000000273*min(dat_europe$node)*747636045,
+      yend = 13.201109271227 + -0.367840886867*max(dat_europe$node) +
+             -0.00000000401*747636045 + 
+             0.000000000273*max(dat_europe$node)*747636045,
+      color = "#00BA38",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_namerica$node),
+      xend = max(dat_namerica$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_namerica$node) +
+          -0.00000000401*368092846 +
+          0.000000000273*min(dat_namerica$node)*368092846,
+      yend = 13.201109271227 + -0.367840886867*max(dat_namerica$node) +
+             -0.00000000401*368092846 + 
+             0.000000000273*max(dat_namerica$node)*368092846,
+      color = "#00BFC4",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_oceania$node),
+      xend = max(dat_oceania$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_oceania$node) +
+          -0.00000000401*42677809 +
+          0.000000000273*min(dat_oceania$node)*42677809,
+      yend = 13.201109271227 + -0.367840886867*max(dat_oceania$node) +
+             -0.00000000401*42677809 + 
+             0.000000000273*max(dat_oceania$node)*42677809,
+      color = "#619CFF",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_samerica$node),
+      xend = max(dat_samerica$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_samerica$node) +
+          -0.00000000401*653739130 +
+          0.000000000273*min(dat_samerica$node)*653739130,
+      yend = 13.201109271227 + -0.367840886867*max(dat_samerica$node) +
+             -0.00000000401*653739130 + 
+             0.000000000273*max(dat_samerica$node)*653739130,
+      color = "#F564E3",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_africa <-
+  ggplot(dat_africa, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_africa$node),
+      xend = max(dat_africa$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_africa$node) +
+          -0.00000000401*1340598113 +
+          0.000000000273*min(dat_africa$node)*1340598113,
+      yend = 13.201109271227 + -0.367840886867*max(dat_africa$node) +
+             -0.00000000401*1340598113 +
+             0.000000000273*max(dat_africa$node)*1340598113,
+      color = "#F8766D",
+      size = 1
+    ) +
+    scale_color_manual(values = "#F8766D") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_asia <-
+  ggplot(dat_asia, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_asia$node),
+      xend = max(dat_asia$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_asia$node) +
+          -0.00000000401*4641054786 +
+          0.000000000273*min(dat_asia$node)*4641054786,
+      yend = 13.201109271227 + -0.367840886867*max(dat_asia$node) +
+             -0.00000000401*4641054786 +
+             0.000000000273*max(dat_asia$node)*4641054786,
+      color = "#B79F00",
+      size = 1
+    ) +
+    scale_color_manual(values = "#B79F00") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_europe <-
+  ggplot(dat_europe, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_europe$node),
+      xend = max(dat_europe$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_europe$node) +
+          -0.00000000401*747636045 +
+          0.000000000273*min(dat_europe$node)*747636045,
+      yend = 13.201109271227 + -0.367840886867*max(dat_europe$node) +
+             -0.00000000401*747636045 + 
+             0.000000000273*max(dat_europe$node)*747636045,
+      color = "#00BA38",
+      size = 1
+    ) +
+    scale_color_manual(values = "#00BA38") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_namerica <-
+  ggplot(dat_namerica, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_namerica$node),
+      xend = max(dat_namerica$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_namerica$node) +
+          -0.00000000401*368092846 +
+          0.000000000273*min(dat_namerica$node)*368092846,
+      yend = 13.201109271227 + -0.367840886867*max(dat_namerica$node) +
+             -0.00000000401*368092846 + 
+             0.000000000273*max(dat_namerica$node)*368092846,
+      color = "#00BFC4",
+      size = 1
+    ) +
+    scale_color_manual(values = "#00BFC4") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_oceania <-
+  ggplot(dat_oceania, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_oceania$node),
+      xend = max(dat_oceania$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_oceania$node) +
+          -0.00000000401*42677809 +
+          0.000000000273*min(dat_oceania$node)*42677809,
+      yend = 13.201109271227 + -0.367840886867*max(dat_oceania$node) +
+             -0.00000000401*42677809 + 
+             0.000000000273*max(dat_oceania$node)*42677809,
+      color = "#619CFF",
+      size = 1
+    ) +
+    scale_color_manual(values = "#619CFF") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
+      color = NULL
+    )
+plot_reg_pop_samerica <-
+  ggplot(dat_samerica, aes(node, path, color = continent)) +
+    xlim(min(dat$node), max(dat$node)) +
+    ylim(min(dat$path), max(dat$path)) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 8.37994550358 + -0.06281616049*min(dat$node),
+      yend = 8.37994550358 + -0.06281616049*max(dat$node),
+      color = "gainsboro",
+      size = 0.5
+    ) +
+    geom_point(size = 1) +
+    geom_segment(
+      x = min(dat_samerica$node),
+      xend = max(dat_samerica$node),
+      y = 13.201109271227 + -0.367840886867*min(dat_samerica$node) +
+          -0.00000000401*653739130 +
+          0.000000000273*min(dat_samerica$node)*653739130,
+      yend = 13.201109271227 + -0.367840886867*max(dat_samerica$node) +
+             -0.00000000401*653739130 + 
+             0.000000000273*max(dat_samerica$node)*653739130,
+      color = "#F564E3",
+      size = 1
+    ) +
+    scale_color_manual(values = "#F564E3") +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(
+      legend.direction = "vertical",
+      legend.position = "right"
+    ) +
+    labs(
+      x = "\nNumber of Nodes",
+      y = "Total Path Lengths (mutations)\n",
       color = NULL
     )
 ## Interactive plots
@@ -466,6 +750,61 @@ graphics.off()
 CairoSVG("surya_figure_punctuation_rate_region.svg", width = 6.535,
          height = 4.039)
 print(plot_region_rate)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_lines.pdf", width = 6.535, 
+         height = 4.039)
+print(plot_reg_pop)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_lines.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_africa.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_africa)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_africa.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_africa)
+CairoPDF("surya_figure_punctuation_pop_asia.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_asia)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_asia.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_asia)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_europe.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_europe)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_europe.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_europe)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_namerica.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_namerica)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_namerica.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_namerica)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_oceania.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_oceania)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_oceania.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_oceania)
+graphics.off()
+CairoPDF("surya_figure_punctuation_pop_samerica.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_samerica)
+graphics.off()
+CairoSVG("surya_figure_punctuation_pop_samerica.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_pop_samerica)
 graphics.off()
 ## Interactive plots
 saveWidget(
