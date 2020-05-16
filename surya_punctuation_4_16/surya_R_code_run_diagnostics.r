@@ -93,7 +93,7 @@ plot_diag <-
     ) +
     scale_y_reverse() +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag_region <-
   ggplot(dat_region, aes(fitted_values, residuals)) +
     geom_point(color = "gray", size = 0.5) +
@@ -105,7 +105,7 @@ plot_diag_region <-
     ) +
     scale_y_reverse() +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag_region_color <-
   ggplot(dat_region, aes(fitted_values, residuals, color = continent)) +
     geom_point(size = 0.5) +
@@ -115,7 +115,7 @@ plot_diag_region_color <-
       legend.title = element_blank(),
       legend.position = "bottom"
     ) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag_pop <-
   ggplot(dat_pop, aes(fitted_values, residuals)) +
     geom_point(color = "gray", size = 0.5) +
@@ -127,7 +127,7 @@ plot_diag_pop <-
     ) +
     scale_y_reverse() +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag_pop_color <-
   ggplot(dat_pop, aes(fitted_values, residuals, color = continent)) +
     geom_point(size = 0.5) +
@@ -137,7 +137,7 @@ plot_diag_pop_color <-
       legend.title = element_blank(),
       legend.position = "bottom"
     ) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag_rate <-
   ggplot(dat_rate, aes(fitted_values, residuals)) +
     geom_point(color = "gray", size = 0.5) +
@@ -149,7 +149,7 @@ plot_diag_rate <-
     ) +
     scale_y_reverse() +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nFitted Values", y = "Residuals\n")
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag <- ggMarginal(plot_diag, type = "density", margins = "y", size = 1.75)
 plot_diag_region <- ggMarginal(
   plot_diag_region,

@@ -41,11 +41,7 @@ scatter_plot <-
       size = 1
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(
-      subtitle = "Total Path Lengths (substitution / site)\n",
-      x = "\nNumber of Nodes",
-      y = NULL
-    )
+    labs(x = "\nNode count", y = "Total path length (substitutions/site)\n")
 scatter_plot_host <-
   ggplot(dat, aes(node, path, color = host)) +
     geom_point() +
@@ -55,9 +51,8 @@ scatter_plot_host <-
       legend.position = "bottom"
     ) +
     labs(
-      subtitle = "Total Path Lengths (substitution / site)\n",
-      x = "\nNumber of Nodes",
-      y = NULL,
+      x = "\nNode count",
+      y = "Total path length (substitutions/site)\n",
       color = NULL
     )
 scatter_plot_type <-
@@ -69,9 +64,8 @@ scatter_plot_type <-
       legend.position = "bottom"
     ) +
     labs(
-      subtitle = "Total Path Lengths (substitution / site)\n",
-      x = "\nNumber of Nodes",
-      y = NULL,
+      x = "\nNode count",
+      y = "Total path length (substitutions/site)\n",
       color = NULL
     )
 scatter_plot_type_2 <-
@@ -99,9 +93,8 @@ scatter_plot_type_2 <-
       legend.position = "bottom"
     ) +
     labs(
-      subtitle = "Total Path Lengths (substitution / site)\n",
-      x = "\nNumber of Nodes",
-      y = NULL,
+      x = "\nNode count",
+      y = "Total path length (substitutions/site)\n",
       color = NULL
     )
 scatter_plot_type_3 <-
@@ -137,46 +130,45 @@ scatter_plot_type_3 <-
       legend.position = "bottom"
     ) +
     labs(
-      subtitle = "Total Path Lengths (substitution / site)\n",
-      x = "\nNumber of Nodes",
-      y = NULL,
+      x = "\nNode count",
+      y = "Total path length (substitutions/site)\n",
       color = NULL
     )
 
 # Save scatter plots ----
-CairoPDF("surya_figure_punctuation_sars_like.pdf", width = 5,
-         height = 4)
+CairoPDF("surya_figure_punctuation_sars_like.pdf", width = 6,
+         height = 5)
 print(scatter_plot)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like.svg", width = 5,
-         height = 4)
+CairoSVG("surya_figure_punctuation_sars_like.svg", width = 6,
+         height = 5)
 print(scatter_plot)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_host.pdf", width = 5,
-         height = 4)
+CairoPDF("surya_figure_punctuation_sars_like_host.pdf", width = 6,
+         height = 5)
 print(scatter_plot_host)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like_host.svg", width = 5,
-         height = 4)
+CairoSVG("surya_figure_punctuation_sars_like_host.svg", width = 6,
+         height = 5)
 print(scatter_plot_host)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_type.pdf", width = 5,
-         height = 4)
+CairoPDF("surya_figure_punctuation_sars_like_type.pdf", width = 6,
+         height = 5)
 print(scatter_plot_type)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_type_2group.pdf", width = 5,
-         height = 4)
+CairoPDF("surya_figure_punctuation_sars_like_type_2group.pdf", width = 6,
+         height = 5)
 print(scatter_plot_type_2)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like_type_2group.svg", width = 5,
-         height = 4)
+CairoSVG("surya_figure_punctuation_sars_like_type_2group.svg", width = 6,
+         height = 5)
 print(scatter_plot_type_2)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_type_3group.pdf", width = 5,
-         height = 4)
+CairoPDF("surya_figure_punctuation_sars_like_type_3group.pdf", width = 6,
+         height = 5)
 print(scatter_plot_type_3)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like_type_3group.svg", width = 5,
-         height = 4)
+CairoSVG("surya_figure_punctuation_sars_like_type_3group.svg", width = 6,
+         height = 5)
 print(scatter_plot_type_3)
 graphics.off()

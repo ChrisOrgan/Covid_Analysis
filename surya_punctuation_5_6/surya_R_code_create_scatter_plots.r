@@ -60,7 +60,7 @@ plot_reg <-
       size = 1
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nNumber of Nodes", y = "Total Path Lengths (mutations)\n")
+    labs(x = "\nNode count", y = "Total path length (mutations)\n")
 plot_region <-
   ggplot(dat, aes(node, path, color = continent)) +
     geom_jitter(size = 0.75, height = 0.2, width = 0.2, alpha = 0.3) +
@@ -70,8 +70,8 @@ plot_region <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region <-
@@ -131,8 +131,8 @@ plot_reg_region <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_africa <-
@@ -164,8 +164,8 @@ plot_reg_region_africa <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_asia <-
@@ -196,8 +196,8 @@ plot_reg_region_asia <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_europe <-
@@ -228,8 +228,8 @@ plot_reg_region_europe <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_namerica <-
@@ -260,8 +260,8 @@ plot_reg_region_namerica <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_oceania <-
@@ -292,8 +292,8 @@ plot_reg_region_oceania <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_region_samerica <-
@@ -324,8 +324,8 @@ plot_reg_region_samerica <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_rate <-
@@ -350,8 +350,8 @@ plot_region_rate <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations/year)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations/year)\n",
       color = NULL
     )
 plot_reg_pop <-
@@ -435,8 +435,8 @@ plot_reg_pop <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_africa <-
@@ -471,8 +471,8 @@ plot_reg_pop_africa <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_asia <-
@@ -507,8 +507,8 @@ plot_reg_pop_asia <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_europe <-
@@ -543,8 +543,8 @@ plot_reg_pop_europe <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_namerica <-
@@ -579,8 +579,8 @@ plot_reg_pop_namerica <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_oceania <-
@@ -615,8 +615,8 @@ plot_reg_pop_oceania <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 plot_reg_pop_samerica <-
@@ -651,8 +651,8 @@ plot_reg_pop_samerica <-
       legend.position = "right"
     ) +
     labs(
-      x = "\nNumber of Nodes",
-      y = "Total Path Lengths (mutations)\n",
+      x = "\nNode count",
+      y = "Total path length (mutations)\n",
       color = NULL
     )
 ## Interactive plots
@@ -662,8 +662,8 @@ plot_interactive <-
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     theme(legend.title = element_blank()) +
     labs(
-      x = "Number of Nodes",
-      y = "Total Path Lengths (mutations)"
+      x = "Node count",
+      y = "Total path length (mutations)"
     )
 plot_interactive <- ggplotly(plot_interactive)
 

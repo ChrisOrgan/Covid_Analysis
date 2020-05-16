@@ -110,10 +110,10 @@ sink()
 
 # Create scatter plot ----
 plot_corr <-
-  ggplot(dat, aes(pop_size, slope, label = continent)) +
+  ggplot(dat, aes(pop_size / 10^-9, slope, label = continent)) +
     geom_segment(
       x = 0,
-      xend = max(dat$pop_size),
+      xend = max(dat$pop_size) / 10^-9,
       y = 0,
       yend = 0,
       color = "gray80",
@@ -130,7 +130,7 @@ plot_corr <-
     ) +
     theme_tufte(base_size = 10, base_family = "Arial", ticks = FALSE) +
     labs(
-      x = "\nPopulation Size",
+      x = "\nPopulation Size (billion individuals)",
       y = "Slope (total path lengths ~ node count)\n"
     )
 

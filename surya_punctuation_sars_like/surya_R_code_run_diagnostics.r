@@ -26,11 +26,7 @@ plot_diag <-
     ) +
     scale_y_reverse() +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(
-      subtitle = "Residuals",
-      x = "\nFitted Values",
-      y = NULL
-    )
+    labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag <- ggMarginal(plot_diag, type = "density", margins = "y", size = 1.75)
 
 # Save the scatter plot ----

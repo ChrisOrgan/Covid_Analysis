@@ -46,11 +46,7 @@ scatter_plot <-
       fun = function(path){beta * path^delta}
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(
-      subtitle = "Number of Nodes",
-      x = "\nTotal Path Lengths",
-      y = NULL
-    )
+    labs(x = "\nTotal path length", y = "Node count\n")
 
 # Save the scatter plot ----
 CairoPDF("surya_figure_punctuation_sars_like_node_density_artifact.pdf",

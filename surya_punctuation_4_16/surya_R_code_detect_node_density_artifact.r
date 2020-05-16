@@ -69,7 +69,7 @@ plot_bias <-
       fun = function(path){beta * path^delta}
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nTotal Path Lengths", y = "Number of Nodes\n")
+    labs(x = "\nTotal path length", y = "Node count\n")
 plot_bias_rate <-
   ggplot(dat_rate, aes(path, node)) +
     geom_point(color = "gray", size = 0.5) +
@@ -79,7 +79,7 @@ plot_bias_rate <-
       fun = function(path_rate){beta_rate * path_rate^delta_rate}
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    labs(x = "\nTotal Path Lengths", y = "Number of Nodes\n")
+    labs(x = "\nTotal path length", y = "Node count\n")
 
 # Save scatter plots ----
 CairoPDF("surya_figure_punctuation_node_density_artifact.pdf", width = 3.2675,

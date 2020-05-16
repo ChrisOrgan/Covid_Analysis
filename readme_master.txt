@@ -5,14 +5,8 @@
 ## Coronavirus Macroevolution
 
 - [x] SARS-CoV-2: Punctuation (4/16)
-- [x] SARS-CoV-2: Punctuation (4/16; mutation rate)
-- [x] SARS-CoV-2: Punctuation (4/16; path ~ node x continent)
-- [ ] SARS-CoV-2: Punctuation (5/05; equitable global subsampling)
-- [ ] SARS-CoV-2: Punctuation (5/05; mutation rate)
-- [ ] SARS-CoV-2: Punctuation (5/05; path ~ node x continent)
-- [ ] SARS-CoV-2: Punctuation (4/30; non-subsampled)
-- [ ] SARS-CoV-2: Punctuation (4/30; mutation rate)
-- [ ] SARS-CoV-2: Punctuation (4/30; path ~ node x continent)
+- [x] SARS-CoV-2: Punctuation (5/06; equitable global subsampling)
+- [x] SARS-CoV-2: Punctuation (4/30; non-subsampled)
 - [ ] SARS-Cov-2: Speciation ~ time + continent
 - [ ] SARS-CoV-2: Geographic radiation
 - [ ] SARS-CoV-2: Dispersal ~ mutation rate
@@ -20,12 +14,14 @@
 
 ### The Mode of SARS-CoV-2 Evolution
 
+- **We have not updated this part since 5/10/2020.**
 - Here, we investigate the mode of SARS-CoV-2 genomic evolution and compare it 
   to its tempo.
     - The mutation rate of SARS-CoV-2 has so far been slower than that of 
       SARS-CoV (Jia et al. 2020), the seasonal flu (see Rambaut's statement in 
       Kupferschmidt 2020), and RNA viruses generally (Corum and Zimmer 2020).
-        - SARS-CoV-2 has proofreader proteins.
+        - SARS-CoV-2, unexpected for a relatively large RNA virus, possesses 
+          proofreader proteins.
     - Once they jumped into and spread among humans, has SARS-CoV-2 been 
       evolving in a punctuational manner, so that a large proportion of their 
       genomic divergences occurred during transmission events?
@@ -192,7 +188,8 @@
         - The residuals vs. fitted values plot indicates a violation of the 
           residual homogeneity of variance.
             - The plot shows funneling, but we expect this pattern given that 
-              SARS-CoV-2 spreads around the Earth from only one origin (Wuhan).
+              SARS-CoV-2 diversifies around the Earth from only one origin 
+              (Wuhan).
             - The violation is more severe for the rate tree analysis.
         - The histogram shows that the residual distribution is somewhat 
           right-skewed.
@@ -209,7 +206,8 @@
         - The tempo and mode of SARS-CoV-2 evolution may be linked.
         - We will not be expecting jumps in the accumulation of mutations and 
           that drugs and vaccines (e.g., Amanat and Kramer 2020; Gao et al. 
-          2020; Le et al. 2020; Sheahan et al. 2020) under development will 
+          2020; Jin et al. 2020; Le et al. 2020; Lei et al. 2020; Sheahan et 
+          al. 2020; Wang et al. 2020c; Yin et al. 2020) under development will 
           still work in the future.
             - Mutations in viruses can be deleterious (e.g., Muth et al. 2018).
     - We check for Simpson's paradox (Blyth 1972), whether only parts of the 
@@ -227,9 +225,9 @@
             - To obtain the standard errors for the intercept and slope of all 
               lines, we fit the model five more times, each with a different 
               reference.
-        - We compare the separate-slopes model above with the single-slope one 
-          using the Bayesian Information Criterion (BIC; Schwarz 1978) and 
-          select the one with the lowest BIC value.
+        - We compare the separate-slopes model above with the single-slope and 
+          equal-slopes ones using the Bayesian Information Criterion (BIC; 
+          Schwarz 1978) and select the one with the lowest BIC value.
             - BIC = ln(*n*)*k* - 2ln(*Lh*)
                 - *n:* the number of taxa (sample size)
                 - *k:* the number of parameters estimated by the model
@@ -239,15 +237,15 @@
                   and five represents positive evidence for the model with the 
                   lowest value; between five and ten a strong one; and a 
                   convincing one for a ΔBIC greater than ten (Raftery 1995).
-        - The separate-slopes model is more likely than the single-slope one 
-          (ΔBIC = 6,161.6; *R<sup>2</sup>* = 0.81).
+        - The separate-slopes model (*R<sup>2</sup>* = 0.81) is more likely 
+          than the single-slope (ΔBIC = 6,161.6) and the equal-slopes ones 
+          (ΔBIC = 3,847.75).
         - There is indeed evidence for Simpson's paradox, with three lines 
           having positive slopes (Africa, Asia, and North America), and the 
           other three negative (Europe, Oceania, and South America).
             - All *P* values are less than 0.01.
             - The lines seem off because they are phylogenetically-corrected.
-            - But, note that all continents have multiple introductions.
-                - Using dummy coding may not be the most appropriate approach.
+            - Note that all continents have multiple introductions.
             - The sample size for three continents (Africa, Oceania, and South 
               America) is relatively small.
             - In all cases, the residuals are relatively large.
@@ -259,16 +257,22 @@
                   distribution poorly.
                 - The fitted values for almost all South American genomes are 
                   highly negative, and thereby nonsensical.
+                    - If the analyses with the newer tree still prove 
+                      predicting South American genomes to be difficult, we 
+                      will drop them and re-fit the model.
             - As before, the residual distribution is non-normal (Shapiro-Wilk 
               *P* < 0.0001).
         - We interpret the separate-slope regression results with care.
     - No published studies have interpreted negative slopes in a punctuation 
       regression test.
         - Here are some thoughts to help interpret negative slopes:
+            - A negative-slope scenario is Red Queen-like (Van Valen 1973; 
+              Stenseth and Smith 1984; Liow et al. 2011) in that the amount of 
+              evolution follows biotic interactions within hosts more than 
+              transmission events (abiotic changes).
             - Viral transmission is allopatric.
             - Sampled viruses could either be in the middle of a coevolutionary 
-              arms race with the host's immune system (Red Queen-like; Van 
-              Valen 1973; Stenseth and Smith 1984) or at the end (i.e., 
+              arms race with the host's immune system or at the end (i.e., 
               winning, and so ended up killing the host).
             - But, COVID-19 symptoms do not develop immediately.
                 - The median incubation period is 5.1 days; 97.5% will develop 
@@ -303,7 +307,7 @@
                     - Following `Nextstrain` designation, we treat Central 
                       America and the Caribbean as part of North America.
                     - So, we subtract 43,532,374 Caribbean people and 
-                      179,670,186 central Americans from South America and add 
+                      179,670,186 Central Americans from South America and add 
                       them to North America.
                 - We use an additional `R` package, `ggrepel` 0.8.2 (Slowinski 
                   2020), when creating the scatter plot.
@@ -312,14 +316,183 @@
               *P* = 0.1361).
             - The plot shows somewhat of a positive relationship, with South 
               America likely being an outlier.
+            - We further incorporate population size in the separate-slopes 
+              regression model.
+                - We double the ML tries to 20 because of a slight instability 
+                  in log-likelihood estimates.
+            - The model is less likely than the separate-slopes model 
+              (ΔBIC = 1,232.31).
+                - The standard errors for the intercept-related terms are 
+                  heavily-inflated.
+                    - Population size and the continent dummy variables are 
+                      redundant.
+            - We also try fitting models comprising of the number of nodes and 
+              population size as the only predictors, with and without an 
+              interaction term.
+            - These models are less likely than the separate-slopes model, 
+              despite having eight fewer parameters 
+              (ΔBIC [without interaction] = 4,786.87; 
+              ΔBIC [with interaction] = 3,300.63).
+                - Still, these models are more likely than the single-slope one 
+                  (ΔBIC [without interaction] = 1,374.73; 
+                  ΔBIC [with interaction] = 2,860.97).
+                - The strength of this model is that it directly assesses 
+                  whether the mode of evolution varies with population size at 
+                  the continent level.
+                - The lines in the plot make more sense than before, with the 
+                  separate-slopes model.
+                    - We calculate the slope for each continent using the 
+                      equation (*m* = [*y<sub>2</sub>* - *y<sub>1</sub>*] / 
+                      [*x<sub>2</sub>* - *x<sub>1</sub>*]).
+                - There is a perfect positive concordance (*τ* = 15 [out of 15 
+                  possible pairings], *P* = 0.001389) between the slope and 
+                  population size, matching our expectations.
+                - The regression diagnostics show less of assumption violations 
+                  than the separate-slopes model.
+                    - The residuals vs. fitted values plot still shows a 
+                      funneling pattern (i.e., heteroscedasticity), especially 
+                      with the Asian genomes.
+                        - There is still a positive relationship.
+                        - The residuals for the Asian genomes are higher 
+                          relative to those from other continents.
+                        - Some of the Asian fitted values are also 
+                          unrealistically negative.
+                        - The mode of SARS-CoV-2 evolution in Asia might have 
+                          changed over time.
+                    - The residuals are more normally-distributed than that of 
+                      the separate-slopes model, but not enough 
+                      (Shapiro-Wilk *P* < 0.0001).
+            - Another potential factor is the speed of transmission, which may 
+              or may not correlate with the population size.
+                - Start reading Salje et al. (2017).
+                - Population size is a factor when calculating the rate of 
+                  transmission, and perhaps, positively associated with 
+                  virulence (Galvani 2003).
+                    - Virulence is the extent of parasite-induced reduction in 
+                      host fitness (fertility and, particularly, mortality).
+    - Despite having a higher BIC score than the separate-slopes model, the 
+      model with an interaction between the number of nodes and population size 
+      is easily interpretable and more reliable based on regression diagnostics.
+    - Here is our synthesis at this stage.
+        - The mode of SARS-CoV-2 evolution seems to depend on the human 
+          population size.
+        - In smaller populations, viral lineages that stay within the same 
+          human host for a prolonged period tend to have evolved more than 
+          those that frequently diversify.
+        - This pattern is reminiscent of the Red Queen.
+        - Evolution follows biotic interactions (coevolutionary arms race 
+          within the human body) more than abiotic changes (host changes or 
+          transmission events).
+        - At the intermediate population size level, the mode of mutation can 
+          be gradual.
+        - The number of accumulated mutations does not match the number of net 
+          transmission events.
+        - And in the largest population, which happens to be in the continent 
+          where SARS-CoV-2 originated, we see evidence of punctuated evolution.
+        - Mutation rates tend to jump during transmission events.
+        - Perhaps, as the host population size increases, selection becomes 
+          stronger than drift.
+        - Viruses that move into a new host (i.e., a new environment) may 
+          experience more intense selective pressure.
     - Non-random sampling regarding time and, specifically, location affects 
       how we interpret our results.
+    - We download more up-to-date trees from `Nextstrain` (*n* = 4,645 genomes).
+        - Downloaded on: 5/6/2020, 5:26:12 PM
+        - Newer notes:
+            - Although the genetic relationships among sampled viruses are 
+              quite clear, there is considerable uncertainty surrounding 
+              estimates of specific transmission dates and in the 
+              reconstruction of geographic spread.
+            - There are thousands of complete genomes available now, and this 
+              number increases by hundreds of every day.
+            - The `Nextstrain` visualization can only handle ~3000 genomes in a 
+              single view for performance and legibility reasons.
+            - Because of this, the `Nextstrain` team have to subsample 
+              available genome data.
+                - Their primary global analysis subsamples to 120 genomes per 
+                  admin division per month.
+            - This approach will result in a more equitable global sequence 
+              distribution.
+            - But, it hides samples available from regions that are doing lots 
+              of sequencing.
+        - Geographic distribution:
+            - Africa: 121 (2.60%)
+            - Asia: 913 (19.66%)
+            - Europe: 1,992 (42.89%)
+            - North America: 1,311 (28.22%)
+            - Oceania: 190 (4.09%)
+            - South America: 118 (2.54%)
+    - Regarding the rate tree, we remove an extremely long internal branch and 
+      its descendants (one France and seven Democratic Republic of Congo [DRC] 
+      genomes; final *n* = 4,637).
+    - We re-do our punctuation tests with the newer trees.
+        - There is very little evidence to suggest that SARS-CoV-2 genomes 
+          evolved in a punctuated manner (slope = 0 ± 0.000000035, *P* = 0.99; 
+          *R<sup>2</sup>* = -2.67; LR [vs. an intercept-only model] = -81.86).
+            - The negative *R<sup>2</sup>* makes sense because the punctuation 
+              regression above collapses to an intercept-only model.
+            - `BayesTraits` seem to have an issue estimating the intercepts.
+                - Pagel's *λ* estimation is not the issue.
+                - We decide to switch to using `R` for the remainder of the 
+                  analyses.
+            - `BayesTraits` results: slope = -0.000000000003, *P* = N/A; 
+              *R<sup>2</sup>* = 0.000000000002; 
+              LR [vs. an intercept-only model] = 0.13.
+            - Rate tree results: slope = -0.0006 ± 0.000016, *P* < 0.0001; 
+              *R<sup>2</sup>* = -7.82; 
+              LR [vs. an intercept-only model] = 1,215.98.
+            - The conclusions from `BayesTraits` and rate tree results are the 
+              same.
+        - There is little evidence that the models with continents as dummy 
+          variables are more likely than the intercept-only one given the extra 
+          parameters (ΔBIC [equal-slopes] = 230.96; 
+          ΔBIC [separate-slopes] = 439.88).
+            - We do not fit the same models multiple times while changing the 
+              reference continent, to conserve computational times.
+        - There is also little evidence that the models with the population 
+          size variable are more likely than the intercept-only one 
+          (ΔBIC [without interaction] = 123.68; 
+          ΔBIC [with interaction] = 210.71).
+        - Also, all models with *λ* = 0 are significantly less likely than 
+          those with *λ* = 1 (mean ΔBIC [`R` results] = 54,633.88).
+        - The *δ* test suggests that the node-density effect is absent
+          (*δ* = -0.032).
+            - For the rate tree, we have to estimate *λ* because *β* is 
+              infinite when *λ* = 1.
+            - The rate tree is also free of this artifact (*δ* = -0.041).
+        - The residuals for the intercept-only and rate tree regression models 
+          are not normally distributed (Shapiro-Wilk *P* < 0.0001).
+    - The results from the newer tree analyses indicate that our previous 
+      inferences might have been misled by sampling biases.
+    - SARS-CoV-2 likely accumulates mutations gradually at the global and 
+      continental scale, irrespective of the population size.
+    - As a sensitivity analysis, we also re-do our punctuation tests with a 
+      non-subsampled tree from `Nextstrain` (*n* =  12,397 genomes; 
+      https://nextstrain.org/ncov/non-subsampled/2020-04-30).
+        - Cassia Wagner kindly shares the tree with us.
+        - Note that this tree was made as a sanity check for the `Nextstrain` 
+          team, and not for further analyses.
+            - The `Nextstrain` team typically excludes sequences with known 
+              sequencing errors, and so the tree contains genomes with inflated 
+              amounts of mutations.
+            - They did not refine branch lengths on this build.
+        - Downloaded on: 5/10/2020, 1:44:14 PM
+        - Geographic distribution:
+            - Africa: 100 (0.81%)
+            - Asia: 863 (6.96%)
+            - Europe: 6,735 (54.33%)
+            - North America: 3,256 (26.26%)
+            - Oceania: 1,325 (10.69%)
+            - South America: 118 (0.95%)
+        - We do not do the rate tree analyses because the `Nextstrain` team did 
+          not infer a corresponding timetree.
         - [...]
 - A follow-up question is whether only parts of the tree, where cross-continent 
   dispersal is rampant, exhibit signatures of punctuated evolution.
 
 ### SARS-like Betacoronaviruses Have Been Evolving Gradually
 
+- **We have not updated this part since 5/10/2020.**
 - Has the evolution of the broader SARS-like betacoronaviruses also been 
   gradual?
     - While the spike gene likely has undergone selection either before or 
@@ -500,11 +673,13 @@
     Karlsson E.K., Lewin H.A. 2020. Broad host range of SARS-CoV-2 predicted by 
     comparative and structural analysis of ACE2 in vertebrates. 
     bioRxiv.:2020.04.16.045302.
+- Galvani A.P. 2003. Epidemiology meets evolutionary ecology. Trends Ecol. 
+    Evol. 18:132–139.
 - Gao Q., Bao L., Mao H., Wang L., Xu K., Yang M., Li Y., Zhu L., Wang N., Lv 
     Z., Gao H., Ge X., Kan B., Hu Y., Liu J., Cai F., Jiang D., Yin Y., Qin C., 
     Li J., Gong X., Lou X., Shi W., Wu D., Zhang H., Zhu L., Deng W., Li Y., Lu 
-    J., Li C., Wang X., Yin W., Zhang Y., Qin C. 2020. Rapid development of an 
-    inactivated vaccine for SARS-CoV-2. bioRxiv. 2020.04.17.046375.
+    J., Li C., Wang X., Yin W., Zhang Y., Qin C. 2020. Development of an 
+    inactivated vaccine candidate for SARS-CoV-2. Science.
 - Gorbalenya A.E., Baker S.C., Baric R.S., de Groot R.J., Drosten C., Gulyaeva 
     A.A., Haagmans B.L., Lauber C., Leontovich A.M., Neuman B.W., Penzar D., 
     Perlman S., Poon L.L.M., Samborskiy D.V., Sidorov I.A., Sola I., Ziebuhr 
@@ -523,6 +698,11 @@
     C., Wang W.-L. 2020. ***Analysis of the mutation dynamics of SARS-CoV-2 
     reveals the spread history and emergence of RBD mutant with lower ACE2 
     binding affinity***. bioRxiv.:2020.04.09.034942.
+- Jin Z., Zhao Y., Sun Y., Zhang B., Wang H., Wu Y., Zhu Y., Zhu C., Hu T., Du 
+    X., Duan Y., Yu J., Yang X., Yang X., Yang K., Liu X., Guddat L.W., Xiao 
+    G., Zhang L., Yang H., Rao Z. 2020. Structural basis for the inhibition of 
+    SARS-CoV-2 main protease by antineoplastic drug carmofur. Nat. Struct. Mol. 
+    Biol. 1–4.
 - Kendall M.G. 1938. A new measure of rank correlation. Biometrika. 30:81–93.
 - Kupferschmidt K. 2020. Mutations can reveal how the coronavirus moves—but 
     they're easy to overinterpret. Available from https://www.sciencemag.org/news/2020/03/mutations-can-reveal-how-coronavirus-moves-they-re-easy-overinterpret.
@@ -532,11 +712,16 @@
     and application. Ann. Intern. Med. 172:577–582.
 - Le T.T., Andreadakis Z., Kumar A., Román R.G., Tollefsen S., Saville M., 
     Mayhew S. 2020. The COVID-19 vaccine development landscape. Nat. Rev. Drug 
-    Discov.
+    Discov. 19:305–306.
+- Lei C., Qian K., Li T., Zhang S., Fu W., Ding M., Hu S. 2020. Neutralization 
+    of SARS-CoV-2 spike pseudotyped virus by recombinant ACE2-Ig. Nat. Commun. 
+    11:1–5.
 - Leung N.H.L., Chu D.K.W., Shiu E.Y.C., Chan K.-H., McDevitt J.J., Hau B.J.P., 
     Yen H.-L., Li Y., Ip D.K.M., Peiris J.S.M., Seto W.-H., Leung G.M., Milton 
     D.K., Cowling B.J. 2020. Respiratory virus shedding in exhaled breath and 
     efficacy of face masks. Nat. Med. 1–5.
+- Liow L.H., Valen L.V., Stenseth N.C. 2011. Red Queen: From populations to 
+    taxa and communities. Trends Ecol. Evol. 26:349–358.
 - Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
     Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
     Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
@@ -576,6 +761,12 @@
 - Sakamoto M., Benton M.J., Venditti C. 2016. Dinosaurs in decline tens of 
     millions of years before their final extinction. Proc. Natl. Acad. Sci. 
     U.S.A. 113:5036–5040.
+- Salje H., Lessler J., Berry I.M., Melendrez M.C., Endy T., Kalayanarooj S., 
+    A-Nuegoonpipat A., Chanama S., Sangkijporn S., Klungthong C., 
+    Thaisomboonsuk B., Nisalak A., Gibbons R.V., Iamsirithaworn S., Macareo 
+    L.R., Yoon I.-K., Sangarsang A., Jarman R.G., Cummings D.A.T. 2017. Dengue 
+    diversity across spatial and temporal scales: Local structure and the 
+    effect of host population size. Science. 355:1302–1306.
 - Schwarz G. 1978. Estimating the dimension of a model. Ann. Stat. 6:461–464.
 - Shapiro S.S., Wilk M.B. 1965. An analysis of variance test for normality 
     (complete samples). Biometrika. 52:591–611.
@@ -586,7 +777,7 @@
     Harcourt J., Tamin A., Thornburg N.J., Swanstrom R., Denison M.R., Baric 
     R.S. 2020. An orally bioavailable broad-spectrum antiviral inhibits 
     SARS-CoV-2 in human airway epithelial cell cultures and multiple 
-    coronaviruses in mice. Sci Transl. Med.
+    coronaviruses in mice. Sci. Transl. Med. 12.
 - Shu Y., McCauley J. 2017. GISAID: Global initiative on sharing all influenza 
     data – from vision to reality. Euro Surveill. 22.
 - Sievert C. 2018. plotly for R.
@@ -614,6 +805,10 @@
     Shang M., Huang J., Wang Y., Xu G., Shen T., Zhang X., Cai Y. 2020b. 
     ***Phase-adjusted estimation of the number of Coronavirus Disease 2019 
     cases in Wuhan, China***. Cell Discov. 6:1–8.
+- Wang C., Li W., Drabek D., Okba N.M.A., van Haperen R., Osterhaus A.D.M.E., 
+    van Kuppeveld F.J.M., Haagmans B.L., Grosveld F., Bosch B.-J. 2020c. A 
+    human monoclonal antibody blocking SARS-CoV-2 infection. Nat. Commun. 
+    11:1–6.
 - Webster A.J., Payne R.J.H., Pagel M. 2003. Molecular phylogenies link rates 
     of evolution and speciation. Science. 301:478–478.
 - Wickham H. 2009. ggplot2: Elegant graphics for data analysis. New York: 
@@ -641,6 +836,11 @@
     bioRxiv.:2020.02.17.951335.
 - Xu Y. 2020. ***Unveiling the origin and transmission of 2019-nCoV***. Trends 
     Microbiol. 28:239–240.
+- Yin W., Mao C., Luan X., Shen D.-D., Shen Q., Su H., Wang X., Zhou F., Zhao 
+    W., Gao M., Chang S., Xie Y.-C., Tian G., Jiang H.-W., Tao S.-C., Shen J., 
+    Jiang Y., Jiang H., Xu Y., Zhang S., Zhang Y., Xu H.E. 2020. Structural 
+    basis for inhibition of the RNA-dependent RNA polymerase from SARS-CoV-2 by 
+    remdesivir. Science.
 - Yu G., Smith D.K., Zhu H., Guan Y., Lam T.T.-Y. 2017. ggtree: An r package 
     for visualization and annotation of phylogenetic trees with their 
     covariates and other associated data. Methods Ecol. Evol. 8:28–36.
@@ -665,8 +865,9 @@
 ## *Nature* Coronavirus Collection
 
 - **[Coronavirus][]**
-- **[Coronavirus updates: autopsy results drastically change US coronavirus 
-     timeline][]**
+- **[Coronavirus research updates: Even laypeople could use this new test to 
+     detect the coronavirus][]**
+- **[Coronavirus: the first three months as it happened][]**
 - [China coronavirus: Six questions scientists are asking][]
 - [How sewage could reveal true scale of coronavirus outbreak][]
 - [Did pangolins spread the China coronavirus to people?][]
@@ -675,8 +876,10 @@
 - [The coronavirus pandemic in five powerful charts][]
 
 [Coronavirus]: https://www.nature.com/collections/hajgidghjb
-[Coronavirus updates: autopsy results drastically change US coronavirus 
- timeline]: https://doi.org/10.1038/d41586-020-00154-w
+[Coronavirus research updates: Even laypeople could use this new test to detect 
+ the coronavirus]: https://doi.org/10.1038/d41586-020-00502-w
+[Coronavirus: the first three months as it happened]: 
+    https://doi.org/10.1038/d41586-020-00154-w
 [China coronavirus: Six questions scientists are asking]:
     https://doi.org/10.1038/d41586-020-00166-6
 [How sewage could reveal true scale of coronavirus outbreak]:
