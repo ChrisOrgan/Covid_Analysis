@@ -31,7 +31,7 @@ plot_tree <-
     geom_tiplab(size = 2, offset = 0.005) +
     geom_tippoint(aes(color = virus_type), size = 1.75) +
     theme_tree2(legend = "right", legend.title = element_blank()) +
-    labs(caption = "substitution / site")
+    labs(caption = "substitutions/site")
 
 # Save plot ----
 CairoPDF("surya_figure_punctuation_sars_like_tree.pdf", width = 6,
