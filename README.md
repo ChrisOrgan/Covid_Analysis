@@ -12,6 +12,15 @@
 
 ### The Mode of SARS-CoV-2 Evolution
 
+- Is punctuated SARS-CoV-2 genomic evolution a signature of positive selection 
+  associated with transmissions into new hosts (Pybus and Rambaut 2009)? Or is 
+  it the strong effect of the genetic drift because of a founder effect (Mayr 
+  1954)?
+- Read https://nextstrain.org/narratives/ncov/sit-rep/2020-05-15?n=5 regarding 
+  the SARS-CoV-2 evolutionary rate.
+- Viral phylodynamics is the study of how epidemiological, immunological, and 
+  evolutionary processes shape viral phylogenies (Volz et al. 2013). This 
+  field has focused on how transmission dynamics impact viral genetic variation.
 - **We have not updated this part since 5/10/2020.**
 - Here, we investigate the mode of SARS-CoV-2 genomic evolution and compare it 
   to its tempo.
@@ -660,7 +669,8 @@
     Halloran M.E., Longini I.M., Vespignani A. 2020. The effect of travel 
     restrictions on the spread of the 2019 novel coronavirus (COVID-19) 
     outbreak. Science. 368:395–400.
-- Cobey S. 2020. ***Modeling infectious disease dynamics***. Science.
+- Cobey S. 2020. ***Modeling infectious disease dynamics.*** Science. 
+    368:713–714.
 - Cohen J. 2020. Why do dozens of diseases wax and wane with the seasons—and 
     will COVID-19? Available from https://www.sciencemag.org/news/2020/03/why-do-dozens-diseases-wax-and-wane-seasons-and-will-covid-19.
 - Corum J., Zimmer C. 2020. How Coronavirus Mutates and Spreads. The New York 
@@ -682,9 +692,9 @@
     A.A., Haagmans B.L., Lauber C., Leontovich A.M., Neuman B.W., Penzar D., 
     Perlman S., Poon L.L.M., Samborskiy D.V., Sidorov I.A., Sola I., Ziebuhr 
     J., Coronaviridae Study Group of the International Committee on Taxonomy of 
-    Viruses. 2020. ***The species *Severe acute respiratory syndrome-related 
-    coronavirus*: Classifying 2019-nCoV and naming it SARS-CoV-2***. Nat. 
-    Microbiol. 1–9.
+    Viruses. 2020. ***The species Severe acute respiratory syndrome-related 
+    coronavirus 2: Classifying 2019-nCoV and naming it SARS-CoV-2.*** Nat. 
+    Microbiol. 5:536–544.
 - Hadfield J., Megill C., Bell S.M., Huddleston J., Potter B., Callender C.,
     Sagulenko P., Bedford T., Neher R.A. 2018. Nextstrain: Real-time tracking 
     of pathogen evolution. Bioinformatics. 34:4121–4123.
@@ -720,6 +730,9 @@
     efficacy of face masks. Nat. Med. 1–5.
 - Liow L.H., Valen L.V., Stenseth N.C. 2011. Red Queen: From populations to 
     taxa and communities. Trends Ecol. Evol. 26:349–358.
+- Mayr E. 1954. Change of genetic environment and evolution. In: Huxley J., 
+    Hardy A.C., Ford E.B., editors. Evolution as a Process. London, U.K.: Allan 
+    & Unwin. p. 157–180.
 - Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
     Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
     Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
@@ -739,6 +752,8 @@
     and evolutionary analyses in R. Bioinformatics. 35:526–528.
 - Pinheiro J., Bates D., DebRoy S., Sarkar D., R Core Team. 2019. nlme: Linear 
     and nonlinear mixed effects models. R package.
+- Pybus O.G., Rambaut A. 2009. Evolutionary analysis of the dynamics of viral 
+    infectious disease. Nat. Rev. Genet. 10:540–550.
 - R Core Team. 2019. R: A language and environment for statistical computing. 
     Vienna, Austria: R Foundation for Statistical Computing.
 - Rambaut A. 2017. FigTree-version 1.4.4, a graphical viewer of phylogenetic 
@@ -791,12 +806,15 @@
 - van Doremalen N., Bushmaker T., Morris D.H., Holbrook M.G., Gamble A., 
     Williamson B.N., Tamin A., Harcourt J.L., Thornburg N.J., Gerber S.I., 
     Lloyd-Smith J.O., de Wit E., Munster V.J. 2020. Aerosol and surface 
-    stability of SARS-CoV-2 as compared with SARS-CoV-1. N. Engl. J. Med.
+    stability of SARS-CoV-2 as compared with SARS-CoV-1. N. Engl. J. Med. 
+    382:1564–1567.
 - Van Valen L. 1973. A new evolutionary law. Evol. Theory. 1:1–30.
 - Venditti C., Meade A., Pagel M. 2006. Detecting the node-density artifact in 
     phylogeny reconstruction. Syst. Biol. 55:637–643.
 - Vogel G. 2020. Antibody surveys suggesting vast undercount of coronavirus 
     infections may be unreliable. Available from https://www.sciencemag.org/news/2020/04/antibody-surveys-suggesting-vast-undercount-coronavirus-infections-may-be-unreliable.
+- Volz E.M., Koelle K., Bedford T. 2013. Viral phylodynamics. PLOS Comput. 
+    Biol. 9:e1002947.
 - Wang C., Horby P.W., Hayden F.G., Gao G.F. 2020a. A novel coronavirus 
     outbreak of global health concern. Lancet. 395:470–473.
 - Wang H., Wang Z., Dong Y., Chang R., Xu C., Yu X., Zhang S., Tsamlag L., 
@@ -863,8 +881,8 @@
 ## *Nature* Coronavirus Collection
 
 - **[Coronavirus][]**
-- **[Coronavirus research updates: Even laypeople could use this new test to 
-     detect the coronavirus][]**
+- **[Coronavirus research updates: An antibody blocks the new coronavirus and 
+     an older relative][]**
 - **[Coronavirus: the first three months as it happened][]**
 - [China coronavirus: Six questions scientists are asking][]
 - [How sewage could reveal true scale of coronavirus outbreak][]
@@ -874,9 +892,9 @@
 - [The coronavirus pandemic in five powerful charts][]
 
 [Coronavirus]: https://www.nature.com/collections/hajgidghjb
-[Coronavirus research updates: Even laypeople could use this new test to detect 
- the coronavirus]: https://doi.org/10.1038/d41586-020-00502-w
-[Coronavirus: the first three months as it happened]: 
+[Coronavirus research updates: An antibody blocks the new coronavirus and an 
+ older relative]: https://doi.org/10.1038/d41586-020-00502-w
+[Coronavirus: the first three months as it happened]:
     https://doi.org/10.1038/d41586-020-00154-w
 [China coronavirus: Six questions scientists are asking]:
     https://doi.org/10.1038/d41586-020-00166-6
@@ -901,6 +919,7 @@
 
 - **[LitCOVID][]**
 - **[Nextstrain][]**
+- **[Nextstrain: Genomic analysis of COVID-19. Situation report 2020-05-15][]**
 - **[Nextstrain: Genomic epidemiology of novel coronavirus][]**
 - **[Nextstrain: Genetic diversity of betacoronaviruses including novel 
      coronavirus (nCoV)][]**
@@ -926,10 +945,11 @@
 - [COVID-19 Projections][]
 - [Molecular dating using heterochronous data and substitution model 
    averaging][]
-- [Cassia Wagner][]
 
 [LitCOVID]: https://www.ncbi.nlm.nih.gov/research/coronavirus
 [Nextstrain]: https://nextstrain.org
+[Nextstrain: Genomic analysis of COVID-19. Situation report 2020-05-15]:
+    https://nextstrain.org/narratives/ncov/sit-rep/2020-05-15
 [Nextstrain: Genomic epidemiology of novel coronavirus]:
     https://nextstrain.org/ncov
 [Nextstrain: Genetic diversity of betacoronaviruses including novel coronavirus 
@@ -968,4 +988,3 @@
 [COVID-19 Projections]: https://covid19.healthdata.org/united-states-of-america
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
-[Cassia Wagner]: https://bedford.io/team/cassia-wagner
