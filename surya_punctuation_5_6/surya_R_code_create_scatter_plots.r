@@ -61,6 +61,19 @@ plot_reg <-
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nNode count", y = "Total path length (mutations)\n")
+plot_reg_loglog <-
+  ggplot(dat, aes(log(node + 1), log(path))) +
+    geom_point(color = "gray") +
+    geom_segment(
+      x = min(log(dat$node + 1)),
+      xend = max(log(dat$node + 1)),
+      y = 2.250556 + 0*min(log(dat$node + 1)),
+      yend = 2.250556 + 0*max(log(dat$node + 1)),
+      color = "black",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    labs(x = "\nLn (node count)", y = "Ln (Total path length [mutations])\n")
 plot_region <-
   ggplot(dat, aes(node, path, color = continent)) +
     geom_jitter(size = 0.75, height = 0.2, width = 0.2, alpha = 0.3) +
@@ -673,6 +686,12 @@ print(plot_reg)
 graphics.off()
 CairoSVG("surya_figure_punctuation.svg", width = 6.535, height = 4.039)
 print(plot_reg)
+graphics.off()
+CairoPDF("surya_figure_punctuation_loglog.pdf", width = 6.535, height = 4.039)
+print(plot_reg_loglog)
+graphics.off()
+CairoSVG("surya_figure_punctuation_loglog.svg", width = 6.535, height = 4.039)
+print(plot_reg_loglog)
 graphics.off()
 CairoPDF("surya_figure_punctuation_region.pdf", width = 6.535, height = 4.039)
 print(plot_region)

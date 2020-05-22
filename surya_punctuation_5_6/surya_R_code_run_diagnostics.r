@@ -21,6 +21,11 @@ meta <- read.delim(
 dat <- dat[match(meta$Strain, dat$genome), ]
 dat <- cbind(dat, meta$Region)
 colnames(dat)[6] <- "continent"
+dat_log <- dat
+dat_log$path <- log(dat_log$path)
+dat_log$node <- log(dat_log$node + 1)
+dat_log$fitted_values <- 2.250556 + 0*log(dat_log$node + 1)
+dat_log$residuals <- dat_log$path - dat_log$fitted_values
 dat_rate <- read.table(
   "surya_BayesTraits_data_rate_path_lengths_nodes.txt",
   sep = "\t"
@@ -32,6 +37,18 @@ dat_rate$residuals <- dat_rate$path - dat_rate$fitted_values
 # Plot marginal histogram scatter plots of residuals ----
 plot_diag <-
   ggplot(dat, aes(fitted_values, residuals)) +
+    geom_point(color = "gray", size = 0.5) +
+    geom_smooth(
+      color = "red",
+      size = 1,
+      method = "loess",
+      se = FALSE
+    ) +
+    scale_y_reverse() +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    labs(x = "\nFitted values", y = "Residuals\n")
+plot_diag_loglog <-
+  ggplot(dat_log, aes(fitted_values, residuals)) +
     geom_point(color = "gray", size = 0.5) +
     geom_smooth(
       color = "red",
@@ -55,6 +72,12 @@ plot_diag_rate <-
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nFitted values", y = "Residuals\n")
 plot_diag <- ggMarginal(plot_diag, type = "density", margins = "y", size = 1.75)
+plot_diag_loglog <- ggMarginal(
+  plot_diag_loglog,
+  type = "density",
+  margins = "y",
+  size = 1.75
+)
 plot_diag_rate <- ggMarginal(
   plot_diag_rate,
   type = "density",
@@ -69,6 +92,12 @@ graphics.off()
 ggsave("surya_figure_punctuation_diagnostics.svg", width = 5, height = 4,
        plot_diag)
 graphics.off()
+ggsave("surya_figure_punctuation_loglog_diagnostics.pdf", width = 5, height = 4,
+       device = cairo_pdf, plot_diag_loglog)
+graphics.off()
+ggsave("surya_figure_punctuation_loglog_diagnostics.svg", width = 5, height = 4,
+       plot_diag_loglog)
+graphics.off()
 ggsave("surya_figure_punctuation_rate_diagnostics.pdf", width = 6.535,
        height = 4.089, device = cairo_pdf, plot_diag_rate)
 graphics.off()
@@ -82,6 +111,12 @@ cat("==============\n")
 cat("Normality Test\n")
 cat("==============\n\n")
 shapiro.test(dat$residuals)
+sink()
+sink("surya_R_output_normality_loglog.txt")
+cat("==============\n")
+cat("Normality Test\n")
+cat("==============\n\n")
+shapiro.test(dat_log$residuals)
 sink()
 sink("surya_R_output_normality_rate.txt")
 cat("==============\n")
