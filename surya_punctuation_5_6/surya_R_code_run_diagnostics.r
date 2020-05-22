@@ -34,6 +34,18 @@ colnames(dat_rate) <- c("genome", "path", "node")
 dat_rate$fitted_values <- 1796.6313 + -0.0006*dat_rate$node
 dat_rate$residuals <- dat_rate$path - dat_rate$fitted_values
 
+# Plot histograms of the variables ----
+plot_y <-
+  ggplot(dat, aes(path)) +
+    geom_density() +
+      theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+      labs(x = "\nTotal path length (mutations)", y = NULL)
+plot_x <-
+  ggplot(dat, aes(node)) +
+    geom_density() +
+      theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+      labs(x = "\nNode count", y = NULL)
+
 # Plot marginal histogram scatter plots of residuals ----
 plot_diag <-
   ggplot(dat, aes(fitted_values, residuals)) +
@@ -86,6 +98,17 @@ plot_diag_rate <- ggMarginal(
 )
 
 # Save diagnostic plots ----
+ggsave("surya_figure_distribution_path_lengths.pdf", width = 5, height = 4,
+       device = cairo_pdf, plot_y)
+graphics.off()
+ggsave("surya_figure_distribution_path_lengths.svg", width = 5, height = 4,
+       plot_y)
+graphics.off()
+ggsave("surya_figure_distribution_nodes.pdf", width = 5, height = 4,
+       device = cairo_pdf, plot_x)
+graphics.off()
+ggsave("surya_figure_distribution_nodes.svg", width = 5, height = 4, plot_x)
+graphics.off()
 ggsave("surya_figure_punctuation_diagnostics.pdf", width = 5, height = 4,
        device = cairo_pdf, plot_diag)
 graphics.off()
