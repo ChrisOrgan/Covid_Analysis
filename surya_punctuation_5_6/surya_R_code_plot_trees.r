@@ -75,8 +75,8 @@ dat_rate$continent <- meta_rate$Region
 
 # Plot trees ----
 plot_tree_mol <-
-  ggtree(tree_mol) %<+% dat +
-    geom_tippoint(aes(color = continent), size = 0.1) +
+  ggtree(tree_mol, color = "gray") %<+% dat +
+    geom_tippoint(aes(color = continent), size = 0.2) +
     theme_tree2(legend = "right", legend.title = element_blank()) +
     labs(caption = "mutations")
 plot_tree_mol_africa <-
@@ -127,10 +127,10 @@ plot_tree_rate <-
     labs(caption = "mutations/year")
 
 # Save tree plots ----
-CairoPDF("surya_figure_tree_molecular.pdf", width = 4, height = 6)
+CairoPDF("surya_figure_tree_molecular.pdf", width = 6.535, height = 7.21)
 print(plot_tree_mol)
 graphics.off()
-CairoSVG("surya_figure_tree_molecular.svg", width = 4, height = 6)
+CairoSVG("surya_figure_tree_molecular.svg", width = 6.535, height = 7.21)
 print(plot_tree_mol)
 graphics.off()
 CairoPDF("surya_figure_tree_molecular_region_africa.pdf", width = 4, height = 6)

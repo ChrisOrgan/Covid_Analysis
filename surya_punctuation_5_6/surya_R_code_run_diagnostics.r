@@ -11,7 +11,7 @@ library(svglite)  # v1.2.3
 # Load and prepare data ----
 dat <- read.table("surya_BayesTraits_data_path_lengths_nodes.txt", sep = "\t")
 colnames(dat) <- c("genome", "path", "node")
-dat$fitted_values <- 12.05444 + 0*dat$node
+dat$fitted_values <- 12.05444 + -0.000000000001883812*dat$node
 dat$residuals <- dat$path - dat$fitted_values
 meta <- read.delim(
   "nextstrain_ncov_global_metadata.tsv",

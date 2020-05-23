@@ -54,8 +54,8 @@ plot_reg <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "black",
       size = 1
     ) +
@@ -155,8 +155,8 @@ plot_reg_region_africa <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "gainsboro",
       size = 0.5
     ) +
@@ -188,8 +188,8 @@ plot_reg_region_asia <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "gainsboro",
       size = 0.5
     ) +
@@ -252,8 +252,8 @@ plot_reg_region_namerica <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "gainsboro",
       size = 0.5
     ) +
@@ -284,8 +284,8 @@ plot_reg_region_oceania <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "gainsboro",
       size = 0.5
     ) +
@@ -316,8 +316,8 @@ plot_reg_region_samerica <-
     geom_segment(
       x = min(dat$node),
       xend = max(dat$node),
-      y = 12.05444 + 0*min(dat$node),
-      yend = 12.05444 + 0*max(dat$node),
+      y = 12.05444 + -0.000000000001883812*min(dat$node),
+      yend = 12.05444 + -0.000000000001883812*max(dat$node),
       color = "gainsboro",
       size = 0.5
     ) +
