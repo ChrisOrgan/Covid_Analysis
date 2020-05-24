@@ -1,0 +1,28 @@
+================
+Punctuation Test
+================
+
+Call:
+lm(formula = path ~ node * virus_type2, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.03746 -0.01159 -0.00757  0.01050  0.06516 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                    0.183369   0.030295   6.053 2.08e-07 ***
+node                          -0.001094   0.003102  -0.353    0.726    
+virus_type2SARS-like CoV      -0.008842   0.032696  -0.270    0.788    
+node:virus_type2SARS-like CoV -0.002033   0.003780  -0.538    0.593    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.02513 on 48 degrees of freedom
+Multiple R-squared:  0.1218,	Adjusted R-squared:  0.06692 
+F-statistic: 2.219 on 3 and 48 DF,  p-value: 0.09796
+
+Log likelihood = 119.848737330757
+BIC = -219.941256068608
+R-squared = 0.121808791350923
+Variance = 0.0006315072225220683
