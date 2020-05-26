@@ -84,27 +84,6 @@ scatter_plot_color_final <-
       y = "Total path length (substitutions/site)\n",
       color = NULL
     )
-
-scatter_plot_color_final <-
-  ggplot(dat, aes(node, path, color = virus_type)) +
-    geom_jitter(alpha = 0.25, width = 0.1) +
-    geom_segment(
-      x = min(dat$node),
-      xend = max(dat$node),
-      y = 0.1606673 + 0*min(dat$node),
-      ## the line looks sharper in the plot when I set the slope to exactly zero
-      yend = 0.1606673 + 0*max(dat$node),
-      color = "black",
-      size = 1
-    ) +
-    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
-    theme(legend.position = "none") +
-    labs(
-      x = "\nNode count",
-      y = "Total path length (substitutions/site)\n",
-      color = NULL
-    )
-
 scatter_plot_type_2 <-
   ggplot(dat, aes(node, path, color = virus_type_2)) +
     geom_jitter(alpha = 0.25, width = 0.1) +
@@ -171,6 +150,41 @@ scatter_plot_type_3 <-
       y = "Total path length (substitutions/site)\n",
       color = NULL
     )
+scatter_plot_type_3_bayesian <-
+  ggplot(dat, aes(node, path, color = virus_type)) +
+    geom_point() +
+    geom_segment(
+      x = min(dat_3_1$node),
+      xend = max(dat_3_1$node),
+      y = 0.1518 + 0*min(dat_3_1$node),
+      ## the line looks sharper in the plot when I set the slope to exactly zero
+      yend = 0.1518 + 0*max(dat_3_1$node),
+      color = "#F8766D",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_3_2$node),
+      xend = max(dat_3_2$node),
+      y = 0.1839 + 0*min(dat_3_2$node),
+      yend = 0.1839 + 0*max(dat_3_2$node),
+      color = "#00BA38",
+      size = 1
+    ) +
+    geom_segment(
+      x = min(dat_2_2$node),
+      xend = max(dat_2_2$node),
+      y = 0.1357 + -0.0001965502*min(dat_2_2$node),
+      yend = 0.1357 + -0.0001965502*max(dat_2_2$node),
+      color = "#619CFF",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(legend.position = "none") +
+    labs(
+      x = "\nNode count",
+      y = "Total path length (substitutions/site)\n",
+      color = NULL
+    )
 ## Interactive plot
 plot_interactive <-
   ggplot(dat, aes(node, path, color = virus_type, label = genome)) +
@@ -184,15 +198,13 @@ plot_interactive <-
 plot_interactive <- ggplotly(plot_interactive)
 
 # Save scatter plots ----
-CairoPDF("surya_figure_punctuation_sars_like_r.pdf", width = 6,
-         height = 5)
+CairoPDF("surya_figure_punctuation_sars_like_r.pdf", width = 6, height = 5)
 print(scatter_plot)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like_r.svg", width = 6,
-         height = 5)
+CairoSVG("surya_figure_punctuation_sars_like_r.svg", width = 6, height = 5)
 print(scatter_plot)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_r_color.pdf", width = 6,
+CairoPDF("surya_figure_punctuation_sars_like_r_color.pdf", width = 6, 
          height = 5)
 print(scatter_plot_color)
 graphics.off()
@@ -231,6 +243,19 @@ graphics.off()
 CairoSVG("surya_figure_punctuation_sars_like_type_3group_r.svg", width = 6,
          height = 5)
 print(scatter_plot_type_3)
+graphics.off()
+CairoPDF(
+  "surya_figure_punctuation_sars_like_type_3group_r_bayesian_no_outliers.pdf",
+  width = 6,
+  height = 5)
+print(scatter_plot_type_3_bayesian)
+graphics.off()
+CairoSVG(
+  "surya_figure_punctuation_sars_like_type_3group_r_bayesian_no_outliers.svg",
+  width = 6,
+  height = 5
+)
+print(scatter_plot_type_3_bayesian)
 graphics.off()
 ## Interactive plot
 saveWidget(

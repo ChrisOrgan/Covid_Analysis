@@ -136,24 +136,19 @@ scatter_plot_type_3 <-
     )
 
 # Save scatter plots ----
-CairoPDF("surya_figure_punctuation_sars_like.pdf", width = 6,
-         height = 5)
+CairoPDF("surya_figure_punctuation_sars_like.pdf", width = 6, height = 5)
 print(scatter_plot)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like.svg", width = 6,
-         height = 5)
+CairoSVG("surya_figure_punctuation_sars_like.svg", width = 6, height = 5)
 print(scatter_plot)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_host.pdf", width = 6,
-         height = 5)
+CairoPDF("surya_figure_punctuation_sars_like_host.pdf", width = 6, height = 5)
 print(scatter_plot_host)
 graphics.off()
-CairoSVG("surya_figure_punctuation_sars_like_host.svg", width = 6,
-         height = 5)
+CairoSVG("surya_figure_punctuation_sars_like_host.svg", width = 6, height = 5)
 print(scatter_plot_host)
 graphics.off()
-CairoPDF("surya_figure_punctuation_sars_like_type.pdf", width = 6,
-         height = 5)
+CairoPDF("surya_figure_punctuation_sars_like_type.pdf", width = 6, height = 5)
 print(scatter_plot_type)
 graphics.off()
 CairoPDF("surya_figure_punctuation_sars_like_type_2group.pdf", width = 6,
