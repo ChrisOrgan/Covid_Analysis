@@ -1154,6 +1154,7 @@
   in SARS-CoV-2 mutations, which may indicate independent adaptations.
     - We can also calculate the CI in each continent, which can inform us how 
       adaptations differ between continents.
+    - Read De Maio et al. (2020).
 
 ### SARS-CoV-2 in Cruise Ships
 
