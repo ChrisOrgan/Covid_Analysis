@@ -35,7 +35,7 @@
                 - Align sequences using `MAFFT` v7.429 (`--auto`; Katoh and 
                   Standley 2013).
                 - Mask positions identified by De Maio et al. (2020) using 
-                  their VCF file.
+                  their variant call format (VCF) file.
                 - Build tree in `IQ-TREE` (`-st DNA -m HKY -G`; Minh et al. 
                   2020) using the HKY substitution model and the gamma model of 
                   rate heterogeneity (four categories).
@@ -63,9 +63,13 @@
             - Mark Pagel also brings up the assumption of other things equal 
               but also says that this limitation should not daunt us.
     - **Conclusion**
-        - We need to state our conclusions with more nuance.
-            - How can we predict SARS-CoV-2 evolution once drugs and vaccines 
-              are rolled out? Perhaps, we should read Gandon et al. (2001).
+        - Our conclusion has to be more nuanced.
+            - Our prediction only goes as far as the point when health 
+              officials start rolling out drugs and vaccines. SARS-CoV-2 
+              evolutionary trajectory will change in response to selection by 
+              drugs and vaccines, depending on their design or the type of host 
+              resistance that they improve (Gandon et al. 2001).
+                - Host immunity shifts the optimum virulence.
     - **Expectation**
         - Mark Pagel suggests that the Red-Queen-like evolution may be better 
           thought of as 'stabilizing selection' — i.e., viruses that transmit 
@@ -77,18 +81,20 @@
      - **Discussion**
         - Why isn't there more variability in the rate of SARS-CoV-2 genomic 
           evolution?
-            - We found gradualism either because we are looking at a 
-              genome-wide mode of evolution, or because there is a push of 
-              constant selection from immense population size.
+            - We found gradualism either because we are looking at genome-wide 
+              evolution, or because there is a push of constant selection from 
+              immense, global-scale population size.
      - **Methods**
         - Mention the *R<sup>2</sup>* of the regression model that we used for 
-          the phylogenetic predictions.
-        - We need to acknowledge that most of the genomes at GISAID come from 
-          symptomatic patients.
-            - Tanner will provide a reference.
+          the phylogenetic predictions (*R<sup>2</sup>* = 0.61).
+        - We need to acknowledge that because asymptomatic carriers are 
+          unlikely to be noticed in the first place, genomes from such 
+          individuals are also unlikely to be sequenced.
     - **Significance**
         - Based on Charles Chapus's comment, our study should also benefit 
           researchers who are trying to trace infectious events.
+            - Using a strict molecular clock to determine the TMRCA of 
+              SARS-CoV-2 (Sciré et al. 2020) might be appropriate.
     - **Cover letter**
         - Viral phylodynamics is the study of how epidemiological, 
           immunological, and evolutionary processes shape viral phylogenies 
