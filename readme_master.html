@@ -40,11 +40,33 @@ a {
 <li><strong>Action list</strong>
 <ul>
 <li>To indirectly check how differences in genome quality impact our
-results, we will bootstrap the <code>Nextstrain</code> tree and re-do the
-analyses without the three outliers with long terminal branch lengths.
+results, we will bootstrap the <code>Nextstrain</code> tree. Separately, we will
+also re-do the analyses without the three outliers that have long
+terminal branch lengths.
 <ul>
-<li>To further screen for outliers, we will scan the multiple
+<li>To further screen for outliers, we will check the GISAID multiple
 sequence alignment.</li>
+<li><em>My workflow</em>
+<ul>
+<li>Based on the regression scatter plot and the tree plot, we
+subjectively identify four outliers (descending order):
+<ul>
+<li>Fujian/IM3520004T/2020 (China, Asia)</li>
+<li>SouthAfrica/R02606/2020 (South Africa, Africa)</li>
+<li>DRC/KN-0051/2020 (DRC, Africa)</li>
+<li>Scotland/EDB146/2020 (Scotland, Europe)</li>
+</ul>
+</li>
+<li>We use the interquartile range (IQR) method to detect
+outliers more objectively.
+<ul>
+<li>We define outliers as data points that are either: (1)
+lower than Q1 - 3 x IQR; or (2) higher than Q3 + 3 x IQR.</li>
+<li>We detect twelve outliers.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>We decided to re-do our regression analyses using a non-subsampled

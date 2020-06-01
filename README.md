@@ -15,10 +15,23 @@
 - **Publication notes**
     - **Action list**
         - To indirectly check how differences in genome quality impact our 
-          results, we will bootstrap the `Nextstrain` tree and re-do the 
-          analyses without the three outliers with long terminal branch lengths.
-            - To further screen for outliers, we will scan the multiple 
+          results, we will bootstrap the `Nextstrain` tree. Separately, we will 
+          also re-do the analyses without the three outliers that have long 
+          terminal branch lengths.
+            - To further screen for outliers, we will check the GISAID multiple 
               sequence alignment.
+            - *My workflow*
+                - Based on the regression scatter plot and the tree plot, we 
+                  subjectively identify four outliers (descending order):
+                    - Fujian/IM3520004T/2020 (China, Asia)
+                    - SouthAfrica/R02606/2020 (South Africa, Africa)
+                    - DRC/KN-0051/2020 (DRC, Africa)
+                    - Scotland/EDB146/2020 (Scotland, Europe)
+                - We use the interquartile range (IQR) method to detect 
+                  outliers more objectively.
+                    - We define outliers as data points that are either: (1) 
+                      lower than Q1 - 3 x IQR; or (2) higher than Q3 + 3 x IQR.
+                    - We detect twelve outliers.
         - We decided to re-do our regression analyses using a non-subsampled 
           SARS-CoV-2 tree, built from high-quality genomes.
             - One weakness of the analyses with the subsampled tree is that we 
