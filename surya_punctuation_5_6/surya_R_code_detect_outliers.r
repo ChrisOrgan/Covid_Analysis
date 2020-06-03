@@ -14,13 +14,14 @@ thresh1 <- q1 - 3*iqr
 thresh3 <- q3 + 3*iqr
 out1 <- dat[dat$path < thresh1, ]
 out3 <- dat[dat$path > thresh3, ]
-sink("surya_R_output_outliers.txt")
-cat("==============================\n")
-cat("Outliers (Lower [Outer] Fence)\n")
-cat("==============================\n\n")
-as.character(out1$genome)
-cat("\n==============================\n")
-cat("Outliers (Upper [Outer] Fence)\n")
-cat("==============================\n\n")
-as.character(out3$genome)
-sink()
+## as.character(out1)
+## character(0)
+## as.character(out3)
+write.table(
+  out3$genome,
+  file = "surya_R_output_outliers.txt",
+  quote = FALSE,
+  sep = "\t",
+  row.names = FALSE,
+  col.names = FALSE
+)
