@@ -46,6 +46,9 @@ dat_rate_europe <- dat_rate[dat_rate$continent == "Europe", ]
 dat_rate_namerica <- dat_rate[dat_rate$continent == "North America", ]
 dat_rate_oceania <- dat_rate[dat_rate$continent == "Oceania", ]
 dat_rate_samerica <- dat_rate[dat_rate$continent == "South America", ]
+dat_out <- read.table("surya_R_output_outliers.txt")
+colnames(dat_out) <- c("outlier")
+dat_edit <- dat[!dat$genome %in% as.character(dat_out$outlier), ]
 
 # Plot scatter plots ----
 plot_reg <-
@@ -74,6 +77,19 @@ plot_reg_loglog <-
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nLn (node count)", y = "Ln (Total path length [mutations])\n")
+plot_reg_out <-
+  ggplot(dat_edit, aes(node, path)) +
+    geom_point(color = "gray") +
+    geom_segment(
+      x = min(dat_edit$node),
+      xend = max(dat_edit$node),
+      y = 11.81481 + -0.00000000000189502*min(dat_edit$node),
+      yend = 11.81481 + -0.00000000000189502*max(dat_edit$node),
+      color = "black",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    labs(x = "\nNode count", y = "Total path length (mutations)\n")
 plot_region <-
   ggplot(dat, aes(node, path, color = continent)) +
     geom_jitter(size = 0.75, height = 0.2, width = 0.2, alpha = 0.3) +
@@ -692,6 +708,14 @@ print(plot_reg_loglog)
 graphics.off()
 CairoSVG("surya_figure_punctuation_loglog.svg", width = 6.535, height = 4.039)
 print(plot_reg_loglog)
+graphics.off()
+CairoPDF("surya_figure_punctuation_no_outliers.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_out)
+graphics.off()
+CairoSVG("surya_figure_punctuation_no_outliers.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_out)
 graphics.off()
 CairoPDF("surya_figure_punctuation_region.pdf", width = 6.535, height = 4.039)
 print(plot_region)
