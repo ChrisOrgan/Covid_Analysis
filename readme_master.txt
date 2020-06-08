@@ -16,24 +16,114 @@
 
 - **Publication notes**
     - **Action list**
-        - To indirectly check how differences in genome quality impact our 
-          results, we will bootstrap the `Nextstrain` tree. Separately, we will 
-          also re-do the analyses without the three outliers that have long 
-          terminal branch lengths.
-            - To further screen for outliers, we will check the GISAID multiple 
-              sequence alignment.
-            - *My workflow*
-                - Based on the regression scatter plot and the tree plot, we 
-                  subjectively identify four outliers (descending order):
-                    - Fujian/IM3520004T/2020 (China, Asia)
-                    - SouthAfrica/R02606/2020 (South Africa, Africa)
-                    - DRC/KN-0051/2020 (DRC, Africa)
-                    - Scotland/EDB146/2020 (Scotland, Europe)
-                - We use the interquartile range (IQR) method to detect 
-                  outliers more objectively.
-                    - We define outliers as data points that are either: (1) 
-                      lower than Q1 - 3 x IQR; or (2) higher than Q3 + 3 x IQR.
-                    - We detect twelve outliers.
+        - To indirectly assess how sampling impacts our results, particularly 
+          regarding genome quality, we subsample the `Nextstrain` tree 1000 
+          times. For each subsample, we randomly choose 1,000 out of 4,645 
+          genomes and then re-do the punctuation regression.
+            - We calculate the median and percentile-based 95% confidence 
+              interval (CI) for each statistic.
+            - We still find little evidence for punctuated evolution 
+              (*β<sub>median</sub>* = -0.0000000000035, 
+              95% CI = [-0.0000000000054, -0.0000000000021], 
+              *P<sub>median</sub>* = 0.99; 
+              *R<sup>2</sup><sub>median</sub>* = -1.50).
+                - The distribution does not include zero, but the minimum and 
+                  maximum values, while negative, are negligibly small.
+        - Separately, we also re-do the punctuation regression without 
+          potential outliers.
+            - Based on the regression scatter plot and the tree plot, we 
+              subjectively identify four outliers (descending order):
+                - Fujian/IM3520004T/2020 (China, Asia)
+                - SouthAfrica/R02606/2020 (South Africa, Africa)
+                - DRC/KN-0051/2020 (DRC, Africa)
+                - Scotland/EDB146/2020 (Scotland, Europe)
+            - We use the interquartile range (IQR) method to detect outliers 
+              more objectively.
+                - We define outliers as data points that are either: (1) lower 
+                  than Q1 - 3 x IQR; or (2) higher than Q3 + 3 x IQR.
+                - We detect twelve outliers, all of which are higher than the 
+                  upper (outer) fence.
+            - We check each outlier sequence to assess whether the long 
+              terminal branch lengths are because of real novelties or 
+              sequencing errors.
+                - We first download the GISAID multiple sequence alignment 
+                  (MSA) on 6 June.
+                    - The GISAID team removed duplicate and low-quality 
+                      sequences (>5% NNNNs) and only used complete ones 
+                      (>29,000 bp).
+                    - The resulting MSA, inferred using `MAFFT` v7.429 (Katoh 
+                      and Standley 2013), contains 32,405 genomes.
+                - Below are qualitative assessments for the sequences 
+                  (descending order):
+                    - Fujian/IM3520004T/2020
+                        - This sequence has unique insertions at sites 6,387, 
+                          6,407, and 26,713, deletions at sites 23,904, 29,718, 
+                          and 29,790-29,874, and a G15543A mutation. There are 
+                          clusters of badly-aligned sequencing errors at sites 
+                          29,728-29,735 and 29,875-29,903. The last region is 
+                          the alignment ends that tend to have high error 
+                          rates, which `Nextstrain` did mask.
+                    - SouthAfrica/R02606/2020
+                        - There are clusters of potentially badly-aligned 
+                          sequencing errors at sites 7,630-7,648 and 
+                          18,230-18,298. This sequence has unique T8329G, 
+                          C11499A, G11501C, C13620T, T23437A, T26631A, T26651A, 
+                          G28895T, and T29604A mutations.
+                    - DRC/KN-0051/2020
+                        - This sequence is not in the MSA, likely because it 
+                          has, based on the comment at GISAID, long stretches 
+                          of NNNs (8.70% of overall sequence).
+                    - Scotland/EDB146/2020
+                        - This sequence has unique G15079A, A17199G, T17200A, 
+                          G17567A, G23561A, and G29058A mutations. The second 
+                          and third ones are next to each other and seem like 
+                          artifacts.
+                    - Senegal/640/2020
+                        - This sequence has long stretches of NNNs, which do 
+                          not seem to result in badly-aligned sites. This 
+                          sequence also has a unique G29372A mutation. There is 
+                          a cluster of likely badly-aligned sequencing errors 
+                          at sites 29,375-29,389.
+                    - USA/TX-HMH0427/2020
+                        - This sequence has the C21575T mutation, which 
+                          occurred on a site that De Maio et al. (2020) 
+                          recommended masking because it is highly homoplasic.
+                            - Note that a highly homoplasic site means that its 
+                              variants are either frequent mutations or 
+                              sequencing errors.
+                    - Luxembourg/LNS0522318/2020
+                        - This sequence is not in the MSA, likely because it 
+                          has, based on the comment at GISAID, long stretches 
+                          of NNNs (5.05% of overall sequence).
+                    - Australia/NT18/2020
+                        - This sequence has mutations G3564T, G8790T, G13571K, 
+                          G14277T, and G24933T, which occurred on sites that De 
+                          Maio et al. (2020) recommended masking because they 
+                          have a high proportion of ambiguous characters. This 
+                          sequence also has mutations G11535T and G14277T, 
+                          which occurred on sites that are highly homoplasic 
+                          and whose variants only come from a single lab. This 
+                          sequence also has unique G15769K, G25770A, and 
+                          G29176T mutations.
+                    - USA/TX-HMH0391/2020
+                        - This sequence has a unique C26822T mutation.
+                    - Senegal/328/2020
+                        - Several nucleotides at sites 2,825-2,831 that come 
+                          after a long stretch of NNNs seem like badly-aligned 
+                          sequencing errors. This sequence has further long 
+                          stretches of NNNs. There is a cluster of likely 
+                          badly-aligned sequencing errors at sites 
+                          29,375-29,384.
+                    - USA/AZ-TG271435/2020
+                        - This sequence has a unique C10954T mutation.
+                    - USA/TX-HMH0428/2020
+                - Generally, all twelve sequences are well-aligned.
+                - It is highly likely that at least four of the twelve have an 
+                  inflated total path length.
+            - We re-do the punctuation regression without the twelve outliers.
+            - We still find little evidence for punctuated evolution 
+              (*β* = -0.0000000000019 ± 0.000000034, *P* = 0.99; 
+              *R<sup>2</sup>* = -2.67).
         - We decided to re-do our regression analyses using a non-subsampled 
           SARS-CoV-2 tree, built from high-quality genomes.
             - One weakness of the analyses with the subsampled tree is that we 
@@ -42,19 +132,27 @@
             - We expect the result from the re-analyses to match our previous 
               one. If not, then we have to figure out why, but the above 
               paragraph is one of the most likely explanations.
-            - *Tanner's phylogenetic inference workflow*
-                - Remove bat and pangolin sequences.
-                - Remove sequences with coverage that is less than 29,400 base 
-                  pairs (bps).
-                - Remove sequences without an associated sampling date.
-                - Align sequences using `MAFFT` v7.429 (`--auto`; Katoh and 
-                  Standley 2013).
-                - Mask positions identified by De Maio et al. (2020) using 
-                  their variant call format (VCF) file.
-                - Build tree in `IQ-TREE` (`-st DNA -m HKY -G`; Minh et al. 
-                  2020) using the HKY substitution model and the gamma model of 
-                  rate heterogeneity (four categories).
-                    - Root the tree to the Wuhan-Hu-1 genome.
+            - *Phylogenetic inference workflow*
+                - The following workflow steps were partly based on De Maio et 
+                  al. (2020).
+                - We download a MAFFT-produced MSA (`-FFT-NS-2`) of 29,287 
+                  SARS-CoV-2 genomes from `GISAID` on 26 May 2020 at 9:57 AM.
+                - We manually inspect and trim the MSA, removing positions 
+                  without a corresponding base in the 29,903 bp Wuhan-Hu-1 
+                  reference sequence (NC_045512.2).
+                - We further remove genome assemblies of less than 29,400 bp.
+                - Sequences from non-human hosts, without a discrete sampling 
+                  date, or those that could not be matched to an entry in the 
+                  GISAID metadata were removed using `R`.
+                - We mask positions that have been reported to be affected by 
+                  sequencing artifacts, as recommended by EMBL/De Maio et al. 
+                  (2020) (https://github.com/W-L/ProblematicSites_SARS-CoV2; https://github.com/W-L/ProblematicSites_SARS-CoV2/blob/master/problematic_sites_sarsCov2.vcf).
+                - There are 23,237 sequences left in the MSA.
+                - We build a tree using `IQ-TREE` (`-st DNA -m HKY+I+G`; Minh 
+                  et al. 2020), allowing the DNA transition and transversion 
+                  rates, the base frequencies, and the substitution rates (by 
+                  position; four categories) to vary.
+                    - We root the tree to the reference sequence.
                     - We know that some positions in the genome are quite 
                       conserved, while others seem to be diverse. We need to 
                       model this rate heterogeneity to get better estimates of 
@@ -62,15 +160,49 @@
                     - Plus, failure to capture the rate heterogeneity may 
                       result in a tree that suffers from the node-density 
                       artifact.
-                - In a second pipeline, filter out identical sequences with 
-                  `CD-HIT` (Fu et al. 2012).
+                - In a second pipeline, we filter out identical sequences with 
+                  `CD-HIT` (`-c 1.0`; Fu et al. 2012).
                     - It is common to have identical or duplicate viral 
                       sequences because of clonal replication.
                     - We want to investigate the effect of having duplicate 
                       data.
-                - And then, build a second tree with the same `IQ-TREE` 
-                  settings.
-                - Tanner base these workflow steps on De Maio et al. (2020).
+                    - This filtering removes 8,209 sequences, leaving 15,028.
+                    - This clustering process also removes the Wuhan-Hu-1 
+                      reference sequence because it is identical to Wuhan/WIV04.
+                        - The resulting tree is rooted to the Wuhan/WIV04 
+                          sequence instead.
+                - We then build a second tree with the same `IQ-TREE` settings.
+                - We additionally download the GISAID metadata for complete, 
+                  high coverage human SARS-CoV-2 genomes.
+            - The most likely model is the one with the node count as the only 
+              predictor (smallest ΔBIC = 81.20).
+            - There seems to be evidence for punctuated evolution 
+              (*β* = 0.0000032 ± 0.000000019, *P* < 0.0001; 
+              *R<sup>2</sup>* = -11.82).
+            - We find little evidence for the node-density artifact 
+              (*δ* = 0.87).
+            - Using the IQR method, with more relaxed criteria (lower than 
+              Q1 - 1.5 x IQR or higher than Q3 + 1.5 x IQR), we detect 24 
+              outliers.
+                - There seem to be arguably obvious badly-aligned sequencing 
+                  errors for Turkey/6224-Ankara1034, Malaysia/190300, and 
+                  Australia/VIC753.
+                - For the genome with the longest total path length, 
+                  USA/VA-DCLS-0083/2020, sites 21,162-21,270 are badly-aligned.
+            - Removing outliers does not change our results 
+              (*β* = 0.0000032 ± 0.000000017, *P* < 0.0001; 
+              *R<sup>2</sup>* = -11.65).
+            - We still find little evidence for punctuated evolution when using 
+              the subsampling approach 
+              (*β<sub>median</sub>* = 0.0000022, 
+              95% CI = [0.0000021, 0.0000024], *P<sub>median</sub>* < 0.0001; 
+              *R<sup>2</sup><sub>median</sub>* = -3.58).
+                - The slope distribution does not include zero.
+            - Diagnostics of the regression model without outliers do not  
+              suggest a violation of the equal-variance assumption. However,  
+              the distribution of the residuals is left-skewed. And, there is a 
+              positive linear relationship between the residuals and fitted 
+              values.
     - **Central view**
         - We should state the central view of our project explicitly (as a 
           question upfront and an answer at the end), that transmission does 
@@ -91,6 +223,7 @@
           the most have the lowest rates of evolution. He further states that 
           even though we find no evidence for this mode of evolution, it goes 
           with our theme that the coronavirus is evolving gradually.
+            - We can skip the negative slope expectation altogether.
         - When describing the gradualism, we should showcase how the rate of 
           evolution under this scenario is uniform across the tree.
      - **Discussion**
@@ -1165,7 +1298,36 @@
 
 ## Notes
 
+### Has SARS-CoV-2 Undergone Continual Immune Selection?
+
+- SARS-CoV-2 has likely undergone continual immune selection given gradualism 
+  and immense population size.
+- Such selection may correspond to a ladder-like, imbalanced timetree (Grenfell 
+  et al. 2004; Volz et al. 2013).
+    - Viral population passes through repeated selective sweeps that are driven 
+      by the human herd immunity, causing rapid lineage turnover.
+    - Alternative view by Volz et al. (2013): For instance, although 
+      ladder-like trees could reflect the presence of directional selection, 
+      ladder-like trees could also reflect sequential genetic bottlenecks that 
+      might occur with rapid spatial spread, as in the case of rabies virus.
+    - Chris Organ: I think the argument would be that the tips that terminate 
+      are selected out of the populations, but that assumes some connection 
+      between divergence and selection doesn't it?
+- We may be able to test for the hypothesis above using a combination of the 
+  punctuation regression test (Webster et al. 2003; Pagel et al. 2006) on the 
+  SARS-CoV-2 timetree and something like the Colless's tree imbalance index 
+  (Colless 1982).
+    - Unfortunately, Colless's index only applies to rooted binary trees.
+- Chris Organ: I don't know that I am convinced that you can infer selection 
+  from tree shape.
+
 ### Punctuated SARS-CoV-2 Gene Evolution?
+
+- Antigenic evolution of the influenza A (H3N2) virus was more punctuated than 
+  genetic evolution, and genetic change sometimes had a disproportionately 
+  large antigenic effect (Smith et al. 2004).
+
+### Punctuated Within-Host SARS-CoV-2 Genomic Evolution?
 
 ### Do Mutations in the Proofreader Gene Increase Evolvability?
 
@@ -1216,6 +1378,8 @@
     Armstrong G.L., Baird G.S., Chu H.Y., Jerome K.R. 2020. Cryptic 
     transmission of SARS-CoV-2 in Washington State. medRxiv. 
     2020.04.02.20051417.
+- Colless D.H. 1982. [Review of] Phylogenetics: The theory and practice of 
+    phylogenetic systematics. Syst. Zool. 31:100–104.
 - Lam T.T.-Y., Shum M.H.-H., Zhu H.-C., Tong Y.-G., Ni X.-B., Liao Y.-S., Wei 
     W., Cheung W.Y.-M., Li W.-J., Li L.-F., Leung G.M., Holmes E.C., Hu Y.-L., 
     Guan Y. 2020. Identifying SARS-CoV-2 related coronaviruses in Malayan 
@@ -1224,3 +1388,6 @@
     Princeton, NJ: Princeton University Press.
 - Nielsen R., Wang H., Pipes L. 2020. Synonymous mutations and the molecular 
     evolution of SARS-Cov-2 origins. bioRxiv.:2020.04.20.052019.
+- Smith D.J., Lapedes A.S., Jong J.C. de, Bestebroer T.M., Rimmelzwaan G.F., 
+    Osterhaus A.D.M.E., Fouchier R.A.M. 2004. Mapping the antigenic and genetic 
+    evolution of influenza virus. Science. 305:371–376.
