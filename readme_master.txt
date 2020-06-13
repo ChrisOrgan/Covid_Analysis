@@ -7,6 +7,10 @@
 - [x] SARS-CoV-2: Punctuation (4/16)
 - [x] SARS-CoV-2: Punctuation (5/06; equitable global subsampling)
 - [x] SARS-CoV-2: Punctuation (4/30; non-subsampled)
+- [x] SARS-CoV-2: Punctuation (5/26; non-subsampled + no duplicates)
+- [x] SARS-CoV-2: Punctuation (5/26; non-subsampled)
+- [ ] SARS-CoV-2: Punctuation (5/26; non-subsampled + no duplicates + node 
+                  support)
 - [ ] SARS-Cov-2: Speciation ~ time + continent
 - [ ] SARS-CoV-2: Geographic radiation
 - [ ] SARS-CoV-2: Dispersal ~ mutation rate
@@ -148,8 +152,8 @@
                   sequencing artifacts, as recommended by EMBL/De Maio et al. 
                   (2020) (https://github.com/W-L/ProblematicSites_SARS-CoV2; https://github.com/W-L/ProblematicSites_SARS-CoV2/blob/master/problematic_sites_sarsCov2.vcf).
                 - There are 23,237 sequences left in the MSA.
-                - We build a tree using `IQ-TREE` (`-st DNA -m HKY+I+G`; Minh 
-                  et al. 2020), allowing the DNA transition and transversion 
+                - We build a tree using `IQ-TREE` (`-st DNA -m HKY+I+G`; Nguyen 
+                  et al. 2015), allowing the DNA transition and transversion 
                   rates, the base frequencies, and the substitution rates (by 
                   position; four categories) to vary.
                     - We root the tree to the reference sequence.
@@ -183,13 +187,14 @@
               (*δ* = 0.87).
             - Using the IQR method, with more relaxed criteria (lower than 
               Q1 - 1.5 x IQR or higher than Q3 + 1.5 x IQR), we detect 24 
-              outliers.
-                - There seem to be arguably obvious badly-aligned sequencing 
-                  errors for Turkey/6224-Ankara1034, Malaysia/190300, and 
-                  Australia/VIC753.
-                - For the genome with the longest total path length, 
-                  USA/VA-DCLS-0083/2020, sites 21,162-21,270 are badly-aligned.
-            - Removing outliers does not change our results 
+              potential outliers.
+                - After checking the MSA, there are nine sequences with likely 
+                  sequencing/assembly artifacts or misalignment.
+                    - The nine sequences are: Australia/VIC753, 
+                      Malaysia/190300, Scotland/EDB146, South_Africa/R02606, 
+                      Turkey/6224-Ankara1034, USA/ID-UW-4100, USA/ID-UW-4462, 
+                      USA/VA-DCLS-0083, USA/WA-UW-4130.
+            - Removing all 24 potential outliers does not change our results 
               (*β* = 0.0000032 ± 0.000000017, *P* < 0.0001; 
               *R<sup>2</sup>* = -11.65).
             - We still find little evidence for punctuated evolution when using 
@@ -300,6 +305,9 @@
           because of a founder effect (Mayr 1954)?
             - Regardless of which interpretation is correct, we didn't find 
               evidence for both.
+    - **References**
+        - Use Domingo and Perales (2019) as a citation for transmission 
+          bottlenecks.
     - **Background**
         - Read https://nextstrain.org/narratives/ncov/sit-rep/2020-05-15?n=5 
           regarding the SARS-CoV-2 evolutionary rate.
@@ -968,6 +976,7 @@
 - De Maio N., Walker C., Borges R., Weilguny L., Slodkowicz G., Goldman N. 
     2020. Issues with SARS-CoV-2 sequencing data. Available from 
     http://virological.org/t/issues-with-sars-cov-2-sequencing-data/473.
+- Domingo E., Perales C. 2019. Viral quasispecies. PLOS Genet. 15:e1008271.
 - Fu L., Niu B., Zhu Z., Wu S., Li W. 2012. CD-HIT: accelerated for clustering 
     the next-generation sequencing data. Bioinformatics. 28:3150–3152.
 - Galvani A.P. 2003. Epidemiology meets evolutionary ecology. Trends Ecol. 
@@ -1027,16 +1036,15 @@
 - Mayr E. 1954. Change of genetic environment and evolution. In: Huxley J., 
     Hardy A.C., Ford E.B., editors. Evolution as a Process. London, U.K.: Allan 
     & Unwin. p. 157–180.
-- Minh B.Q., Schmidt H.A., Chernomor O., Schrempf D., Woodhams M.D., von 
-    Haeseler A., Lanfear R. 2020. IQ-TREE 2: New models and efficient methods 
-    for phylogenetic inference in the genomic era. Mol. Biol. Evol. 
-    37:1530–1534.
 - Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
     Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
     Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
     2018. Attenuation of replication by a 29 nucleotide deletion in 
     SARS-coronavirus acquired during the early stages of human-to-human 
     transmission. Sci. Rep. 8:1–11.
+- Nguyen L.-T., Schmidt H.A., von Haeseler A., Minh B.Q. 2015. IQ-TREE: A fast 
+    and effective stochastic algorithm for estimating maximum-likelihood 
+    phylogenies. Mol. Biol. Evol. 32:268–274.
 - O'Hara R.B., Kotze D.J. 2010. Do not log-transform count data. Methods Ecol. 
     Evol. 1:118–122.
 - Pagel M. 1999. Inferring the historical patterns of biological evolution. 
@@ -1326,6 +1334,11 @@
 - Antigenic evolution of the influenza A (H3N2) virus was more punctuated than 
   genetic evolution, and genetic change sometimes had a disproportionately 
   large antigenic effect (Smith et al. 2004).
+- As a proxy for the total amount of evolution a gene lineage has undergone, we 
+  use the mutation count within a gene, with each mutation weighted by the 
+  corresponding nucleotide transition probability.
+    - We estimate the transition probabilities using a GTR substitution model, 
+      which should also allow us to account for multiple hits.
 
 ### Punctuated Within-Host SARS-CoV-2 Genomic Evolution?
 

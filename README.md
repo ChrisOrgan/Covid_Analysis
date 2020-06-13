@@ -5,6 +5,10 @@
 - [x] SARS-CoV-2: Punctuation (4/16)
 - [x] SARS-CoV-2: Punctuation (5/06; equitable global subsampling)
 - [x] SARS-CoV-2: Punctuation (4/30; non-subsampled)
+- [x] SARS-CoV-2: Punctuation (5/26; non-subsampled + no duplicates)
+- [x] SARS-CoV-2: Punctuation (5/26; non-subsampled)
+- [ ] SARS-CoV-2: Punctuation (5/26; non-subsampled + no duplicates + node 
+                  support)
 - [ ] SARS-Cov-2: Speciation ~ time + continent
 - [ ] SARS-CoV-2: Geographic radiation
 - [ ] SARS-CoV-2: Dispersal ~ mutation rate
@@ -146,8 +150,8 @@
                   sequencing artifacts, as recommended by EMBL/De Maio et al. 
                   (2020) (https://github.com/W-L/ProblematicSites_SARS-CoV2; https://github.com/W-L/ProblematicSites_SARS-CoV2/blob/master/problematic_sites_sarsCov2.vcf).
                 - There are 23,237 sequences left in the MSA.
-                - We build a tree using `IQ-TREE` (`-st DNA -m HKY+I+G`; Minh 
-                  et al. 2020), allowing the DNA transition and transversion 
+                - We build a tree using `IQ-TREE` (`-st DNA -m HKY+I+G`; Nguyen 
+                  et al. 2015), allowing the DNA transition and transversion 
                   rates, the base frequencies, and the substitution rates (by 
                   position; four categories) to vary.
                     - We root the tree to the reference sequence.
@@ -181,13 +185,14 @@
               (*δ* = 0.87).
             - Using the IQR method, with more relaxed criteria (lower than 
               Q1 - 1.5 x IQR or higher than Q3 + 1.5 x IQR), we detect 24 
-              outliers.
-                - There seem to be arguably obvious badly-aligned sequencing 
-                  errors for Turkey/6224-Ankara1034, Malaysia/190300, and 
-                  Australia/VIC753.
-                - For the genome with the longest total path length, 
-                  USA/VA-DCLS-0083/2020, sites 21,162-21,270 are badly-aligned.
-            - Removing outliers does not change our results 
+              potential outliers.
+                - After checking the MSA, there are nine sequences with likely 
+                  sequencing/assembly artifacts or misalignment.
+                    - The nine sequences are: Australia/VIC753, 
+                      Malaysia/190300, Scotland/EDB146, South_Africa/R02606, 
+                      Turkey/6224-Ankara1034, USA/ID-UW-4100, USA/ID-UW-4462, 
+                      USA/VA-DCLS-0083, USA/WA-UW-4130.
+            - Removing all 24 potential outliers does not change our results 
               (*β* = 0.0000032 ± 0.000000017, *P* < 0.0001; 
               *R<sup>2</sup>* = -11.65).
             - We still find little evidence for punctuated evolution when using 
@@ -298,6 +303,9 @@
           because of a founder effect (Mayr 1954)?
             - Regardless of which interpretation is correct, we didn't find 
               evidence for both.
+    - **References**
+        - Use Domingo and Perales (2019) as a citation for transmission 
+          bottlenecks.
     - **Background**
         - Read https://nextstrain.org/narratives/ncov/sit-rep/2020-05-15?n=5 
           regarding the SARS-CoV-2 evolutionary rate.
@@ -966,6 +974,7 @@
 - De Maio N., Walker C., Borges R., Weilguny L., Slodkowicz G., Goldman N. 
     2020. Issues with SARS-CoV-2 sequencing data. Available from 
     http://virological.org/t/issues-with-sars-cov-2-sequencing-data/473.
+- Domingo E., Perales C. 2019. Viral quasispecies. PLOS Genet. 15:e1008271.
 - Fu L., Niu B., Zhu Z., Wu S., Li W. 2012. CD-HIT: accelerated for clustering 
     the next-generation sequencing data. Bioinformatics. 28:3150–3152.
 - Galvani A.P. 2003. Epidemiology meets evolutionary ecology. Trends Ecol. 
@@ -1025,16 +1034,15 @@
 - Mayr E. 1954. Change of genetic environment and evolution. In: Huxley J., 
     Hardy A.C., Ford E.B., editors. Evolution as a Process. London, U.K.: Allan 
     & Unwin. p. 157–180.
-- Minh B.Q., Schmidt H.A., Chernomor O., Schrempf D., Woodhams M.D., von 
-    Haeseler A., Lanfear R. 2020. IQ-TREE 2: New models and efficient methods 
-    for phylogenetic inference in the genomic era. Mol. Biol. Evol. 
-    37:1530–1534.
 - Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
     Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
     Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
     2018. Attenuation of replication by a 29 nucleotide deletion in 
     SARS-coronavirus acquired during the early stages of human-to-human 
     transmission. Sci. Rep. 8:1–11.
+- Nguyen L.-T., Schmidt H.A., von Haeseler A., Minh B.Q. 2015. IQ-TREE: A fast 
+    and effective stochastic algorithm for estimating maximum-likelihood 
+    phylogenies. Mol. Biol. Evol. 32:268–274.
 - O'Hara R.B., Kotze D.J. 2010. Do not log-transform count data. Methods Ecol. 
     Evol. 1:118–122.
 - Pagel M. 1999. Inferring the historical patterns of biological evolution. 
@@ -1293,3 +1301,104 @@
 [COVID-19 Projections]: https://covid19.healthdata.org/united-states-of-america
 [Molecular dating using heterochronous data and substitution model averaging]:
     https://taming-the-beast.org/tutorials/Molecular-Dating-Tutorial
+
+## Notes
+
+### Has SARS-CoV-2 Undergone Continual Immune Selection?
+
+- SARS-CoV-2 has likely undergone continual immune selection given gradualism 
+  and immense population size.
+- Such selection may correspond to a ladder-like, imbalanced timetree (Grenfell 
+  et al. 2004; Volz et al. 2013).
+    - Viral population passes through repeated selective sweeps that are driven 
+      by the human herd immunity, causing rapid lineage turnover.
+    - Alternative view by Volz et al. (2013): For instance, although 
+      ladder-like trees could reflect the presence of directional selection, 
+      ladder-like trees could also reflect sequential genetic bottlenecks that 
+      might occur with rapid spatial spread, as in the case of rabies virus.
+    - Chris Organ: I think the argument would be that the tips that terminate 
+      are selected out of the populations, but that assumes some connection 
+      between divergence and selection doesn't it?
+- We may be able to test for the hypothesis above using a combination of the 
+  punctuation regression test (Webster et al. 2003; Pagel et al. 2006) on the 
+  SARS-CoV-2 timetree and something like the Colless's tree imbalance index 
+  (Colless 1982).
+    - Unfortunately, Colless's index only applies to rooted binary trees.
+- Chris Organ: I don't know that I am convinced that you can infer selection 
+  from tree shape.
+
+### Punctuated SARS-CoV-2 Gene Evolution?
+
+- Antigenic evolution of the influenza A (H3N2) virus was more punctuated than 
+  genetic evolution, and genetic change sometimes had a disproportionately 
+  large antigenic effect (Smith et al. 2004).
+- As a proxy for the total amount of evolution a gene lineage has undergone, we 
+  use the mutation count within a gene, with each mutation weighted by the 
+  corresponding nucleotide transition probability.
+    - We estimate the transition probabilities using a GTR substitution model, 
+      which should also allow us to account for multiple hits.
+
+### Punctuated Within-Host SARS-CoV-2 Genomic Evolution?
+
+### Do Mutations in the Proofreader Gene Increase Evolvability?
+
+### Convergent SARS-CoV-2 Mutations
+
+- Using the consistency index (CI), we can test for the degree of convergence 
+  in SARS-CoV-2 mutations, which may indicate independent adaptations.
+    - We can also calculate the CI in each continent, which can inform us how 
+      adaptations differ between continents.
+    - Read De Maio et al. (2020).
+
+### SARS-CoV-2 in Cruise Ships
+
+- SARS-CoV-2 genomic diversity might have declined following transmissions into 
+  cruise ships (i.e., founder effect), which may be equivalent to islands in 
+  the theory of island biogeography (MacArthur and Wilson 1967).
+
+### The Coevolution of Coronavirus Spike Gene and Vertebrate ACE2
+
+- Do non-conservative mutations in the coronavirus *S* gene explain those in 
+  the vertebrate ACE2?
+- Possibly, not all mammal coronaviruses prefer ACE2 (Damas et al. 2020).
+
+### Did Mutation Rates Increase Before or After the Zoonotic Transfer to Humans?
+
+- The high binding affinity of the SARS-CoV-2 receptor-binding domain (RBD) to 
+  human ACE2 indicate selection (Andersen et al. 2020).
+- The question is whether selection occurred before the zoonotic transfer 
+  (pre-adaptation in pangolins or other intermediates) or after (cryptic 
+  human-to-human transmissions).
+    - Potential biases are the undersampling of non-human SARS-like CoVs 
+      (Andersen et al. 2020) and SARS-CoV-2 from the early cryptic transmission 
+      stages (e.g., Bedford et al. 2020).
+- Likely, SARS-like CoVs from bats and pangolins recombined before jumping into 
+  humans (Lam et al. 2020; Nielsen et al. 2020; Xiao et al. 2020).
+
+### References
+
+- Bedford T., Greninger A.L., Roychoudhury P., Starita L.M., Famulare M., Huang 
+    M.-L., Nalla A., Pepper G., Reinhardt A., Xie H., Shrestha L., Nguyen T.N., 
+    Adler A., Brandstetter E., Cho S., Giroux D., Han P.D., Fay K., Frazar 
+    C.D., Ilcisin M., Lacombe K., Lee J., Kiavand A., Richardson M., Sibley 
+    T.R., Truong M., Wolf C.R., Nickerson D.A., Rieder M.J., Englund J.A., 
+    The Seattle Flu Study Investigators, Hadfield J., Hodcroft E.B., 
+    Huddleston J., Moncla L.H., Müller N.F., Neher R.A., Deng X., Gu W., 
+    Federman S., Chiu C., Duchin J., Gautom R., Melly G., Hiatt B., Dykema P., 
+    Lindquist S., Queen K., Tao Y., Uehara A., Tong S., MacCannell D., 
+    Armstrong G.L., Baird G.S., Chu H.Y., Jerome K.R. 2020. Cryptic 
+    transmission of SARS-CoV-2 in Washington State. medRxiv. 
+    2020.04.02.20051417.
+- Colless D.H. 1982. [Review of] Phylogenetics: The theory and practice of 
+    phylogenetic systematics. Syst. Zool. 31:100–104.
+- Lam T.T.-Y., Shum M.H.-H., Zhu H.-C., Tong Y.-G., Ni X.-B., Liao Y.-S., Wei 
+    W., Cheung W.Y.-M., Li W.-J., Li L.-F., Leung G.M., Holmes E.C., Hu Y.-L., 
+    Guan Y. 2020. Identifying SARS-CoV-2 related coronaviruses in Malayan 
+    pangolins. Nature. 1–6.
+- MacArthur R.H., Wilson E.O. 1967. The Theory of Island Biogeography. 
+    Princeton, NJ: Princeton University Press.
+- Nielsen R., Wang H., Pipes L. 2020. Synonymous mutations and the molecular 
+    evolution of SARS-Cov-2 origins. bioRxiv.:2020.04.20.052019.
+- Smith D.J., Lapedes A.S., Jong J.C. de, Bestebroer T.M., Rimmelzwaan G.F., 
+    Osterhaus A.D.M.E., Fouchier R.A.M. 2004. Mapping the antigenic and genetic 
+    evolution of influenza virus. Science. 305:371–376.
