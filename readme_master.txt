@@ -208,6 +208,23 @@
               the distribution of the residuals is left-skewed. And, there is a 
               positive linear relationship between the residuals and fitted 
               values.
+            - We re-do the regression analyses using a tree where we collapse 
+              nodes with low support (< 50%).
+                - We first removed the nine potential outliers with likely 
+                  sequencing/assembly artifacts from the alignment (final 
+                  *n* = 15,019 sequences).
+                - We substitute forward slashes (/) and vertical bars (|) with 
+                  underscores using `ape`.
+                    - `IQ-TREE` 1.x only accepts the non-alphanumeric 
+                      characters underscore (_), dash (-), and dot (.) in the 
+                      sequence name (https://groups.google.com/forum/#!topic/iqtree/Xo8baNMJxAU).
+                - For evaluating node support, we use the Bayesian-like 
+                  transformation of the aLRT option (aBayes; Anisimova et al. 
+                  2011) in `IQ-TREE on XSEDE 1.6.10` on `The CIPRES Science`
+                  `Gateway` 3.3 (Miller et al. 2010).
+                    - We use a Neighbor-Joining starting tree.
+                    - We set Wuhan/WIV04 as the outgroup.
+                    - We use the GTR substitution model.
     - **Central view**
         - We should state the central view of our project explicitly (as a 
           question upfront and an answer at the end), that transmission does 
@@ -950,6 +967,9 @@
 - Anfinrud P., Stadnytskyi V., Bax C.E., Bax A. 2020. Visualizing 
     speech-generated oral fluid droplets with laser light scattering. N. 
     Engl. J. Med.
+- Anisimova M., Gil M., Dufayard J.-F., Dessimoz C., Gascuel O. 2011. Survey of 
+    branch support methods demonstrates accuracy, power, and robustness of fast 
+    likelihood-based approximation schemes. Syst. Biol. 60:685–699.
 - Attali D., Baker C. 2019. ggExtra: Add marginal histograms to "ggplot2", and 
     more "ggplot2" enhancements. R package.
 - Arnold J.B. 2019. ggthemes: Extra themes, scales and geoms for "ggplot2." R 
@@ -1036,6 +1056,9 @@
 - Mayr E. 1954. Change of genetic environment and evolution. In: Huxley J., 
     Hardy A.C., Ford E.B., editors. Evolution as a Process. London, U.K.: Allan 
     & Unwin. p. 157–180.
+- Miller M.A., Pfeiffer W., Schwartz T. 2010. Creating the CIPRES Science 
+    Gateway for inference of large phylogenetic trees. 2010 Gateway Computing 
+    Environments Workshop (GCE):1–8.
 - Muth D., Corman V.M., Roth H., Binger T., Dijkman R., Gottula L.T., 
     Gloza-Rausch F., Balboni A., Battilani M., Rihtarič D., Toplak I., 
     Ameneiros R.S., Pfeifer A., Thiel V., Drexler J.F., Müller M.A., Drosten C. 
