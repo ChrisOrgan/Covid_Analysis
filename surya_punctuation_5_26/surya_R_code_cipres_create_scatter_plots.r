@@ -28,6 +28,17 @@ plot_reg <-
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nNode count", y = "Total path length (mutations/site)\n")
+## Interactive plots
+plot_interactive <-
+  ggplot(dat, aes(node, path, label = genome)) +
+    geom_point(alpha = 0.4) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    theme(legend.title = element_blank()) +
+    labs(
+      x = "Node count",
+      y = "Total path length (mutations/site)"
+    )
+plot_interactive <- ggplotly(plot_interactive)
 
 # Save scatter plots ----
 CairoPDF("surya_figure_cipres_punctuation.pdf", width = 6.535, height = 4.039)
@@ -36,3 +47,8 @@ graphics.off()
 CairoSVG("surya_figure_cipres_punctuation.svg", width = 6.535, height = 4.039)
 print(plot_reg)
 graphics.off()
+## Interactive plots
+saveWidget(
+  widget = as_widget(plot_interactive),
+  file = "surya_figure_cipres_punctuation_interactive.html"
+)
