@@ -2,45 +2,52 @@
 Regression
 ==========
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: y ~ x * group 
   Data: dat_edit2 
        AIC      BIC    logLik
-  230.9105 238.2221 -108.4552
+  250.2279 259.2988 -118.1139
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
 lambda 
      1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~vf 
 
 Coefficients:
                       Value Std.Error   t-value p-value
-(Intercept)      -13.024234  27.42423 -0.474917  0.6397
-x                  0.802878   0.19752  4.064885  0.0006
-groupmammal       11.312561  38.66694  0.292564  0.7727
-grouparchosaur    19.962644  30.35554  0.657628  0.5179
-x:groupmammal     -0.203641   0.28871 -0.705357  0.4883
-x:grouparchosaur  -0.380161   0.29060 -1.308188  0.2049
+(Intercept)      -10.856553  27.62522 -0.392994  0.6983
+x                  0.794122   0.21798  3.643067  0.0015
+groupmammal       11.566548  38.49644  0.300458  0.7668
+grouparchosaur    17.363419  28.97370  0.599282  0.5554
+x:groupmammal     -0.188070   0.30714 -0.612326  0.5469
+x:grouparchosaur  -0.371942   0.28428 -1.308349  0.2049
 
  Correlation: 
                  (Intr) x      grpmmm grprch x:grpm
-x                -0.395                            
-groupmammal      -0.709  0.280                     
-grouparchosaur   -0.567  0.369  0.402              
-x:groupmammal     0.270 -0.684 -0.462 -0.253       
-x:grouparchosaur  0.297 -0.679 -0.210 -0.522  0.464
+x                -0.489                            
+groupmammal      -0.718  0.351                     
+grouparchosaur   -0.632  0.467  0.454              
+x:groupmammal     0.347 -0.710 -0.489 -0.331       
+x:grouparchosaur  0.375 -0.767 -0.269 -0.600  0.544
 
 Standardized residuals:
          Min           Q1          Med           Q3          Max 
--1.006734476 -0.294793956 -0.008672226  0.208847236  0.984032726 
+-1.037117236 -0.361916407  0.008358776  0.171786031  1.107752515 
 
-Residual standard error: 33.68135 
+Residual standard error: 39.02188 
 Degrees of freedom: 27 total; 21 residual
 
-Intercept = -13.024
-Slope (ref: lepidosaur) = 0.803
-P-value (slope) = 0.000556388277071209
-R-squared = 0.592
-Variance = 1134.433
-BIC = 238.222
+                       Value  Std.Error    t-value     p-value
+(Intercept)      -10.8565532 27.6252233 -0.3929942 0.698284761
+x                  0.7941222  0.2179818  3.6430671 0.001520236
+groupmammal       11.5665477 38.4964423  0.3004576 0.766782456
+grouparchosaur    17.3634190 28.9736955  0.5992822 0.555395654
+x:groupmammal     -0.1880703  0.3071408 -0.6123258 0.546895954
+x:grouparchosaur  -0.3719417  0.2842832 -1.3083494 0.204894628
+
+R-squared = 0.55843465799046
+Variance = 1522.70746753439

@@ -2,25 +2,19 @@
 Regression
 ==========
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: y ~ x * group 
   Data: dat_edit2 
-       AIC      BIC    logLik
-  221.3083 228.6199 -103.6541
-
-Correlation Structure: corPagel
- Formula: ~1 
- Parameter estimate(s):
-lambda 
- 1e-06 
+      AIC      BIC   logLik
+  230.918 239.9888 -108.459
 
 Coefficients:
                       Value Std.Error   t-value p-value
-(Intercept)       -1.814409  9.358108 -0.193886  0.8481
-x                  0.616923  0.159003  3.879933  0.0009
-grouplepidosaur   -4.022515 14.128807 -0.284703  0.7787
-grouparchosaur     3.657645 13.061026  0.280043  0.7822
-x:grouplepidosaur  0.014136  0.248007  0.056997  0.9551
+(Intercept)       -1.814410  9.358099 -0.193887  0.8481
+x                  0.616923  0.159003  3.879934  0.0009
+grouplepidosaur   -4.022515 14.128796 -0.284703  0.7787
+grouparchosaur     3.657643 13.061012  0.280043  0.7822
+x:grouplepidosaur  0.014136  0.248006  0.056997  0.9551
 x:grouparchosaur  -0.135243  0.240690 -0.561899  0.5801
 
  Correlation: 
@@ -33,14 +27,18 @@ x:grouparchosaur   0.540 -0.661 -0.358 -0.839  0.424
 
 Standardized residuals:
        Min         Q1        Med         Q3        Max 
--2.1783837 -0.4526877  0.1345796  0.4054094  2.4554408 
+-2.4700556 -0.5132996  0.1525991  0.4596914  2.7842092 
 
-Residual standard error: 15.23688 
+Residual standard error: 13.43766 
 Degrees of freedom: 27 total; 21 residual
 
-Intercept = -1.814
-Slope (ref: mammal) = 0.617
-P-value (slope) = 0.000865378741454818
-R-squared = 0.616
-Variance = 232.162
-BIC = 228.62
+                        Value  Std.Error     t-value      p-value
+(Intercept)       -1.81440998  9.3580989 -0.19388660 0.8481278813
+x                  0.61692280  0.1590034  3.87993365 0.0008653778
+grouplepidosaur   -4.02251538 14.1287955 -0.28470335 0.7786601093
+grouparchosaur     3.65764299 13.0610124  0.28004284 0.7821846333
+x:grouplepidosaur  0.01413569  0.2480065  0.05699725 0.9550862345
+x:grouparchosaur  -0.13524340  0.2406900 -0.56189866 0.5801335015
+
+R-squared = 0.615887761769177
+Variance = 180.57068897967

@@ -2,37 +2,40 @@
 Regression
 ==========
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: y ~ x 
   Data: dat_edit 
        AIC      BIC    logLik
-  221.8786 226.7542 -106.9393
+  203.1369 208.3202 -97.56845
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
    lambda 
--0.256465 
+-1.141748 
+Variance function:
+ Structure: fixed weights
+ Formula: ~vf 
 
 Coefficients:
-                 Value Std.Error   t-value p-value
-(Intercept) -0.5562812  4.379939 -0.127007     0.9
-x            0.5630197  0.088577  6.356261     0.0
+               Value Std.Error  t-value p-value
+(Intercept) 9.308074 2.4646938 3.776564   9e-04
+x           0.444163 0.0475078 9.349266   0e+00
 
  Correlation: 
   (Intr)
-x -0.994
+x -1    
 
 Standardized residuals:
-        Min          Q1         Med          Q3         Max 
--2.71882341 -0.46789145 -0.09294935  0.52087228  2.97509850 
+       Min         Q1        Med         Q3        Max 
+-3.7602427 -1.2443830 -0.6701843  0.5971771  3.2715829 
 
-Residual standard error: 12.99924 
+Residual standard error: 11.98955 
 Degrees of freedom: 27 total; 25 residual
 
-Intercept = -0.556
-Slope = 0.563
-P-value (slope) = 1.18332672382817e-06
-R-squared = 0.603
-Variance = 168.98
-BIC = 226.754
+                Value  Std.Error  t-value      p-value
+(Intercept) 9.3080736 2.46469380 3.776564 8.774162e-04
+x           0.4441632 0.04750781 9.349266 1.224630e-09
+
+R-squared = 0.551747986635435
+Variance = 143.749390661946

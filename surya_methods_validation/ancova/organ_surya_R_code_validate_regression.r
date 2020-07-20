@@ -3,13 +3,13 @@
 
 
 # library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggimage)  # v0.2.8
 library(ggplot2)  # v3.3.0
 library(ggthemes)  # v4.2.0
 library(ggtree)  # v1.14.6
-library(nlme)  # v3.1-147
-library(phytools)  # v0.7-20
+library(nlme)  # v3.1.147
+library(phytools)  # v0.7.20
 
 
 # Load and edit data ----
@@ -99,259 +99,281 @@ CairoPDF("organ_surya_figure_validation_tree.pdf", width = 5, height = 5)
 print(plot_tree)
 graphics.off()
 
-# Define correlation matrices ----
-vcv_0 <- corPagel(value = 0.000001, phy = tree, fixed = TRUE)
-vcv_est <- corPagel(value = 0, phy = tree)  # defauult value = 0
-vcv_1 <- corPagel(value = 1, phy = tree, fixed = TRUE)
+# Reorder data frames ----
+dat_edit <- dat_edit[match(tree$tip.label, rownames(dat_edit)), ]
+dat_edit1 <- dat_edit1[match(tree$tip.label, rownames(dat_edit1)), ]
+dat_edit2 <- dat_edit2[match(tree$tip.label, rownames(dat_edit2)), ]
+dat_edit3 <- dat_edit3[match(tree$tip.label, rownames(dat_edit3)), ]
 
-# Fit GLS and PGLS models ----
-pgls1 <- gls(y ~ x, data = dat_edit, correlation = vcv_0)
+# Define variance-covariance matrices ----
+vcv_0 <- diag(nrow = length(tree$tip.label))
+vcv_1 <- vcv(tree)
+## When lambda is unfixed, transform the matrix later after estimating lambda
+
+# Define correlation matrices ----
+cor_0 <- corPagel(value = 0.000001, phy = tree, fixed = TRUE)
+cor_est <- corPagel(value = 1, phy = tree)  # initial value = 1
+cor_1 <- corPagel(value = 1, phy = tree, fixed = TRUE)
+
+# Define variance weights ----
+vf <- diag(vcv(tree))
+
+# Fit OLS and PGLS models ----
+pgls1 <- gls(
+  y ~ x,
+  data = dat_edit,
+  correlation = NULL,
+  weights = NULL,
+  method = "ML"
+)
 sum1 <- summary(pgls1)
-beta0 <- as.numeric(pgls1$coefficients[1])
-beta1 <- as.numeric(pgls1$coefficients[2])
-p_val <- sum1$tTable[8]
-sse <- sum(pgls1$residuals^2)
-sst <- sum((dat_edit$y - mean(dat_edit$y))^2)
+res_raw <- as.numeric(pgls1$residuals)
+res_null <- as.matrix(dat_edit$y - mean(dat_edit$y))
+sse <- as.numeric(t(res_raw) %*% solve(vcv_0) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_0) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum1$sigma^2
-bic <- sum1$BIC
 sink("organ_surya_R_output_validation_regression_1group_lambda0.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls1)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum1$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
-pgls2 <- gls(y ~ x, data = dat_edit, correlation = vcv_est)
+pgls2 <- gls(
+  y ~ x,
+  data = dat_edit,
+  correlation = cor_est,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum2 <- summary(pgls2)
-beta0 <- as.numeric(pgls2$coefficients[1])
-beta1 <- as.numeric(pgls2$coefficients[2])
-p_val <- sum2$tTable[8]
-sse <- sum(pgls2$residuals^2)
-sst <- sum((dat_edit$y - mean(dat_edit$y))^2)
+res_raw <- as.numeric(pgls2$residuals)
+pgls_null <- gls(
+  y ~ 1,
+  data = dat_edit,
+  correlation = cor_est,
+  weights = varFixed(~vf),
+  method = "ML"
+)
+mean_phylo <- as.numeric(pgls_null$coefficients[1])
+res_null <- as.matrix(dat_edit$y - mean_phylo)
+## We cannot specify a variance-covariance matrix with a negative lambda
+vcv_est <- vcv_0
+diag(vcv_est) <- diag(vcv(tree))
+sse <- as.numeric(t(res_raw) %*% solve(vcv_est) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_est) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum2$sigma^2
-bic <- sum2$BIC
 sink("organ_surya_R_output_validation_regression_1group.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls2)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum2$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
-pgls3 <- gls(y ~ x, data = dat_edit, correlation = vcv_1)
+pgls3 <- gls(
+  y ~ x,
+  data = dat_edit,
+  correlation = cor_1,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum3 <- summary(pgls3)
-beta0 <- as.numeric(pgls3$coefficients[1])
-beta1 <- as.numeric(pgls3$coefficients[2])
-p_val <- sum3$tTable[8]
-sse <- sum(pgls3$residuals^2)
-sst <- sum((dat_edit$y - mean(dat_edit$y))^2)
+res_raw <- as.numeric(pgls3$residuals)
+pgls_null <- gls(
+  y ~ 1,
+  data = dat_edit,
+  correlation = cor_1,
+  weights = varFixed(~vf),
+  method = "ML"
+)
+mean_phylo <- as.numeric(pgls_null$coefficients[1])
+res_null <- as.matrix(dat_edit$y - mean_phylo)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_1) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_1) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum3$sigma^2
-bic <- sum3$BIC
 sink("organ_surya_R_output_validation_regression_1group_lambda1.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls3)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum3$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 dat_edit$group <- as.factor(dat_edit$group)
-pgls4 <- gls(y ~ x * group, data = dat_edit, correlation = vcv_0)
+pgls4 <- gls(
+  y ~ x * group,
+  data = dat_edit,
+  correlation = NULL,
+  weights = NULL,
+  method = "ML"
+)
 sum4 <- summary(pgls4)
-beta0 <- as.numeric(pgls4$coefficients[1])
-beta1 <- as.numeric(pgls4$coefficients[2])
-beta2 <- as.numeric(pgls4$coefficients[3])
-beta3 <- as.numeric(pgls4$coefficients[4])
-beta4 <- as.numeric(pgls4$coefficients[5])
-beta5 <- as.numeric(pgls4$coefficients[6])
-p_val <- sum4$tTable[20]
-sse <- sum(pgls4$residuals^2)
-sst <- sum((dat_edit$y - mean(dat_edit$y))^2)
+res_raw <- as.numeric(pgls4$residuals)
+res_null <- as.matrix(dat_edit$y - mean(dat_edit$y))
+sse <- as.numeric(t(res_raw) %*% solve(vcv_0) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_0) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum4$sigma^2
-bic <- sum4$BIC
 sink("organ_surya_R_output_validation_regression_3group_arc_lambda0.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls4)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: archosaur) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum4$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 dat_edit2 <- dat_edit
 dat_edit2$group <- as.factor(dat_edit2$group)
 dat_edit2$group <- relevel(dat_edit2$group, ref = "lepidosaur")
-pgls5 <- gls(y ~ x * group, data = dat_edit2, correlation = vcv_0)
+pgls5 <- gls(
+  y ~ x * group,
+  data = dat_edit2,
+  correlation = NULL,
+  weights = NULL,
+  method = "ML"
+)
 sum5 <- summary(pgls5)
-beta0 <- as.numeric(pgls5$coefficients[1])
-beta1 <- as.numeric(pgls5$coefficients[2])
-beta2 <- as.numeric(pgls5$coefficients[3])
-beta3 <- as.numeric(pgls5$coefficients[4])
-beta4 <- as.numeric(pgls5$coefficients[5])
-beta5 <- as.numeric(pgls5$coefficients[6])
-p_val <- sum5$tTable[20]
-sse <- sum(pgls5$residuals^2)
-sst <- sum((dat_edit2$y - mean(dat_edit2$y))^2)
+res_raw <- as.numeric(pgls5$residuals)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_0) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_0) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum5$sigma^2
-bic <- sum5$BIC
 sink("organ_surya_R_output_validation_regression_3group_lep_lambda0.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls5)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: lepidosaur) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum5$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 dat_edit2$group <- relevel(dat_edit2$group, ref = "mammal")
-pgls6 <- gls(y ~ x * group, data = dat_edit2, correlation = vcv_0)
+pgls6 <- gls(
+  y ~ x * group,
+  data = dat_edit2,
+  correlation = NULL,
+  weights = NULL,
+  method = "ML"
+)
 sum6 <- summary(pgls6)
-beta0 <- as.numeric(pgls6$coefficients[1])
-beta1 <- as.numeric(pgls6$coefficients[2])
-beta2 <- as.numeric(pgls6$coefficients[3])
-beta3 <- as.numeric(pgls6$coefficients[4])
-beta4 <- as.numeric(pgls6$coefficients[5])
-beta5 <- as.numeric(pgls6$coefficients[6])
-p_val <- sum6$tTable[20]
-sse <- sum(pgls6$residuals^2)
-sst <- sum((dat_edit2$y - mean(dat_edit2$y))^2)
+res_raw <- as.numeric(pgls6$residuals)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_0) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_0) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum6$sigma^2
-bic <- sum6$BIC
 sink("organ_surya_R_output_validation_regression_3group_mam_lambda0.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls6)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: mammal) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum6$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
-pgls7 <- gls(y ~ x * group, data = dat_edit, correlation = vcv_1)
+pgls7 <- gls(
+  y ~ x * group,
+  data = dat_edit,
+  correlation = cor_1,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum7 <- summary(pgls7)
-beta0 <- as.numeric(pgls7$coefficients[1])
-beta1 <- as.numeric(pgls7$coefficients[2])
-beta2 <- as.numeric(pgls7$coefficients[3])
-beta3 <- as.numeric(pgls7$coefficients[4])
-beta4 <- as.numeric(pgls7$coefficients[5])
-beta5 <- as.numeric(pgls7$coefficients[6])
-p_val <- sum7$tTable[20]
-sse <- sum(pgls7$residuals^2)
-sst <- sum((dat_edit$y - mean(dat_edit$y))^2)
+res_raw <- as.numeric(pgls7$residuals)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_1) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_1) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum7$sigma^2
-bic <- sum7$BIC
 sink("organ_surya_R_output_validation_regression_3group_arc_lambda1.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls7)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: archosaur) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum7$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 dat_edit2$group <- as.factor(dat_edit2$group)
 dat_edit2$group <- relevel(dat_edit2$group, ref = "lepidosaur")
-pgls8 <- gls(y ~ x * group, data = dat_edit2, correlation = vcv_1)
+pgls8 <- gls(
+  y ~ x * group,
+  data = dat_edit2,
+  correlation = cor_1,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum8 <- summary(pgls8)
-beta0 <- as.numeric(pgls8$coefficients[1])
-beta1 <- as.numeric(pgls8$coefficients[2])
-beta2 <- as.numeric(pgls8$coefficients[3])
-beta3 <- as.numeric(pgls8$coefficients[4])
-beta4 <- as.numeric(pgls8$coefficients[5])
-beta5 <- as.numeric(pgls8$coefficients[6])
-p_val <- sum8$tTable[20]
-sse <- sum(pgls8$residuals^2)
-sst <- sum((dat_edit2$y - mean(dat_edit2$y))^2)
+res_raw <- as.numeric(pgls8$residuals)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_1) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_1) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum8$sigma^2
-bic <- sum8$BIC
 sink("organ_surya_R_output_validation_regression_3group_lep_lambda1.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls8)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: lepidosaur) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum8$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 dat_edit2$group <- as.factor(dat_edit2$group)
 dat_edit2$group <- relevel(dat_edit2$group, ref = "mammal")
-pgls9 <- gls(y ~ x * group, data = dat_edit2, correlation = vcv_1)
+pgls9 <- gls(
+  y ~ x * group,
+  data = dat_edit2,
+  correlation = cor_1,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum9 <- summary(pgls9)
-beta0 <- as.numeric(pgls9$coefficients[1])
-beta1 <- as.numeric(pgls9$coefficients[2])
-beta2 <- as.numeric(pgls9$coefficients[3])
-beta3 <- as.numeric(pgls9$coefficients[4])
-beta4 <- as.numeric(pgls9$coefficients[5])
-beta5 <- as.numeric(pgls9$coefficients[6])
-p_val <- sum9$tTable[20]
-sse <- sum(pgls9$residuals^2)
-sst <- sum((dat_edit2$y - mean(dat_edit2$y))^2)
+res_raw <- as.numeric(pgls9$residuals)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_1) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_1) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum9$sigma^2
-bic <- sum9$BIC
 sink("organ_surya_R_output_validation_regression_3group_mam_lambda1.txt")
 cat("==========\n")
 cat("Regression\n")
 cat("==========\n\n")
 summary(pgls9)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope (ref: mammal) = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), "\n", sep = ""))
-cat(paste("Variance = ", round(sigma2, 3), "\n", sep = ""))
-cat(paste("BIC = ", round(bic, 3), sep = ""))
+sum9$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, "\n", sep = ""))
+cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")
 sink()
 
@@ -379,16 +401,16 @@ plot_pgls1 <-
       aes(color = "R\nPagel's lambda = 1\n"),
       x = min(dat_edit$x),
       xend = max(dat_edit$x),
-      y = -2.643534 + 0.6182929*min(dat_edit$x),
-      yend = -2.643534 + 0.6182929*max(dat_edit$x),
+      y = 0.174215 + 0.5847268*min(dat_edit$x),
+      yend = 0.174215 + 0.5847268*max(dat_edit$x),
       size = 0.5
     ) +
     geom_segment(
       aes(color = "R\nPagel's lambda = 0\n"),
       x = min(dat_edit$x),
       xend = max(dat_edit$x),
-      y = -1.9924498 + 0.5796281*min(dat_edit$x),
-      yend = -1.9924498 + 0.5796281*max(dat_edit$x),
+      y = -1.9924521 + 0.5796281*min(dat_edit$x),
+      yend = -1.9924521 + 0.5796281*max(dat_edit$x),
       size = 0.5
     ) +
     scale_colour_manual(values = c("light blue", "blue", "pink", "red")) +
@@ -414,8 +436,8 @@ plot_pgls3_lambda0 <-
       aes(linetype = "R"),
       x = min(dat_arc$x),
       xend = max(dat_arc$x),
-      y = 1.843236 + 0.481679*min(dat_arc$x),
-      yend = 1.843236 + 0.481679*max(dat_arc$x),
+      y = 1.843233 + 0.4816794*min(dat_arc$x),
+      yend = 1.843233 + 0.4816794*max(dat_arc$x),
       color = "#F8766D",
       size = 1
     ) +
@@ -432,8 +454,8 @@ plot_pgls3_lambda0 <-
       aes(linetype = "R"),
       x = min(dat_lep$x),
       xend = max(dat_lep$x),
-      y = -5.83692 + 0.631059*min(dat_lep$x),
-      yend = -5.83692 + 0.631059*max(dat_lep$x),
+      y = -5.83692536 + 0.63105849*min(dat_lep$x),
+      yend = -5.83692536 + 0.63105849*max(dat_lep$x),
       color = "#00BA38",
       size = 1
     ) +
@@ -450,8 +472,8 @@ plot_pgls3_lambda0 <-
       aes(linetype = "R"),
       x = min(dat_mam$x),
       xend = max(dat_mam$x),
-      y = -1.814409 + 0.616923*min(dat_mam$x),
-      yend = -1.814409 + 0.616923*max(dat_mam$x),
+      y = -1.81440998 + 0.6169228*min(dat_mam$x),
+      yend = -1.81440998 + 0.6169228*max(dat_mam$x),
       color = "#619CFF",
       size = 1
     ) +
@@ -477,8 +499,8 @@ plot_pgls3_lambda1 <-
       aes(linetype = "R"),
       x = min(dat_arc$x),
       xend = max(dat_arc$x),
-      y = 6.93841 + 0.422717*min(dat_arc$x),
-      yend = 6.93841 + 0.422717*max(dat_arc$x),
+      y = 6.5068658 + 0.4221805*min(dat_arc$x),
+      yend = 6.5068658 + 0.4221805*max(dat_arc$x),
       color = "#F8766D",
       size = 1
     ) +
@@ -495,8 +517,8 @@ plot_pgls3_lambda1 <-
       aes(linetype = "R"),
       x = min(dat_lep$x),
       xend = max(dat_lep$x),
-      y = -13.024234 + 0.802878*min(dat_lep$x),
-      yend = -13.024234 + 0.802878*max(dat_lep$x),
+      y = -10.8565532 + 0.7941222*min(dat_lep$x),
+      yend = -10.8565532 + 0.7941222*max(dat_lep$x),
       color = "#00BA38",
       size = 1
     ) +
@@ -513,8 +535,8 @@ plot_pgls3_lambda1 <-
       aes(linetype = "R"),
       x = min(dat_mam$x),
       xend = max(dat_mam$x),
-      y = -1.711673 + 0.599237*min(dat_mam$x),
-      yend = -1.711673 + 0.599237*max(dat_mam$x),
+      y = 0.7099945 + 0.606052*min(dat_mam$x),
+      yend = 0.7099945 + 0.606052*max(dat_mam$x),
       color = "#619CFF",
       size = 1
     ) +
