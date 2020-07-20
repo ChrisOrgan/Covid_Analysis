@@ -3,13 +3,13 @@
 
 
 # library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggimage)  # v0.2.8
 library(ggplot2)  # v3.3.0
 library(ggthemes)  # v4.2.0
 library(ggtree)  # v1.14.6
-library(nlme)  # v3.1-147
-library(phytools)  # v0.7-20
+library(nlme)  # v3.1.147
+library(phytools)  # v0.7.20
 
 
 # Simulate tree ----
@@ -120,12 +120,23 @@ write.table(
 )
 
 # Define correlation matrices ----
-vcv <- corPagel(value = 1, phy = tree)
-vcv_pos <- corPagel(value = 0, phy = tree_pos)  # false convergence (8)
-vcv_neg <- corPagel(value = 1, phy = tree_neg)
+corr <- corPagel(value = 1, phy = tree, fixed = TRUE)
+corr_pos <- corPagel(value = 1, phy = tree_pos, fixed = TRUE)
+corr_neg <- corPagel(value = 1, phy = tree_neg, fixed = TRUE)
+
+# Define variance weights ----
+vf <- diag(vcv)
+vf_pos <- diag(vcv_pos)
+vf_neg <- diag(vcv_neg)
 
 # Detect node-density artifact ----
-pgls <- gls(log(node) ~ log(path), data = dat, correlation = vcv)
+pgls <- gls(
+  log(node) ~ log(path),
+  data = dat,
+  correlation = corr,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 beta <- exp(as.numeric(pgls$coefficients[1]))
 delta <- as.numeric(pgls$coefficients[2])
 sink("surya_R_output_validation_node_density.txt")
@@ -134,14 +145,16 @@ cat("Node-Density Test\n")
 cat("=================\n\n")
 summary(pgls)
 cat("\n")
-cat(paste("Beta = ", round(beta, 3), "\n", sep = ""))
-cat(paste("Delta = ", round(delta, 3), sep = ""))
+cat(paste("Beta = ", beta, "\n", sep = ""))
+cat(paste("Delta = ", delta, sep = ""))
 cat("\n")
 sink()
 pgls_pos <- gls(
   log(node_pos) ~ log(path_pos),
   data = dat_pos,
-  correlation = vcv_pos
+  correlation = corr_pos,
+  weights = varFixed(~vf_pos),
+  method = "ML"
 )
 beta_pos <- exp(as.numeric(pgls_pos$coefficients[1]))
 delta_pos <- as.numeric(pgls_pos$coefficients[2])
@@ -151,14 +164,16 @@ cat("Node-Density Test (Positive Control)\n")
 cat("====================================\n\n")
 summary(pgls_pos)
 cat("\n")
-cat(paste("Beta = ", round(beta_pos, 3), "\n", sep = ""))
-cat(paste("Delta = ", round(delta_pos, 3), sep = ""))
+cat(paste("Beta = ", beta_pos, "\n", sep = ""))
+cat(paste("Delta = ", delta_pos, sep = ""))
 cat("\n")
 sink()
 pgls_neg <- gls(
   log(node_neg) ~ log(path_neg),
   data = dat_neg,
-  correlation = vcv_neg
+  correlation = corr_neg,
+  weights = varFixed(~vf_neg),
+  method = "ML"
 )
 beta_neg <- exp(as.numeric(pgls_neg$coefficients[1]))
 delta_neg <- as.numeric(pgls_neg$coefficients[2])
@@ -168,8 +183,8 @@ cat("Node-Density Test (Negative Control)\n")
 cat("====================================\n\n")
 summary(pgls_neg)
 cat("\n")
-cat(paste("Beta = ", round(beta_neg, 3), "\n", sep = ""))
-cat(paste("Delta = ", round(delta_neg, 3), sep = ""))
+cat(paste("Beta = ", beta_neg, "\n", sep = ""))
+cat(paste("Delta = ", delta_neg, sep = ""))
 cat("\n")
 sink()
 
@@ -232,13 +247,28 @@ print(plot_reg_neg)
 graphics.off()
 
 # Test for punctuation ----
-pgls_pe <- gls(path ~ node, data = dat, correlation = vcv)
+pgls_pe <- gls(
+  path ~ node,
+  data = dat,
+  correlation = corr,
+  weights = varFixed(~vf),
+  method = "ML"
+)
 sum_pe <- summary(pgls_pe)
 beta0 <- as.numeric(pgls_pe$coefficients[1])
 beta1 <- as.numeric(pgls_pe$coefficients[2])
-p_val <- sum_pe$tTable[8]
-sse <- sum(pgls_pe$residuals^2)
-sst <- sum((dat$path - mean(dat$path))^2)
+res_raw <- as.numeric(pgls_pe$residuals)
+pgls_null <- gls(
+  path ~ 1,
+  data = dat,
+  correlation = corr,
+  weights = varFixed(~vf),
+  method = "ML"
+)
+mean_phylo <- as.numeric(pgls_null$coefficients[1])
+res_null <- as.matrix(dat$path - mean_phylo)
+sse <- as.numeric(t(res_raw) %*% solve(vcv) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv) %*% res_null)
 r2 <- 1 - sse/sst
 sink("surya_R_output_validation_punctuation.txt")
 cat("================\n")
@@ -246,50 +276,77 @@ cat("Punctuation Test\n")
 cat("================\n\n")
 summary(pgls_pe)
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2, 3), sep = ""))
+sum_pe$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, sep = ""))
 cat("\n")
 sink()
-pgls_pe_pos <- gls(path_pos ~ node_pos, data = dat_pos, correlation = vcv_pos)
-sum_pe_pos <- summary(pgls_pe_pos)
-beta0_pos <- as.numeric(pgls_pe_pos$coefficients[1])
-beta1_pos <- as.numeric(pgls_pe_pos$coefficients[2])
-p_val_pos <- sum_pe_pos$tTable[8]
-sse_pos <- sum(pgls_pe_pos$residuals^2)
-sst_pos <- sum((dat_pos$path_pos - mean(dat_pos$path_pos))^2)
-r2_pos <- 1 - sse_pos/sst_pos
+pgls_pos <- gls(
+  path_pos ~ node_pos,
+  data = dat_pos,
+  correlation = corr_pos,
+  weights = varFixed(~vf_pos),
+  method = "ML"
+)
+sum_pos <- summary(pgls_pos)
+beta0_pos <- as.numeric(pgls_pos$coefficients[1])
+beta1_pos <- as.numeric(pgls_pos$coefficients[2])
+res_raw <- as.numeric(pgls_pos$residuals)
+pgls_null <- gls(
+  path_pos ~ 1,
+  data = dat_pos,
+  correlation = corr_pos,
+  weights = varFixed(~vf_pos),
+  method = "ML"
+)
+mean_phylo <- as.numeric(pgls_null$coefficients[1])
+res_null <- as.matrix(dat_pos$path - mean_phylo)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_pos) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_pos) %*% res_null)
+r2 <- 1 - sse/sst
 sink("surya_R_output_validation_punctuation_positive.txt")
 cat("===================================\n")
 cat("Punctuation Test (Positive Control)\n")
 cat("===================================\n\n")
-summary(pgls_pe_pos)
+summary(pgls_pos)
 cat("\n")
-cat(paste("Intercept = ", round(beta0_pos, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1_pos, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val_pos, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2_pos, 3), sep = ""))
+sum_pos$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, sep = ""))
 cat("\n")
 sink()
-pgls_pe_neg <- gls(path_neg ~ node_neg, data = dat_neg, correlation = vcv_neg)
-sum_pe_neg <- summary(pgls_pe_neg)
-beta0_neg <- as.numeric(pgls_pe_neg$coefficients[1])
-beta1_neg <- as.numeric(pgls_pe_neg$coefficients[2])
-p_val_neg <- sum_pe_neg$tTable[8]
-sse_neg <- sum(pgls_pe_neg$residuals^2)
-sst_neg <- sum((dat_neg$path_neg - mean(dat_neg$path_neg))^2)
-r2_neg <- 1 - sse_neg/sst_neg
+pgls_neg <- gls(
+  path_neg ~ node_neg,
+  data = dat_neg,
+  correlation = corr_neg,
+  weights = varFixed(~vf_neg),
+  method = "ML"
+)
+sum_neg <- summary(pgls_neg)
+beta0_neg <- as.numeric(pgls_neg$coefficients[1])
+beta1_neg <- as.numeric(pgls_neg$coefficients[2])
+res_raw <- as.numeric(pgls_neg$residuals)
+pgls_null <- gls(
+  path_neg ~ 1,
+  data = dat_neg,
+  correlation = corr_neg,
+  weights = varFixed(~vf_neg),
+  method = "ML"
+)
+mean_phylo <- as.numeric(pgls_null$coefficients[1])
+res_null <- as.matrix(dat_neg$path - mean_phylo)
+sse <- as.numeric(t(res_raw) %*% solve(vcv_neg) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv_neg) %*% res_null)
+r2 <- 1 - sse/sst
 sink("surya_R_output_validation_punctuation_negative.txt")
 cat("===================================\n")
 cat("Punctuation Test (Negative Control)\n")
 cat("===================================\n\n")
-summary(pgls_pe_neg)
+summary(pgls_neg)
 cat("\n")
-cat(paste("Intercept = ", round(beta0_neg, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1_neg, 3), "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val_neg, "\n", sep = ""))
-cat(paste("R-squared = ", round(r2_neg, 3), sep = ""))
+sum_neg$tTable
+cat("\n")
+cat(paste("R-squared = ", r2, sep = ""))
 cat("\n")
 sink()
 

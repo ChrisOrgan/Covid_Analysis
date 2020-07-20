@@ -2,35 +2,39 @@
 Punctuation Test (Positive Control)
 ===================================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: path_pos ~ node_pos 
   Data: dat_pos 
-        AIC       BIC   logLik
-  -1076.367 -1066.027 542.1835
+       AIC       BIC   logLik
+  -1111.51 -1103.695 558.7552
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
-   lambda 
-0.9809604 
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~vf_pos 
 
 Coefficients:
                 Value    Std.Error   t-value p-value
-(Intercept) 0.9991282 0.0009058719  1102.947       0
-node_pos    1.0000728 0.0000846583 11813.049       0
+(Intercept) 0.9991608 0.0006684004  1494.854       0
+node_pos    1.0000638 0.0000939041 10649.839       0
 
  Correlation: 
          (Intr)
-node_pos -0.7  
+node_pos -0.546
 
 Standardized residuals:
-        Min          Q1         Med          Q3         Max 
--1.88483265 -0.51987497  0.09466191  0.59233573  1.49527351 
+       Min         Q1        Med         Q3        Max 
+-1.7758808 -0.5069877  0.1153862  0.6443701  1.7581828 
 
-Residual standard error: 0.001625967 
+Residual standard error: 0.0005673173 
 Degrees of freedom: 100 total; 98 residual
 
-Intercept = 0.999
-Slope = 1
-P-value (slope) = 2.41993954570666e-303
-R-squared = 1
+                Value    Std.Error   t-value       p-value
+(Intercept) 0.9991608 6.684004e-04  1494.854 2.310464e-215
+node_pos    1.0000638 9.390412e-05 10649.839 6.246832e-299
+
+R-squared = 0.999999135948553

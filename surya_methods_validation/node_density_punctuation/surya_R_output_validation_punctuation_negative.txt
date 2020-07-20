@@ -2,35 +2,39 @@
 Punctuation Test (Negative Control)
 ===================================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: path_neg ~ node_neg 
   Data: dat_neg 
-        AIC       BIC   logLik
-  -587.8416 -577.5017 297.9208
+        AIC       BIC  logLik
+  -609.9919 -602.1764 307.996
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
-  lambda 
-1.041286 
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~vf_neg 
 
 Coefficients:
                 Value   Std.Error   t-value p-value
-(Intercept) 14.002385 0.006395870 2189.2854  0.0000
-node_neg    -0.000825 0.000909868   -0.9072  0.3665
+(Intercept) 14.002481 0.006222493 2250.3007  0.0000
+node_neg    -0.000851 0.000889955   -0.9566  0.3411
 
  Correlation: 
          (Intr)
-node_neg -0.701
+node_neg -0.709
 
 Standardized residuals:
        Min         Q1        Med         Q3        Max 
--3.0663448 -1.4033408 -0.4137269  0.5147025  2.1948864 
+-3.1675290 -1.4466209 -0.4223904  0.5392283  2.2726874 
 
-Residual standard error: 0.01506307 
+Residual standard error: 0.003890694 
 Degrees of freedom: 100 total; 98 residual
 
-Intercept = 14.002
-Slope = -0.001
-P-value (slope) = 0.366506765749723
-R-squared = 0.023
+                    Value    Std.Error     t-value       p-value
+(Intercept) 14.0024807331 0.0062224932 2250.300690 9.022251e-233
+node_neg    -0.0008512992 0.0008899553   -0.956564  3.411412e-01
+
+R-squared = 0.00925051330561422

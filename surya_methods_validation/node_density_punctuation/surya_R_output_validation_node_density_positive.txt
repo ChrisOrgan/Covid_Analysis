@@ -2,33 +2,36 @@
 Node-Density Test (Positive Control)
 ====================================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: log(node_pos) ~ log(path_pos) 
   Data: dat_pos 
-        AIC       BIC   logLik
-  -733.7806 -723.4407 370.8903
+        AIC      BIC   logLik
+  -678.7566 -670.941 342.3783
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
-  lambda 
-1.076961 
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~vf_pos 
 
 Coefficients:
                    Value   Std.Error   t-value p-value
-(Intercept)   -0.4986767 0.013168077 -37.87012       0
-log(path_pos)  1.1658279 0.005634645 206.90350       0
+(Intercept)   -0.5418317 0.010519225 -51.50871       0
+log(path_pos)  1.1904870 0.005997304 198.50370       0
 
  Correlation: 
               (Intr)
-log(path_pos) -0.899
+log(path_pos) -0.886
 
 Standardized residuals:
-        Min          Q1         Med          Q3         Max 
--1.35602691 -0.02318773  0.65295600  1.37902750  1.57136451 
+       Min         Q1        Med         Q3        Max 
+-1.9013565 -0.9985251  0.3593424  1.1050359  1.5281779 
 
-Residual standard error: 0.01408533 
+Residual standard error: 0.004937862 
 Degrees of freedom: 100 total; 98 residual
 
-Beta = 0.607
-Delta = 1.166
+Beta = 0.581681803453308
+Delta = 1.19048701083497
