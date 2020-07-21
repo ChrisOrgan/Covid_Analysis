@@ -1,0 +1,31 @@
+=================
+Node-Density Test
+=================
+
+
+Call:
+pgls(formula = log(node) ~ log(path), data = dat_c)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.32835 -0.06814 -0.00491  0.05325  0.33737 
+
+Branch length transformations:
+
+kappa  [Fix]  : 1.000
+lambda [Fix]  : 1.000
+delta  [Fix]  : 1.000
+
+Coefficients:
+            Estimate Std. Error t value  Pr(>|t|)    
+(Intercept)  0.99084    0.07467 13.2695 < 2.2e-16 ***
+log(path)    0.57009    0.05883  9.6904 4.441e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1199 on 98 degrees of freedom
+Multiple R-squared: 0.4893,	Adjusted R-squared: 0.4841 
+F-statistic:  93.9 on 1 and 98 DF,  p-value: 5.688e-16 
+
+Beta = 2.69348233444408
+Delta = 0.570088154934298

@@ -4,6 +4,7 @@
 
 # library(ape)  # v5.3
 library(Cairo)  # v1.5.12
+library(caper)  # v1.0.1
 library(ggimage)  # v0.2.8
 library(ggplot2)  # v3.3.0
 library(ggthemes)  # v4.2.0
@@ -185,6 +186,188 @@ summary(pgls_neg)
 cat("\n")
 cat(paste("Beta = ", beta_neg, "\n", sep = ""))
 cat(paste("Delta = ", delta_neg, sep = ""))
+cat("\n")
+sink()
+
+# Detect node-density artifact (REML) ----
+pgls <- gls(
+  log(node) ~ log(path),
+  data = dat,
+  correlation = corr,
+  weights = varFixed(~vf),
+  method = "REML"
+)
+beta_reml <- exp(as.numeric(pgls$coefficients[1]))
+delta_reml <- as.numeric(pgls$coefficients[2])
+sink("surya_R_output_validation_node_density_reml.txt")
+cat("=================\n")
+cat("Node-Density Test\n")
+cat("=================\n\n")
+summary(pgls)
+cat("\n")
+cat(paste("Beta = ", beta_reml, "\n", sep = ""))
+cat(paste("Delta = ", delta_reml, sep = ""))
+cat("\n")
+sink()
+pgls_pos <- gls(
+  log(node_pos) ~ log(path_pos),
+  data = dat_pos,
+  correlation = corr_pos,
+  weights = varFixed(~vf_pos),
+  method = "REML"
+)
+beta_pos_reml <- exp(as.numeric(pgls_pos$coefficients[1]))
+delta_pos_reml <- as.numeric(pgls_pos$coefficients[2])
+sink("surya_R_output_validation_node_density_positive_reml.txt")
+cat("====================================\n")
+cat("Node-Density Test (Positive Control)\n")
+cat("====================================\n\n")
+summary(pgls_pos)
+cat("\n")
+cat(paste("Beta = ", beta_pos_reml, "\n", sep = ""))
+cat(paste("Delta = ", delta_pos_reml, sep = ""))
+cat("\n")
+sink()
+pgls_neg <- gls(
+  log(node_neg) ~ log(path_neg),
+  data = dat_neg,
+  correlation = corr_neg,
+  weights = varFixed(~vf_neg),
+  method = "REML"
+)
+beta_neg_reml <- exp(as.numeric(pgls_neg$coefficients[1]))
+delta_neg_reml <- as.numeric(pgls_neg$coefficients[2])
+sink("surya_R_output_validation_node_density_negative_reml.txt")
+cat("====================================\n")
+cat("Node-Density Test (Negative Control)\n")
+cat("====================================\n\n")
+summary(pgls_neg)
+cat("\n")
+cat(paste("Beta = ", beta_neg_reml, "\n", sep = ""))
+cat(paste("Delta = ", delta_neg_reml, sep = ""))
+cat("\n")
+sink()
+
+# Detect node-density artifact (node + 1) ----
+dat_1 <- dat
+dat_1_pos <- dat_pos
+dat_1_neg <- dat_neg
+dat_1$node <- dat_1$node + 1
+dat_1_pos$node <- dat_1_pos$node + 1
+dat_1_neg$node <- dat_1_neg$node + 1
+pgls <- gls(
+  log(node) ~ log(path),
+  data = dat_1,
+  correlation = corr,
+  weights = varFixed(~vf),
+  method = "ML"
+)
+beta_1 <- exp(as.numeric(pgls$coefficients[1]))
+delta_1 <- as.numeric(pgls$coefficients[2])
+sink("surya_R_output_validation_node_density_plus1.txt")
+cat("=================\n")
+cat("Node-Density Test\n")
+cat("=================\n\n")
+summary(pgls)
+cat("\n")
+cat(paste("Beta = ", beta_1, "\n", sep = ""))
+cat(paste("Delta = ", delta_1, sep = ""))
+cat("\n")
+sink()
+pgls_pos <- gls(
+  log(node_pos) ~ log(path_pos),
+  data = dat_1_pos,
+  correlation = corr_pos,
+  weights = varFixed(~vf_pos),
+  method = "ML"
+)
+beta_1_pos <- exp(as.numeric(pgls_pos$coefficients[1]))
+delta_1_pos <- as.numeric(pgls_pos$coefficients[2])
+sink("surya_R_output_validation_node_density_positive_plus1.txt")
+cat("====================================\n")
+cat("Node-Density Test (Positive Control)\n")
+cat("====================================\n\n")
+summary(pgls_pos)
+cat("\n")
+cat(paste("Beta = ", beta_1_pos, "\n", sep = ""))
+cat(paste("Delta = ", delta_1_pos, sep = ""))
+cat("\n")
+sink()
+pgls_neg <- gls(
+  log(node_neg) ~ log(path_neg),
+  data = dat_1_neg,
+  correlation = corr_neg,
+  weights = varFixed(~vf_neg),
+  method = "ML"
+)
+beta_1_neg <- exp(as.numeric(pgls_neg$coefficients[1]))
+delta_1_neg <- as.numeric(pgls_neg$coefficients[2])
+sink("surya_R_output_validation_node_density_negative_plus1.txt")
+cat("====================================\n")
+cat("Node-Density Test (Negative Control)\n")
+cat("====================================\n\n")
+summary(pgls_neg)
+cat("\n")
+cat(paste("Beta = ", beta_1_neg, "\n", sep = ""))
+cat(paste("Delta = ", delta_1_neg, sep = ""))
+cat("\n")
+sink()
+
+# Detect node-density artifact (caper) ----
+dat$species <- rownames(dat)
+dat_pos$species <- rownames(dat_pos)
+dat_neg$species <- rownames(dat_neg)
+dat_c <- comparative.data(phy = tree, data = dat, names.col = "species")
+dat_c_pos <- comparative.data(
+  phy = tree_pos,
+  data = dat_pos,
+  names.col = "species"
+)
+dat_c_neg <- comparative.data(
+  phy = tree_neg,
+  data = dat_neg,
+  names.col = "species"
+)
+pgls <- pgls(log(node) ~ log(path), data = dat_c)
+sum_pgls <- summary(pgls)
+beta_c <- exp(sum_pgls$coefficients[1])
+delta_c <- sum_pgls$coefficients[2]
+sink("surya_R_output_validation_node_density_caper.txt")
+cat("=================\n")
+cat("Node-Density Test\n")
+cat("=================\n\n")
+sum_pgls
+cat("\n")
+cat(paste("Beta = ", beta_c, "\n", sep = ""))
+cat(paste("Delta = ", delta_c, sep = ""))
+cat("\n")
+sink()
+pgls_pos <- pgls(log(node_pos) ~ log(path_pos), data = dat_c_pos)
+sum_pgls <- summary(pgls_pos)
+beta_c_pos <- exp(sum_pgls$coefficients[1])
+delta_c_pos <- sum_pgls$coefficients[2]
+sink("surya_R_output_validation_node_density_positive_caper.txt")
+cat("====================================\n")
+cat("Node-Density Test (Positive Control)\n")
+cat("====================================\n\n")
+sum_pgls
+cat("\n")
+cat(paste("Beta = ", beta_c_pos, "\n", sep = ""))
+cat(paste("Delta = ", delta_c_pos, sep = ""))
+cat("\n")
+sink()
+pgls_neg <- pgls(log(node_neg) ~ log(path_neg), data = dat_c_neg)
+sum_pgls <- summary(pgls_neg)
+beta_c_neg <- exp(sum_pgls$coefficients[1])
+delta_c_neg <- sum_pgls$coefficients[2]
+sink("surya_R_output_validation_node_density_negative_caper.txt")
+cat("====================================\n")
+cat("Node-Density Test (Negative Control)\n")
+cat("====================================\n\n")
+sum_pgls
+cat("\n")
+cat(paste("Beta = ", beta_c_neg, "\n", sep = ""))
+cat(paste("Delta = ", delta_c_neg, sep = ""))
 cat("\n")
 sink()
 
