@@ -3,10 +3,10 @@
 
 
 # library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggimage)  # v0.2.8
 library(ggtree)  # v1.14.6
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 library(svglite)  # v1.2.3
 
 
@@ -26,7 +26,7 @@ con_oceania <- as.character(dat$V1[dat$continent == "Oceania"])
 con_namerica <- as.character(dat$V1[dat$continent == "North America"])
 con_euro <- as.character(dat$V1[dat$continent == "Europe"])
 con_asia <- as.character(dat$V1[dat$continent == "Asia"])
-continents <- list(con_samerica, con_africa, con_oceania, con_namerica,
+continents <- list(con_samerica, con_africa, con_oceania, con_namerica, 
                    con_euro, con_asia)
 names(continents) <- c("South America", "Africa", "Oceania", "North America",
                        "Europe", "Asia")

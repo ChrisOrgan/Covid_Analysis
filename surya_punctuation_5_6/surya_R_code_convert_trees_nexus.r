@@ -2,7 +2,7 @@
 # This code is part of the coronavirus-macroevolution project.
 
 
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 
 
 # Read trees ----

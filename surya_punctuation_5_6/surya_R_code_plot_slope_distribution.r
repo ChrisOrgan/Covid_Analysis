@@ -22,7 +22,7 @@ plot_dist <-
       x = 0,
       xend = 0,
       y = 0,
-      yend = 500000000000,
+      yend = 440000000000,
       linetype = "dashed",
       color = "gray40",
       size = 0.5

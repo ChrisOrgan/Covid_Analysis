@@ -3,17 +3,17 @@
 
 
 # library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggimage)  # v0.2.8
 library(ggtree)  # v1.14.6
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 library(svglite)  # v1.2.3
 
 
 # Read trees ----
 tree_mol <- read.nexus(file = "nextstrain_ncov_global_tree_v4.nex")
 tree_time <- read.nexus(file = "nextstrain_ncov_global_timetree_v4.nex")
-tree_rate <- read.nexus(file = "surya_tree_rate_v2.nex")
+## tree_rate <- read.nexus(file = "surya_tree_rate_v2.nex")
 
 # Load and prepare data ----
 dat <- read.table("surya_BayesTraits_data_path_lengths_nodes.txt", sep = "\t")
@@ -60,25 +60,25 @@ dat_samerica$continent <- factor(
   levels = c("Africa", "Asia", "Europe", "Oceania", "North America",
              "South America")
 )
-dat_rate <- read.table(
-  "surya_BayesTraits_data_rate_path_lengths_nodes.txt",
-  sep = "\t"
-)
-meta_rate <- meta
-drop_list <- c("Iceland/104/2020", "England/20134078904/2020",
-               "Wales/PHWC-2559D/2020", "Scotland/EDB119/2020",
-               "Scotland/EDB120/2020", "Scotland/EDB099/2020",
-               "Scotland/EDB098/2020")
-meta_rate <- meta_rate[!meta_rate$Strain %in% drop_list, ]
-meta_rate <- meta_rate[match(dat_rate$V1, meta_rate$Strain), ]
-dat_rate$continent <- meta_rate$Region
+## dat_rate <- read.table(
+##   "surya_BayesTraits_data_rate_path_lengths_nodes.txt",
+##   sep = "\t"
+## )
+## meta_rate <- meta
+## drop_list <- c("Iceland/104/2020", "England/20134078904/2020",
+##                "Wales/PHWC-2559D/2020", "Scotland/EDB119/2020",
+##                "Scotland/EDB120/2020", "Scotland/EDB099/2020",
+##                "Scotland/EDB098/2020")
+## meta_rate <- meta_rate[!meta_rate$Strain %in% drop_list, ]
+## meta_rate <- meta_rate[match(dat_rate$V1, meta_rate$Strain), ]
+## dat_rate$continent <- meta_rate$Region
 
 # Plot trees ----
-plot_tree_mol <-
-  ggtree(tree_mol, color = "gray") %<+% dat +
-    geom_tippoint(aes(color = continent), size = 0.2) +
-    theme_tree2(legend = "right", legend.title = element_blank()) +
-    labs(caption = "mutations")
+## plot_tree_mol <-
+##   ggtree(tree_mol, color = "gray") %<+% dat +
+##     geom_tippoint(aes(color = continent), size = 0.2) +
+##     theme_tree2(legend = "right", legend.title = element_blank()) +
+##     labs(caption = "mutations")
 plot_tree_mol_africa <-
   ggtree(tree_mol) %<+% dat_africa +
     geom_tippoint(aes(color = continent), size = 0.1) +
@@ -120,19 +120,19 @@ plot_tree_time <-
     geom_tippoint(aes(color = continent), size = 0.1) +
     theme_tree2(legend = "right", legend.title = element_blank()) +
     labs(caption = "year")
-plot_tree_rate <-
-  ggtree(tree_rate) %<+% dat_rate +
-    geom_tippoint(aes(color = continent), size = 0.1) +
-    theme_tree2(legend = "right", legend.title = element_blank()) +
-    labs(caption = "mutations/year")
+## plot_tree_rate <-
+##   ggtree(tree_rate) %<+% dat_rate +
+##     geom_tippoint(aes(color = continent), size = 0.1) +
+##     theme_tree2(legend = "right", legend.title = element_blank()) +
+##     labs(caption = "mutations/year")
 
 # Save tree plots ----
-CairoPDF("surya_figure_tree_molecular.pdf", width = 6.535, height = 7.21)
-print(plot_tree_mol)
-graphics.off()
-CairoSVG("surya_figure_tree_molecular.svg", width = 6.535, height = 7.21)
-print(plot_tree_mol)
-graphics.off()
+## CairoPDF("surya_figure_tree_molecular.pdf", width = 6.535, height = 7.21)
+## print(plot_tree_mol)
+## graphics.off()
+## CairoSVG("surya_figure_tree_molecular.svg", width = 6.535, height = 7.21)
+## print(plot_tree_mol)
+## graphics.off()
 CairoPDF("surya_figure_tree_molecular_region_africa.pdf", width = 4, height = 6)
 print(plot_tree_mol_africa)
 graphics.off()
@@ -183,9 +183,9 @@ graphics.off()
 CairoSVG("surya_figure_tree_time.svg", width = 4, height = 6)
 print(plot_tree_time)
 graphics.off()
-CairoPDF("surya_figure_tree_rate.pdf", width = 4, height = 6)
-print(plot_tree_rate)
-graphics.off()
-CairoSVG("surya_figure_tree_rate.svg", width = 4, height = 6)
-print(plot_tree_rate)
-graphics.off()
+## CairoPDF("surya_figure_tree_rate.pdf", width = 4, height = 6)
+## print(plot_tree_rate)
+## graphics.off()
+## CairoSVG("surya_figure_tree_rate.svg", width = 4, height = 6)
+## print(plot_tree_rate)
+## graphics.off()

@@ -3,8 +3,8 @@
 
 
 # library(ape)  # v5.3
-library(phytools)  # v0.7-20
-library(nlme)  # v3.1-147
+library(phytools)  # v0.7.20
+library(nlme)  # v3.1.147
 
 
 # Read tree ----
@@ -23,14 +23,32 @@ for (subs in 1:1000) {
   tree_edit <- keep.tip(phy = tree, tip = subsample)
   dat_edit <- dat[dat$genome %in% subsample, ]
   dat_edit <- dat_edit[, -1]
-  vcv <- corPagel(value = 1, phy = tree_edit, fixed = TRUE)
-  pgls <- gls(path ~ node, data = dat_edit, correlation = vcv)
+  vcv <- vcv(tree_edit)
+  corr <- corPagel(value = 1, phy = tree_edit, fixed = TRUE)
+  vf <- diag(vcv)
+  pgls_int <- gls(
+    path ~ 1,
+    data = dat_edit,
+    correlation = corr,
+    weights = varFixed(~vf),
+    method = "ML"
+  )
+  mean_phylo <- as.numeric(pgls_int$coefficients[1])
+  pgls <- gls(
+    path ~ node,
+    data = dat_edit,
+    correlation = corr,
+    weights = varFixed(~vf),
+    method = "ML"
+  )
   summ <- summary(pgls)
   beta0 <- as.numeric(pgls$coefficients[1])
   beta1 <- as.numeric(pgls$coefficients[2])
   sig2 <- summ$sigma^2
-  sse <- sum(pgls$residuals^2)
-  sst <- sum((dat_edit$path - mean(dat_edit$path))^2)
+  res_raw <- as.numeric(pgls$residuals)
+  res_null <- as.matrix(dat_edit$path - mean_phylo)
+  sse <- as.numeric(t(res_raw) %*% solve(vcv, tol = 2e-18) %*% res_raw)
+  sst <- as.numeric(t(res_null) %*% solve(vcv, tol = 2e-18) %*% res_null)
   r2 <- 1 - sse/sst
   se_b0 <- summ$tTable[3]
   se_b1 <- summ$tTable[4]
