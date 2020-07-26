@@ -36,7 +36,7 @@ dat_caper <- comparative.data(
 ## dat_rate <- dat_rate[, -1]
 ## dat_rate$node <- dat_rate$node + 1
 
-# Define variance-covariance matrices ----
+# Define correlation matrix ----
 corr <- corPagel(value = 1, phy = tree, fixed = TRUE)
 ## vcv_rate <- corPagel(value = 1, phy = tree_rate)  # infinite beta*
 
