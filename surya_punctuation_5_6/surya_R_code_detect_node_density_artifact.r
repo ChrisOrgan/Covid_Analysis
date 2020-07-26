@@ -62,6 +62,7 @@ cat("\n")
 cat(paste("Delta = ", delta, sep = ""))
 cat("\n")
 sink()
+## Try REML
 pgls_reml <- gls(
   log(node) ~ log(path),
   data = dat,
@@ -69,7 +70,6 @@ pgls_reml <- gls(
   weights = varFixed(~vf),
   method = "REML"
 )
-## Try REML
 beta_reml <- exp(as.numeric(pgls_reml$coefficients[1]))
 delta_reml <- as.numeric(pgls_reml$coefficients[2])
 sink("surya_R_output_node_density_artifact_reml.txt")
