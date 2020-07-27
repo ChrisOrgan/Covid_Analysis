@@ -3,11 +3,9 @@
 
 
 # library(ape)  # v5.3
-library(phytools)  # v0.7-20
-library(nlme)  # v3.1-147
+library(phytools)  # v0.7.20
+library(nlme)  # v3.1.147
 
-
-memory.limit(size = 1000000)
 
 # Read tree ----
 tree <- read.nexus(file = "tanner_tree.nex")
@@ -19,23 +17,58 @@ rownames(dat) <- dat$genome
 dat_out <- read.table("surya_R_output_outliers.txt")
 colnames(dat_out) <- c("outlier")
 dat_edit <- dat[!dat$genome %in% as.character(dat_out$outlier), ]
-dat_edit <- dat_edit[, -1]
 
 # Remove outliers from tree ----
 tree_edit <- drop.tip(phy = tree, tip = as.character(dat_out$outlier))
 
+# Re-order data ----
+dat_edit <- dat_edit[match(tree_edit$tip.label, dat_edit$genome), ]
+
+# Define variance-covariance matrix ----
+vcv <- vcv(phy = tree_edit)
+
 # Define correlation matrix ----
-vcv_lambda1 <- corPagel(value = 1, phy = tree_edit, fixed = TRUE)
+corr <- corPagel(value = 1, phy = tree_edit, fixed = TRUE)
+
+# Define variance weights ----
+w <- diag(vcv)
+
+# Fit intercept-only model ----
+pgls_int <- gls(
+  path ~ 1,
+  data = dat_edit,
+  correlation = corr,
+  weights = varFixed(~w),
+  method = "ML"
+)
+sum_int <- summary(pgls_int)
+mean_phylo <- as.numeric(pgls_int$coefficients[1])
+sigma2 <- sum_int$sigma^2
+sink("surya_R_output_regression_punctuation_intercept_lambda1_no_outliers.txt")
+cat("=================================\n")
+cat("Punctuation Test (Intercept-Only)\n")
+cat("=================================\n\n")
+summary(pgls_int)
+cat("\n")
+sum_int$tTable
+cat("\n")
+cat(paste("Variance = ", sigma2, sep = ""))
+cat("\n")
+sink()
 
 # Test for punctuation ----
-pgls_pe <- gls(path ~ node, data = dat_edit, correlation = vcv_lambda1)
+pgls_pe <- gls(
+  path ~ node,
+  data = dat_edit,
+  correlation = corr,
+  weights = varFixed(~w),
+  method = "ML"
+)
 sum_pe <- summary(pgls_pe)
-beta0 <- as.numeric(pgls_pe$coefficients[1])
-beta1 <- as.numeric(pgls_pe$coefficients[2])
-se_beta1 <- sum_pe$tTable[4]
-p_val <- sum_pe$tTable[8]
-sse <- sum(pgls_pe$residuals^2)
-sst <- sum((dat_edit$path - mean(dat_edit$path))^2)
+res_raw <- as.numeric(pgls_pe$residuals)
+res_null <- as.matrix(dat_edit$path - mean_phylo)
+sse <- as.numeric(t(res_raw) %*% solve(vcv, tol = 2e-18) %*% res_raw)
+sst <- as.numeric(t(res_null) %*% solve(vcv, tol = 2e-18) %*% res_null)
 r2 <- 1 - sse/sst
 sigma2 <- sum_pe$sigma^2
 sink("surya_R_output_regression_punctuation_lambda1_no_outliers.txt")
@@ -46,10 +79,6 @@ summary(pgls_pe)
 cat("\n")
 sum_pe$tTable
 cat("\n")
-cat(paste("Intercept = ", round(beta0, 3), "\n", sep = ""))
-cat(paste("Slope = ", round(beta1, 3), "\n", sep = ""))
-cat(paste("SE (slope) = ", se_beta1, "\n", sep = ""))
-cat(paste("P-value (slope) = ", p_val, "\n", sep = ""))
 cat(paste("R-squared = ", r2, "\n", sep = ""))
 cat(paste("Variance = ", sigma2, sep = ""))
 cat("\n")

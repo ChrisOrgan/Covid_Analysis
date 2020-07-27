@@ -2,43 +2,46 @@
 Punctuation Test
 ================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: path ~ node * pop_size 
   Data: dat 
-        AIC       BIC   logLik
-  -294150.8 -294112.7 147080.4
+        AIC     BIC   logLik
+  -277595.1 -277557 138802.6
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
 lambda 
      1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
 
 Coefficients:
                      Value    Std.Error   t-value p-value
-(Intercept)   0.0004648931 4.258724e-06 109.16254   0e+00
-node          0.0000032016 1.901500e-08 168.36876   0e+00
-pop_size      0.0000000000 0.000000e+00  -3.92022   1e-04
-node:pop_size 0.0000000000 0.000000e+00   4.30689   0e+00
+(Intercept)   7.813793e-07 4.193169e-06  0.186346  0.8522
+node          2.332596e-06 7.766700e-08 30.033190  0.0000
+pop_size      0.000000e+00 0.000000e+00  2.202745  0.0276
+node:pop_size 0.000000e+00 0.000000e+00 -1.527926  0.1266
 
  Correlation: 
               (Intr) node   pop_sz
-node          -0.650              
-pop_size      -0.107  0.056       
-node:pop_size  0.084 -0.042 -0.855
+node          -0.036              
+pop_size      -0.263  0.014       
+node:pop_size  0.197  0.000 -0.754
 
 Standardized residuals:
-       Min         Q1        Med         Q3        Max 
--27.151741 -15.469143  -9.406159  -7.404157  32.450939 
+        Min          Q1         Med          Q3         Max 
+-4.20510980 -1.59509537 -0.01803133  0.85720184  8.73695172 
 
-Residual standard error: 6.247913e-05 
+Residual standard error: 0.005384648 
 Degrees of freedom: 15028 total; 15024 residual
 
-                      Value    Std.Error    t-value      p-value
-(Intercept)    4.648931e-04 4.258724e-06 109.162544 0.000000e+00
-node           3.201553e-06 1.901512e-08 168.368764 0.000000e+00
-pop_size      -8.059717e-16 2.055932e-16  -3.920225 8.885897e-05
-node:pop_size  2.531615e-18 5.878057e-19   4.306891 1.666157e-05
+                      Value    Std.Error    t-value       p-value
+(Intercept)    7.813793e-07 4.193169e-06  0.1863458  8.521761e-01
+node           2.332596e-06 7.766728e-08 30.0331898 1.681409e-192
+pop_size       5.887286e-16 2.672704e-16  2.2027450  2.762786e-02
+node:pop_size -1.570107e-18 1.027607e-18 -1.5279258  1.265520e-01
 
-R-squared = -11.83
-Variance = 0
+R-squared = 0.0568273130385926
+Variance = 2.89944300203219e-05

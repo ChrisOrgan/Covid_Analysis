@@ -22,12 +22,12 @@ plot_dist <-
       x = 0,
       xend = 0,
       y = 0,
-      yend = 6000000,
+      yend = 6750000,
       linetype = "dashed",
       color = "gray40",
       size = 0.5
     ) +
-    annotate("text", x = 0, y = 6000000, label = "") +
+    annotate("text", x = 0, y = 6750000, label = "") +
     geom_density(color = "black") +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nSlope", y = NULL)

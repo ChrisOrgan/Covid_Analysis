@@ -13,8 +13,8 @@ dna <- read.FASTA(
 # Edit sequence names ----
 dna_edit <- dna
 names(dna_edit) <- gsub("/", "_", names(dna_edit))
-# names(dna_edit) <- gsub("\", "_", names(dna_edit))
-# names(dna_edit) <- gsub(" ", "_", names(dna_edit))
+names(dna_edit) <- gsub("\\", "_", names(dna_edit))
+names(dna_edit) <- gsub(" ", "_", names(dna_edit))
 names(dna_edit) <- gsub("\\|", "_", names(dna_edit))
 
 # Write alignment in the FASTA format ----

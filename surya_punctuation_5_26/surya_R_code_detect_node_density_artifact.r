@@ -3,30 +3,37 @@
 
 
 library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggplot2)  # v3.3.0
 library(ggthemes)  # v4.2.0
-library(nlme)  # v3.1-147
+library(nlme)  # v3.1.147
 library(svglite)  # v1.2.3
 
-
-memory.limit(size = 1000000)
 
 # Read tree ----
 tree <- read.nexus(file = "tanner_tree.nex")
 
 # Define correlation matrix ----
-vcv <- corPagel(value = 1, phy = tree, fixed = TRUE)
+corr <- corPagel(value = 1, phy = tree, fixed = TRUE)
+
+# Define variance weights ----
+w <- diag(vcv(tree))
 
 # Load and prepare data ----
-dat <- read.table("surya_R_data_path_lengths_nodes_region.txt", sep = "\t")
-colnames(dat) <- c("genome", "path", "node", "continent")
+dat <- read.table("surya_R_data_path_lengths_nodes.txt", sep = "\t")
+colnames(dat) <- c("genome", "path", "node")
 rownames(dat) <- dat$genome
-dat <- dat[, -1]
 dat$node <- dat$node + 1  # This addition prevents log-transforming zero
+dat <- dat[match(tree$tip.label, rownames(dat)), ]
 
 # Detect node-density artifact ----
-pgls <- gls(log(node) ~ log(path), data = dat, correlation = vcv)
+pgls <- gls(
+  log(node) ~ log(path),
+  data = dat,
+  correlation = corr,
+  weights = varFixed(~w),
+  method = "ML"
+)
 beta <- exp(as.numeric(pgls$coefficients[1]))
 delta <- as.numeric(pgls$coefficients[2])
 sink("surya_R_output_node_density_artifact.txt")
@@ -35,7 +42,7 @@ cat("Node-Density Test\n")
 cat("=================\n\n")
 summary(pgls)
 cat("\n")
-cat(paste("Delta = ", round(delta, 3), sep = ""))
+cat(paste("Delta = ", delta, sep = ""))
 cat("\n")
 sink()
 

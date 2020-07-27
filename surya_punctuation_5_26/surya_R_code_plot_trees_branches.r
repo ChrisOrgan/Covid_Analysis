@@ -3,10 +3,10 @@
 
 
 # library(ape)  # v5.3
-library(Cairo)  # v1.5-12
+library(Cairo)  # v1.5.12
 library(ggimage)  # v0.2.8
 library(ggtree)  # v1.14.6
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 library(svglite)  # v1.2.3
 
 

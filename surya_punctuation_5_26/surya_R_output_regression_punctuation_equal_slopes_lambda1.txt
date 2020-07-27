@@ -2,52 +2,55 @@
 Punctuation Test
 ================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: path ~ node + continent 
   Data: dat 
         AIC       BIC   logLik
-  -294148.9 -294087.9 147082.4
+  -277598.8 -277537.8 138807.4
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
 lambda 
      1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
 
 Coefficients:
                                Value    Std.Error   t-value p-value
-(Intercept)             0.0004641093 4.425732e-06 104.86612  0.0000
-node                    0.0000032049 1.901100e-08 168.57872  0.0000
-continentAsia          -0.0000010420 1.357101e-06  -0.76783  0.4426
-continentEurope        -0.0000008713 1.288526e-06  -0.67622  0.4989
-continentNorth America -0.0000007218 1.312761e-06  -0.54987  0.5824
-continentOceania       -0.0000009566 1.345573e-06  -0.71091  0.4772
-continentSouth America  0.0000005449 1.565879e-06   0.34796  0.7279
+(Intercept)             5.167268e-06 4.740070e-06  1.090125  0.2757
+node                    2.335991e-06 7.767100e-08 30.075554  0.0000
+continentAsia          -1.889800e-06 2.490405e-06 -0.758832  0.4480
+continentEurope        -3.717118e-06 2.413554e-06 -1.540101  0.1236
+continentNorth America -2.142014e-06 2.455504e-06 -0.872332  0.3830
+continentOceania       -3.845455e-06 2.509427e-06 -1.532404  0.1254
+continentSouth America -2.522679e-06 2.821235e-06 -0.894175  0.3712
 
  Correlation: 
                        (Intr) node   cntnnA cntnnE cntnNA cntnnO
-node                   -0.623                                   
-continentAsia          -0.286  0.016                            
-continentEurope        -0.283  0.003  0.940                     
-continentNorth America -0.282  0.001  0.932  0.972              
-continentOceania       -0.273  0.004  0.911  0.953  0.941       
-continentSouth America -0.235  0.004  0.777  0.819  0.806  0.791
+node                   -0.031                                   
+continentAsia          -0.521  0.006                            
+continentEurope        -0.501 -0.001  0.952                     
+continentNorth America -0.498  0.000  0.944  0.975              
+continentOceania       -0.487 -0.002  0.926  0.956  0.945       
+continentSouth America -0.431  0.010  0.818  0.853  0.840  0.823
 
 Standardized residuals:
-       Min         Q1        Med         Q3        Max 
--27.133718 -15.451178  -9.392243  -7.385692  32.439981 
+        Min          Q1         Med          Q3         Max 
+-4.22680719 -1.61022380 -0.02822438  0.84184658  8.72980683 
 
-Residual standard error: 6.25172e-05 
+Residual standard error: 0.005382921 
 Degrees of freedom: 15028 total; 15021 residual
 
-                               Value    Std.Error     t-value   p-value
-(Intercept)             4.641093e-04 4.425732e-06 104.8661204 0.0000000
-node                    3.204915e-06 1.901138e-08 168.5787200 0.0000000
-continentAsia          -1.042018e-06 1.357101e-06  -0.7678262 0.4426025
-continentEurope        -8.713244e-07 1.288526e-06  -0.6762179 0.4989127
-continentNorth America -7.218454e-07 1.312761e-06  -0.5498682 0.5824179
-continentOceania       -9.565826e-07 1.345573e-06  -0.7109112 0.4771503
-continentSouth America  5.448639e-07 1.565879e-06   0.3479603 0.7278749
+                               Value    Std.Error    t-value       p-value
+(Intercept)             5.167268e-06 4.740070e-06  1.0901248  2.756757e-01
+node                    2.335991e-06 7.767074e-08 30.0755543 5.065134e-193
+continentAsia          -1.889800e-06 2.490405e-06 -0.7588321  4.479649e-01
+continentEurope        -3.717118e-06 2.413554e-06 -1.5401013  1.235567e-01
+continentNorth America -2.142014e-06 2.455504e-06 -0.8723319  3.830413e-01
+continentOceania       -3.845455e-06 2.509427e-06 -1.5324037  1.254439e-01
+continentSouth America -2.522679e-06 2.821235e-06 -0.8941753  3.712424e-01
 
-R-squared = -11.817
-Variance = 0
+R-squared = 0.0574319996590438
+Variance = 2.89758411191129e-05

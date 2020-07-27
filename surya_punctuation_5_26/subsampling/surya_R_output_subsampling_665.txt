@@ -2,37 +2,40 @@
 Punctuation Test #665
 ======================
 
-Generalized least squares fit by REML
+Generalized least squares fit by maximum likelihood
   Model: path ~ node 
   Data: dat_edit 
-        AIC       BIC   logLik
-  -17734.76 -17720.04 8870.379
+        AIC       BIC  logLik
+  -17363.88 -17349.16 8684.94
 
 Correlation Structure: corPagel
  Formula: ~1 
  Parameter estimate(s):
 lambda 
      1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
 
 Coefficients:
-                   Value    Std.Error  t-value p-value
-(Intercept) 0.0004140615 1.661029e-05 24.92802       0
-node        0.0000022006 6.269300e-08 35.10084       0
+                   Value    Std.Error   t-value p-value
+(Intercept) 3.142957e-05 1.182652e-05  2.657549   0.008
+node        1.878319e-06 1.252610e-07 14.995263   0.000
 
  Correlation: 
      (Intr)
-node -0.574
+node -0.144
 
 Standardized residuals:
        Min         Q1        Med         Q3        Max 
--10.971377  -6.088846  -4.381388  -3.537964   1.143255 
+-2.4526684 -0.5926441  0.3800154  0.9116488  3.7597726 
 
-Residual standard error: 8.956644e-05 
+Residual standard error: 0.005509005 
 Degrees of freedom: 1000 total; 998 residual
 
-                   Value    Std.Error  t-value       p-value
-(Intercept) 4.140615e-04 1.661029e-05 24.92802 5.095526e-107
-node        2.200572e-06 6.269286e-08 35.10084 1.932291e-176
+                   Value    Std.Error   t-value      p-value
+(Intercept) 3.142957e-05 1.182652e-05  2.657549 7.996883e-03
+node        1.878319e-06 1.252608e-07 14.995263 5.415117e-46
 
-Variance = 8.02214654102984e-09
-R-squared = -3.8105472248049
+R-squared = 0.183879027703382
+Variance = 3.03491310679336e-05

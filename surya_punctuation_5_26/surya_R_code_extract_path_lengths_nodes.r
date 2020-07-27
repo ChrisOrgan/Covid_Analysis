@@ -3,7 +3,7 @@
 
 
 # library(ape)  # v5.3
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 library(stringr)  # v.1.4.0
 
 
