@@ -3,7 +3,7 @@
 
 
 # library(ape)  # v5.3
-library(phytools)  # v0.7-20
+library(phytools)  # v0.7.20
 
 
 # Read tree ----
@@ -13,12 +13,12 @@ tree <- read.nexus(file = "nextstrain_groups_blab_sars-like-cov_tree_v3.nex")
 vcv <- vcv(phy = tree)
 
 # Extract path lengths (diagonals of the matrix) ----
-paths <- diag(vcv)
+path <- diag(vcv)
 
 # Extract nodes ----
-nodes <- NULL
+node <- NULL
 for (strain in 1:length(tree$tip.label)) {
-  nodes[strain] <- length(
+  node[strain] <- length(
     nodepath(
       phy = tree,
       from = length(tree$tip.label) + 1,  # root
@@ -27,13 +27,22 @@ for (strain in 1:length(tree$tip.label)) {
   ) - 2  # minus the root and terminal tip
 }
 
-# Create a data frame ----
-dat <- data.frame(sQuote(tree$tip.label), paths, nodes)
+# Create data frames ----
+dat <- data.frame(sQuote(tree$tip.label), path, node)
+dat_int <- data.frame(sQuote(tree$tip.label), path)
 
 # Write data frame to a tab-delimited text file ----
 write.table(
   dat,
   file = "surya_BayesTraits_data_path_lengths_nodes.txt",
+  quote = FALSE,
+  sep = "\t",
+  row.names = FALSE,
+  col.names = FALSE
+)
+write.table(
+  dat_int,
+  file = "surya_BayesTraits_data_path_lengths.txt",
   quote = FALSE,
   sep = "\t",
   row.names = FALSE,
