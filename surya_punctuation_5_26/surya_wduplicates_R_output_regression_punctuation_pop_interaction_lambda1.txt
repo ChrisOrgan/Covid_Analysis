@@ -1,0 +1,47 @@
+================
+Punctuation Test
+================
+
+Generalized least squares fit by maximum likelihood
+  Model: path ~ node * pop_size 
+  Data: dat 
+        AIC       BIC   logLik
+  -449901.6 -449861.3 224955.8
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
+
+Coefficients:
+                    Value    Std.Error   t-value p-value
+(Intercept)   3.82840e-08 2.789809e-06  0.013723  0.9891
+node          8.29313e-07 3.026380e-08 27.402808  0.0000
+pop_size      0.00000e+00 0.000000e+00  1.240938  0.2146
+node:pop_size 0.00000e+00 0.000000e+00 -0.802373  0.4223
+
+ Correlation: 
+              (Intr) node   pop_sz
+node          -0.012              
+pop_size      -0.159  0.004       
+node:pop_size  0.120 -0.005 -0.757
+
+Standardized residuals:
+       Min         Q1        Med         Q3        Max 
+-2.0495830 -0.3149250  0.2408116  1.3201407 17.2356515 
+
+Residual standard error: 0.005056732 
+Degrees of freedom: 23237 total; 23233 residual
+
+                      Value    Std.Error     t-value       p-value
+(Intercept)    3.828403e-08 2.789809e-06  0.01372281  9.890512e-01
+node           8.293130e-07 3.026380e-08 27.40280783 9.800993e-163
+pop_size       1.476352e-16 1.189706e-16  1.24093814  2.146411e-01
+node:pop_size -9.103500e-20 1.134572e-19 -0.80237306  4.223454e-01
+
+R-squared = 0.0313625389006129
+Variance = 2.55705428609932e-05

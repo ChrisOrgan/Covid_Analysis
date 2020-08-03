@@ -31,9 +31,35 @@ plot_reg <-
     ) +
     theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
     labs(x = "\nNode count", y = "Total path length (mutations/site)\n")
+plot_reg_alpha <-
+  ggplot(dat, aes(node, path)) +
+    geom_point(color = "gray", alpha = 0.3) +
+    geom_segment(
+      x = min(dat$node),
+      xend = max(dat$node),
+      y = 0.000002596172 + 0.00004221837*min(dat$node),
+      yend = 0.000002596172 + 0.00004221837*max(dat$node),
+      color = "black",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    labs(x = "\nNode count", y = "Total path length (mutations/site)\n")
 plot_reg_out <-
   ggplot(dat_edit, aes(node, path)) +
     geom_point(color = "gray") +
+    geom_segment(
+      x = min(dat_edit$node),
+      xend = max(dat_edit$node),
+      y = 0.000002594185 + 0.00004208053*min(dat_edit$node),
+      yend = 0.000002594185 + 0.00004208053*max(dat_edit$node),
+      color = "black",
+      size = 1
+    ) +
+    theme_tufte(base_size = 12, base_family = "Arial", ticks = FALSE) +
+    labs(x = "\nNode count", y = "Total path length (mutations/site)\n")
+plot_reg_out_alpha <-
+  ggplot(dat_edit, aes(node, path)) +
+    geom_point(color = "gray", alpha = 0.25) +
     geom_segment(
       x = min(dat_edit$node),
       xend = max(dat_edit$node),
@@ -89,6 +115,14 @@ graphics.off()
 CairoSVG("surya_cipres_figure_punctuation.svg", width = 6.535, height = 4.039)
 print(plot_reg)
 graphics.off()
+CairoPDF("surya_cipres_figure_punctuation_alpha.pdf", width = 6.535,
+         height = 4.039)
+print(plot_reg_alpha)
+graphics.off()
+CairoSVG("surya_cipres_figure_punctuation_alpha.svg", width = 6.535,
+         height = 4.039)
+print(plot_reg_alpha)
+graphics.off()
 CairoPDF("surya_cipres_figure_punctuation_no_outliers.pdf", width = 6.535,
          height = 4.039)
 print(plot_reg_out)
@@ -96,6 +130,14 @@ graphics.off()
 CairoSVG("surya_cipres_figure_punctuation_no_outliers.svg", width = 6.535,
          height = 4.039)
 print(plot_reg_out)
+graphics.off()
+CairoPDF("surya_cipres_figure_punctuation_no_outliers_alpha.pdf",
+         width = 6.535, height = 4.039)
+print(plot_reg_out_alpha)
+graphics.off()
+CairoSVG("surya_cipres_figure_punctuation_no_outliers_alpha.svg",
+         width = 6.535, height = 4.039)
+print(plot_reg_out_alpha)
 graphics.off()
 ## Interactive plots
 saveWidget(
