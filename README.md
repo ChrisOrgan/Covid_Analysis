@@ -2,6 +2,8 @@
 
 # Coronavirus Macroevolution
 
+- [x] SARS-CoV-1: Punctuation
+- [x] SARS-CoV-1: Punctuation (node support)
 - [x] SARS-CoV-2: Punctuation (4/16)
 - [x] SARS-CoV-2: Punctuation (5/06; equitable global subsampling)
 - [x] SARS-CoV-2: Punctuation (4/30; non-subsampled)
