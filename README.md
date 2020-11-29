@@ -2,5 +2,5 @@
 
 # Coronavirus Evolution
 
-This repository contains data and other files for "SARS-CoV-2 Evolves in 
-Episodic Bursts".
+This repository contains data and other files for "Lineage-Splitting Drives The 
+Rate of SARS-CoV-2 Evolution".
