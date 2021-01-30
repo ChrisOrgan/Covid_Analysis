@@ -2,5 +2,5 @@
 
 # Coronavirus Evolution
 
-This repository contains data and other files for "Lineage-Splitting Drives the 
-Rate of SARS-CoV-2 Evolution".
+This repository contains data and other files for "SARS-CoV-2 Evolution is 
+Punctuated".
