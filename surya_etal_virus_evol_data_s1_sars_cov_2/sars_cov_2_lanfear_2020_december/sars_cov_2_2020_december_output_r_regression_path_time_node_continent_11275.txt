@@ -1,0 +1,62 @@
+========================
+Regression (Alternative)
+========================
+
+Generalized least squares fit by maximum likelihood
+  Model: path ~ time + node + continent 
+  Data: dat 
+        AIC       BIC   logLik
+  -193561.7 -193495.7 96789.86
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
+
+Coefficients:
+                              Value    Std.Error   t-value p-value
+(Intercept)            -0.009864755 0.0015246042 -6.470371  0.0000
+time                    0.000004884 0.0000007547  6.470749  0.0000
+node                    0.000000090 0.0000000235  3.835967  0.0001
+continentAsia          -0.000000525 0.0000007272 -0.722446  0.4700
+continentEurope        -0.000000337 0.0000006595 -0.510602  0.6096
+continentNorth America -0.000000303 0.0000006627 -0.456598  0.6480
+continentOceania       -0.000000356 0.0000007043 -0.506170  0.6127
+continentSouth America -0.000000712 0.0000007545 -0.944088  0.3451
+
+ Correlation: 
+                       (Intr) time   node   cntnnA cntnnE cntnNA cntnnO
+time                   -1.000                                          
+node                   -0.003  0.003                                   
+continentAsia          -0.043  0.042 -0.015                            
+continentEurope        -0.071  0.071 -0.019  0.892                     
+continentNorth America -0.055  0.055 -0.010  0.880  0.953              
+continentOceania       -0.071  0.071 -0.012  0.836  0.921  0.913       
+continentSouth America  0.009 -0.010 -0.022  0.776  0.863  0.836  0.802
+
+Standardized residuals:
+       Min         Q1        Med         Q3        Max 
+-0.2088897  2.3190124  2.7424100  3.0817090  3.9038838 
+
+Residual standard error: 0.008073878 
+Degrees of freedom: 11275 total; 11267 residual
+
+                               Value    Std.Error    t-value      p-value
+(Intercept)            -9.864755e-03 1.524604e-03 -6.4703714 1.018163e-10
+time                    4.883507e-06 7.547051e-07  6.4707492 1.015630e-10
+node                    9.023933e-08 2.352453e-08  3.8359674 1.257531e-04
+continentAsia          -5.253520e-07 7.271849e-07 -0.7224462 4.700352e-01
+continentEurope        -3.367322e-07 6.594808e-07 -0.5106020 6.096398e-01
+continentNorth America -3.025746e-07 6.626715e-07 -0.4565981 6.479687e-01
+continentOceania       -3.564823e-07 7.042738e-07 -0.5061700 6.127472e-01
+continentSouth America -7.122724e-07 7.544557e-07 -0.9440877 3.451451e-01
+
+R-squared = 0.00508472260031434
+Partial R-squared = 0.000149676226028903
+Variance = 6.51874983815183e-05
+SSE = 0.734989044252786
+SST = 0.738745359478001
