@@ -1,0 +1,104 @@
+========================
+Regression (Alternative)
+========================
+
+Generalized least squares fit by maximum likelihood
+  Model: path ~ time + node * continent 
+  Data: dat 
+        AIC       BIC   logLik
+  -277915.9 -277809.2 138971.9
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
+
+Coefficients:
+                                  Value   Std.Error    t-value p-value
+(Intercept)                 -0.09518978 0.008228444 -11.568381  0.0000
+time                         0.00004712 0.000004073  11.568720  0.0000
+node                         0.00000227 0.000000077  29.359495  0.0000
+continentAsia               -0.00000035 0.000003561  -0.098568  0.9215
+continentEurope             -0.00000408 0.000003478  -1.171847  0.2413
+continentNorth America      -0.00000212 0.000003593  -0.590511  0.5549
+continentOceania            -0.00000326 0.000003655  -0.892813  0.3720
+continentSouth America      -0.00000332 0.000004083  -0.813919  0.4157
+node:continentAsia          -0.00000001 0.000000010  -0.660495  0.5089
+node:continentEurope         0.00000000 0.000000009   0.183940  0.8541
+node:continentNorth America  0.00000000 0.000000010   0.094888  0.9244
+node:continentOceania        0.00000000 0.000000010  -0.220599  0.8254
+node:continentSouth America  0.00000001 0.000000013   0.625133  0.5319
+
+ Correlation: 
+                            (Intr) time   node   cntnnA cntnnE cntnNA cntnnO
+time                        -1.000                                          
+node                         0.070 -0.070                                   
+continentAsia               -0.024  0.024  0.084                            
+continentEurope             -0.018  0.017  0.085  0.944                     
+continentNorth America      -0.021  0.021  0.086  0.932  0.959              
+continentOceania            -0.019  0.019  0.081  0.916  0.941  0.923       
+continentSouth America      -0.033  0.033  0.079  0.809  0.849  0.824  0.805
+node:continentAsia           0.016 -0.015 -0.104 -0.716 -0.639 -0.638 -0.626
+node:continentEurope         0.013 -0.013 -0.118 -0.688 -0.729 -0.694 -0.686
+node:continentNorth America  0.011 -0.011 -0.116 -0.672 -0.680 -0.738 -0.660
+node:continentOceania        0.018 -0.018 -0.110 -0.649 -0.661 -0.649 -0.735
+node:continentSouth America  0.019 -0.018 -0.083 -0.487 -0.510 -0.491 -0.482
+                            cntnSA nd:cnA nd:cnE nd:cNA nd:cnO
+time                                                          
+node                                                          
+continentAsia                                                 
+continentEurope                                               
+continentNorth America                                        
+continentOceania                                              
+continentSouth America                                        
+node:continentAsia          -0.548                            
+node:continentEurope        -0.618  0.893                     
+node:continentNorth America -0.585  0.874  0.926              
+node:continentOceania       -0.565  0.845  0.909  0.872       
+node:continentSouth America -0.712  0.632  0.697  0.656  0.643
+
+Standardized residuals:
+        Min          Q1         Med          Q3         Max 
+-4.06549766 -1.53703054 -0.01537291  0.82783121  5.52333897 
+
+Residual standard error: 0.005300993 
+Degrees of freedom: 15019 total; 15006 residual
+
+                                    Value    Std.Error      t-value
+(Intercept)                 -9.518978e-02 8.228444e-03 -11.56838084
+time                         4.712414e-05 4.073410e-06  11.56871986
+node                         2.267326e-06 7.722633e-08  29.35949539
+continentAsia               -3.510110e-07 3.561114e-06  -0.09856774
+continentEurope             -4.075651e-06 3.477970e-06  -1.17184749
+continentNorth America      -2.121951e-06 3.593416e-06  -0.59051081
+continentOceania            -3.263043e-06 3.654788e-06  -0.89281315
+continentSouth America      -3.323339e-06 4.083132e-06  -0.81391886
+node:continentAsia          -6.538928e-09 9.900037e-09  -0.66049532
+node:continentEurope         1.673825e-09 9.099839e-09   0.18394011
+node:continentNorth America  9.134855e-10 9.626977e-09   0.09488809
+node:continentOceania       -2.184370e-09 9.901992e-09  -0.22059902
+node:continentSouth America  8.093499e-09 1.294685e-08   0.62513257
+                                  p-value
+(Intercept)                  8.053076e-31
+time                         8.021602e-31
+node                        2.804008e-184
+continentAsia                9.214828e-01
+continentEurope              2.412769e-01
+continentNorth America       5.548571e-01
+continentOceania             3.719716e-01
+continentSouth America       4.157044e-01
+node:continentAsia           5.089462e-01
+node:continentEurope         8.540629e-01
+node:continentNorth America  9.244050e-01
+node:continentOceania        8.254077e-01
+node:continentSouth America  5.318936e-01
+
+R-squared = 0.0671366874871266
+Partial R-squared = 0.000300049061384259
+Variance = 2.81005310823846e-05
+SSE = 0.422041876326292
+SST = 0.452415558276624

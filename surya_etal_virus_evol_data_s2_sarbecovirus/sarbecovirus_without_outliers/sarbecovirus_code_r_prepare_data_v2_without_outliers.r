@@ -1,0 +1,38 @@
+# Written by Kevin Surya.
+# This code is part of the coronavirus-evolution project.
+
+
+# Read datasets ----
+path <- read.table(
+  "sarbecovirus_data_root_tip_divergence_v2_without_outliers.txt",
+  sep = "\t"
+)
+times <- read.table(
+  "sarbecovirus_data_sampling_time_v2_without_outliers.txt",
+  sep = "\t"
+)
+node <- read.table(
+  "sarbecovirus_data_node_count_v2_without_outliers.txt",
+  sep = "\t"
+)
+host <- read.table(
+  "sarbecovirus_data_host_v2_without_outliers.txt",
+  sep = "\t"
+)
+
+# Make a data frame ----
+times <- times[match(path$V1, times$V1), ]
+node <- node[match(path$V1, node$V1), ]
+host <- host[match(path$V1, host$V1), ]
+dat <- data.frame(path, times$V2, node$V2, host$V2)
+colnames(dat) <- c("genome", "path", "time", "node", "host")
+
+# Save the data frame to a tab-delimited text file ----
+write.table(
+  dat,
+  file = "sarbecovirus_data_v2_without_outliers.txt",
+  quote = FALSE,
+  sep = "\t",
+  row.names = FALSE,
+  col.names = TRUE
+)
