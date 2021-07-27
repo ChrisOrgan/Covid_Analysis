@@ -1,6 +1,6 @@
 # Coronavirus Evolution
 
-This repository contains data and other files for "SARS-CoV-2 Evolution Is 
+This repository contains data and other files for "SARS-CoV-2 Evolution Was 
 Punctuated Over the First Year of the Pandemic".
 
 ## Contents
