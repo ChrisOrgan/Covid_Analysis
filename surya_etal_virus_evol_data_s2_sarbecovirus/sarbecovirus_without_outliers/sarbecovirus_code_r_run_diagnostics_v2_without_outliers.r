@@ -10,7 +10,7 @@ library(ggthemes)
 
 
 # Read tree ----
-tree <- read.nexus(file = "sarbecovirus_tree_mol_v3_51.nex")
+tree <- read.nexus(file = "sarbecovirus_tree_mol_v3_50.nex")
 
 # Define variance-covariance matrix ----
 vcv <- vcv(phy = tree)
@@ -31,7 +31,7 @@ dat <- read.table(
   header = TRUE,
   row.names = 1
 )
-dat$fitted_values <- 0.09828117
+dat$fitted_values <- 0.09847825
 dat$res_raw <- dat$path - dat$fitted_values
 dat$res_phy <- as.vector(Dfun(vcv) %*% dat$res_raw)
 

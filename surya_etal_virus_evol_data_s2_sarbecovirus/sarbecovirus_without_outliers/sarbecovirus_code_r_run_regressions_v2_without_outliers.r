@@ -9,7 +9,7 @@ library(phytools)
 
 
 # Read tree ----
-tree <- read.nexus(file = "sarbecovirus_tree_mol_v3_51.nex")
+tree <- read.nexus(file = "sarbecovirus_tree_mol_v3_50.nex")
 
 # Read data ----
 dat <- read.table(

@@ -22,10 +22,13 @@ tree <- ladderize(
   right = FALSE
 )
 
+# Drop the outgroup
+tree <- drop.tip(phy = tree, tip = root_genome)
+
 # Remove duplicate genomes ----
 tip_remove <- read.table("sarbecovirus_data_duplicate_genomes.txt")
 tip_remove <- as.character(tip_remove$V1)
 tree <- drop.tip(phy = tree, tip = tip_remove)
 
 # Save the edited tree ----
-writeNexus(tree = tree, file = "sarbecovirus_tree_mol_v2_60.nex")
+writeNexus(tree = tree, file = "sarbecovirus_tree_mol_v2_59.nex")

@@ -10,7 +10,7 @@ library(zoo)
 
 
 # Read tree ----
-tree <- read.nexus(file = "sarbecovirus_tree_mol_v2_60.nex")
+tree <- read.nexus(file = "sarbecovirus_tree_mol_v2_59.nex")
 
 # Extract sampling times from tip labels ----
 dates <- word(tree$tip.label, start = 5, end = 5, sep = "\\.")
