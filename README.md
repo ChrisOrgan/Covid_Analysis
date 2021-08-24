@@ -1,7 +1,7 @@
 # Coronavirus Evolution
 
-This repository contains data and other files for "SARS-CoV-2 Evolution Was 
-Punctuated Over the First Year of the Pandemic".
+This repository contains data and other files for "Detecting Punctuated 
+Evolution in SARS-CoV-2".
 
 ## Contents
 
@@ -14,6 +14,8 @@ Punctuated Over the First Year of the Pandemic".
             - root-to-tip divergence ~ 1
             - root-to-tip divergence ~ sampling time
             - root-to-tip divergence ~ sampling time + node count
+            - root-to-tip divergence ~ sampling time + node count
+              (Pagel's lambda estimated)
             - root-to-tip divergence ~ sampling time + node count
               (subsampling x1000 1000 genomes)
             - root-to-tip divergence ~ sampling time + node count

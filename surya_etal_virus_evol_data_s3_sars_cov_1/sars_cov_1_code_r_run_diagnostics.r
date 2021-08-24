@@ -31,8 +31,7 @@ dat <- read.table(
   header = TRUE,
   row.names = 1
 )
-dat$fitted_values <- -4.671367 + 0.002332*dat$time + 0.431105*dat$node +
-                     -0.000215*dat$time*dat$node
+dat$fitted_values <- 0.0008423665
 dat$res_raw <- dat$path - dat$fitted_values
 dat$res_phy <- as.vector(Dfun(vcv) %*% dat$res_raw)
 

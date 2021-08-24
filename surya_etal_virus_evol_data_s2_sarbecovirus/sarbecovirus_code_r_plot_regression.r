@@ -9,13 +9,16 @@ library(ggthemes)
 
 # Read data ----
 dat <- read.table("sarbecovirus_data.txt", sep = "\t", header = TRUE)
-dat <- dat[-6, ]  # removes the Kenyan sarbecovirus
 
 # Plot regression ----
 plot_reg <-
   ggplot(dat, aes(x = time, y = path, color = node)) +
     geom_point() +
-    scale_colour_gradient(low = "gray90", high = "gray10") +
+    scale_colour_gradient(
+      breaks = c(2, 8, 14),
+      low = "gray75",
+      high = "gray0"
+    ) +
     guides(colour = guide_colourbar(barwidth = 0.25, ticks = FALSE)) +
     theme_tufte(base_size = 10, base_family = "Arial", ticks = FALSE) +
     labs(

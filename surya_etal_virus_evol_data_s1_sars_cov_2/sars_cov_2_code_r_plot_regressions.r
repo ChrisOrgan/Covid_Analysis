@@ -76,7 +76,7 @@ plot_reg <-
     ####   linetype = "dashed"
     #### ) +
     geom_smooth(method = "lm", se = FALSE, color = "black", size = 0.5) +
-    scale_colour_gradient(low = "gray90", high = "gray10") +
+    scale_colour_gradient(low = "gray75", high = "gray0") +
     guides(colour = guide_colourbar(barwidth = 0.25, ticks = FALSE)) +
     theme_tufte(base_size = 10, base_family = "Arial", ticks = FALSE) +
     labs(

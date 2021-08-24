@@ -8,7 +8,7 @@ library(stringr)
 
 
 # Read tree ----
-tree <- read.nexus(file = "sarbecovirus_tree_mol_v2_60.nex")
+tree <- read.nexus(file = "sarbecovirus_tree_mol_v2_59.nex")
 
 # Extract hosts from tip labels ----
 host <- word(tree$tip.label, start = 2, end = 2, sep = "\\.")
