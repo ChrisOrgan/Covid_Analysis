@@ -1,11 +1,11 @@
 # Coronavirus Evolution
 
 This repository contains data and other files for "Detecting Punctuated 
-Evolution in SARS-CoV-2".
+Evolution in SARS-CoV-2 over the First Year of the Pandemic".
 
 ## Contents
 
-- surya_etal_virus_evol_data_s1_sars_cov_2
+- surya_etal_plos_bio_data_s1_sars_cov_2
     - Dataset 1 (2020-05-26)
         - Tree
         - 3D scatter plot
@@ -61,7 +61,7 @@ Evolution in SARS-CoV-2".
               (no interaction between time and node)
         - Variance inflation factors
         - Regression diagnostics
-- surya_etal_virus_evol_data_s2_sarbecovirus
+- surya_etal_plos_bio_data_s2_sarbecovirus
     - Boni et al.'s (2020) edited alignment
     - Tree
     - 3D scatter plot
@@ -78,7 +78,7 @@ Evolution in SARS-CoV-2".
         - root-to-tip divergence ~ sampling time x node count
     - Variance inflation factors
     - Regression diagnostics
-- surya_etal_virus_evol_data_s3_sars_cov_1
+- surya_etal_plos_bio_data_s3_sars_cov_1
     - Boni et al.'s (2020) edited alignment
     - Tree
     - 3D scatter plot
