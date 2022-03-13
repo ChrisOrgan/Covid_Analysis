@@ -1,7 +1,7 @@
 # Coronavirus Evolution
 
 This repository contains data and other files for "Detecting Punctuated 
-Evolution in SARS-CoV-2".
+Evolution in SARS-CoV-2 over the First Year of the Pandemic".
 
 ## Contents
 
