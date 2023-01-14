@@ -1,0 +1,37 @@
+======================
+Node-Density Test #335
+======================
+
+Generalized least squares fit by maximum likelihood
+  Model: log(node + 1) ~ log(path) 
+  Data: dat_subs 
+       AIC      BIC    logLik
+  32.59864 37.81165 -13.29932
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
+
+Coefficients:
+               Value Std.Error  t-value p-value
+(Intercept) 4.040448 0.8893243 4.543278  0.0001
+log(path)   0.290922 0.0901737 3.226244  0.0025
+
+ Correlation: 
+          (Intr)
+log(path) 0.995 
+
+Standardized residuals:
+       Min         Q1        Med         Q3        Max 
+-2.1421361  0.6625997  1.1497611  1.4070037  3.1061196 
+
+Residual standard error: 29.77609 
+Degrees of freedom: 42 total; 40 residual
+
+Beta = 56.8517991734904
+Delta = 0.290922475124853

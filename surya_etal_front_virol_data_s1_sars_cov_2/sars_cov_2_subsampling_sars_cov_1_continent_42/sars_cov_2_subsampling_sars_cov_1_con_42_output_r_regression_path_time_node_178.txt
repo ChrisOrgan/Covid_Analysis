@@ -1,0 +1,47 @@
+==============================
+Regression (Alternative) #178
+==============================
+
+Generalized least squares fit by maximum likelihood
+  Model: path ~ time + node 
+  Data: dat_subs 
+        AIC       BIC   logLik
+  -663.9412 -656.9906 335.9706
+
+Correlation Structure: corPagel
+ Formula: ~1 
+ Parameter estimate(s):
+lambda 
+     1 
+Variance function:
+ Structure: fixed weights
+ Formula: ~w 
+
+Coefficients:
+                   Value Std.Error   t-value p-value
+(Intercept) -0.016388249 0.3719510 -0.044060  0.9651
+time         0.000008102 0.0001841  0.043999  0.9651
+node         0.000025896 0.0000073  3.552012  0.0010
+
+ Correlation: 
+     (Intr) time  
+time -1.000       
+node  0.486 -0.486
+
+Standardized residuals:
+      Min        Q1       Med        Q3       Max 
+-2.075581  0.275779  1.189697  1.892587  2.623473 
+
+Residual standard error: 0.007139525 
+Degrees of freedom: 42 total; 39 residual
+
+                    Value    Std.Error     t-value     p-value
+(Intercept) -1.638825e-02 3.719510e-01 -0.04406024 0.965081208
+time         8.101639e-06 1.841310e-04  0.04399931 0.965129464
+node         2.589581e-05 7.290463e-06  3.55201222 0.001017655
+
+R-squared = 0.300031225443368
+Partial R-squared = 0.244431910975919
+Variance = 5.09728122343691e-05
+SSE = 0.00214085811384359
+SST = 0.00305850516717639

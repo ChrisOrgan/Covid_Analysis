@@ -20,6 +20,14 @@ Evolution in SARS-CoV-2 over the First Year of the Pandemic".
               (subsampling x1000 1000 genomes)
             - root-to-tip divergence ~ sampling time + node count
               (subsampling by clade x1000 100-1000 genomes)
+            - root-to-tip divergence ~ sampling time + node count
+              (subsampling x1000 1000 genomes,
+              accounting for SARS-CoV-1 by-continent sampling proportion)
+            - root-to-tip divergence ~ sampling time + node count
+              (subsampling x1000 42 genomes)
+            - root-to-tip divergence ~ sampling time + node count
+              (subsampling x1000 42 genomes,
+              accounting for SARS-CoV-1 by-continent sampling proportion)
             - root-to-tip divergence ~ sampling time + node count + continent
             - root-to-tip divergence ~ sampling time + node count x continent
             - root-to-tip divergence ~ sampling time x node count

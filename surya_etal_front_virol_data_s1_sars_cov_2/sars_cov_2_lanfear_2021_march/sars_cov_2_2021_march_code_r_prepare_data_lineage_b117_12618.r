@@ -16,11 +16,11 @@ meta <- read.csv(
 meta$b117 <- 0
 meta$b117[meta$lineage == "B.1.1.7"] <- 1
 ## table(meta$b117)
-### 
+###
 ###     0     1
 ### 10327  2291
 ## round(table(meta$b117) / 12618 * 100, 2)
-### 
+###
 ###     0     1
 ### 81.84 18.16
 
