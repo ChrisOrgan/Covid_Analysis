@@ -15,7 +15,7 @@ tree <- read.nexus(file = "sarbecovirus_tree_mol_v3_50.nex")
 # Extract sampling times from tip labels ----
 dates <- word(tree$tip.label, start = 5, end = 5, sep = "\\.")
 times <- data.frame(tree$tip.label, dates)
-colnames(times) <- c("genome", "dates") 
+colnames(times) <- c("genome", "dates")
 for (genome in 1:length(times$genome)) {
   if (nchar(times$dates[genome]) == 4) {
     times$dformat[genome] <- "y"

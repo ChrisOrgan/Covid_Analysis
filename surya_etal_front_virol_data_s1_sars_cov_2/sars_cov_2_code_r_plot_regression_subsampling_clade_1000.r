@@ -21,7 +21,7 @@ plot_node <-
       x = 0,
       xend = 0,
       y = 0,
-      yend = 710000,
+      yend = 670000,
       linetype = "dashed",
       color = "gray40",
       size = 0.5
