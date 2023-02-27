@@ -84,6 +84,28 @@ plot_reg <-
       y = "Root-to-tip divergence (subs/site)\n",
       color = "Node\ncount"
     )
+plot_reg_black_bg <-
+  ggplot(dat, aes(x = time, y = path, color = node)) +
+    geom_point(size = 0.75) +
+    geom_smooth(method = "lm", se = FALSE, color = "white", size = 0.5) +
+    scale_colour_gradient(low = "gray25", high = "gray75") +
+    guides(colour = guide_colourbar(barwidth = 0.25, ticks = FALSE)) +
+    theme_tufte(base_size = 12, base_family = "Calibri", ticks = FALSE) +
+    theme(
+      plot.background = element_rect(fill = "black"),
+      panel.background = element_rect(fill = "black"),
+      axis.title.x = element_text(color = "#A6A6A6"),
+      axis.title.y = element_text(color = "#A6A6A6"),
+      axis.text.y = element_text(color = "#A6A6A6"),
+      axis.text.x = element_text(color = "#A6A6A6"),
+      legend.title =  element_text(color = "#A6A6A6"),
+      legend.text = element_text(color = "#A6A6A6")
+    ) +
+    labs(
+      x = expression(bold("Sampling time")),
+      y = expression(bold("Root-to-tip divergence")),
+      color = expression(bold("Node\ncount"))
+    )
 ## Continents
 plot_reg_africa <-
   ggplot(dat_con_africa, aes(x = time, y = path, color = node)) +
@@ -269,6 +291,14 @@ CairoPDF(
   height = 2.94
 )
 print(plot_reg)
+graphics.off()
+## Global - black background
+CairoSVG(
+  file = "sars_cov_2_figure_regression_path_time_node_black_bg.svg",
+  width = 3.75,
+  height = 2.813
+)
+print(plot_reg_black_bg)
 graphics.off()
 ## Continents
 CairoSVG(
