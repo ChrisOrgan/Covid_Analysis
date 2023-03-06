@@ -96,10 +96,10 @@ plot_reg_black_bg <-
       panel.background = element_rect(fill = "black"),
       axis.title.x = element_text(color = "#A6A6A6"),
       axis.title.y = element_text(color = "#A6A6A6"),
-      axis.text.y = element_text(color = "#A6A6A6"),
-      axis.text.x = element_text(color = "#A6A6A6"),
+      axis.text.y = element_blank(),
+      axis.text.x = element_blank(),
       legend.title =  element_text(color = "#A6A6A6"),
-      legend.text = element_text(color = "#A6A6A6")
+      legend.text = element_blank()
     ) +
     labs(
       x = expression(bold("Sampling time")),
@@ -295,8 +295,8 @@ graphics.off()
 ## Global - black background
 CairoSVG(
   file = "sars_cov_2_figure_regression_path_time_node_black_bg.svg",
-  width = 3.75,
-  height = 2.813
+  width = 3.67,
+  height = 2.44
 )
 print(plot_reg_black_bg)
 graphics.off()
